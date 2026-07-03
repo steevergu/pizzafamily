@@ -459,7 +459,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .canal-card::after { content: ''; position: absolute; inset: 0; z-index: -1; }
 .canal-card.resto::after  { background: linear-gradient(180deg, rgba(12,12,12,.55) 0%, rgba(12,12,12,.18) 32%, rgba(8,8,8,.88) 100%); }
 .canal-card.camion::after { background: linear-gradient(180deg, rgba(24,14,4,.30) 0%, rgba(24,14,4,.12) 28%, rgba(34,16,4,.90) 100%); }
-.canal-card.distrib { background: linear-gradient(150deg, #3a5c2a 0%, var(--green) 52%, var(--green-deep) 100%); }
+.canal-card.distrib { background-color: var(--green-deep); background-size: cover; background-position: center; }
+.canal-card.distrib::after { background: linear-gradient(180deg, rgba(26,47,23,.30) 0%, rgba(26,47,23,.12) 28%, rgba(26,47,23,.88) 100%); }
 
 .canal-num {
   position: absolute; top: 16px; left: 26px; z-index: 0;
@@ -1385,7 +1386,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     </article>
 
     <!-- 03 — Les Distribs -->
-    <article class="canal-card distrib">
+    <article class="canal-card distrib" style="background-image:url('img/distributeur.png');">
       <span class="canal-num" aria-hidden="true">03</span>
       <span class="canal-emoji" aria-hidden="true">🍕</span>
       <div class="canal-card-body">
