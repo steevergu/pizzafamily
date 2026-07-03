@@ -1,0 +1,2359 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Family — Trois façons de se régaler</title>
+<meta name="description" content="Pizza Family — Pizza fraîche au kiosque, en camion ou au distrib ouvert 24/7. Pâte faite chaque jour.">
+<meta property="og:title" content="Pizza Family — Trois façons de se régaler">
+<meta property="og:description" content="Pizza fraîche. Au kiosque, en camion, ou au distrib 24/7.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="apple-touch-icon" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,700;1,9..40,800&family=Caveat:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   PIZZA FAMILY v2 — calqué sur la structure visuelle de Quick
+   ============================================================ */
+
+:root {
+  /* ---- Palette de marque exacte du logo ---- */
+  --orange:       #F05E26;   /* orange primaire — action */
+  --orange-dark:  #d44c1c;   /* hover orange */
+  --orange-soft:  #F57A28;   /* orange secondaire — accent */
+  --red:          #C62023;   /* rouge urgence */
+  --red-dark:     #a31a1d;
+  --red-light:    #d92427;
+  --green:        #294926;   /* vert foncé du logo */
+  --green-deep:   #1a2f17;   /* surface sombre principale */
+  --green-800:    #223d1e;
+  --green-500:    #4C823D;   /* vert moyen du logo */
+  --beige:        #e4dbd2;
+  --beige-soft:   #ede7df;
+  --beige-deep:   #b0a090;
+  --cream:        #F5F5F2;   /* fond de page */
+  --paper:        #EDEAE2;   /* papier chaud */
+  --ink:          #191919;   /* noir texte exact du logo */
+  --ink-70:       rgba(25,25,25,.7);
+  --white:        #FFFFFF;
+  /* ombres */
+  --shadow-warm:  18px 24px 60px rgba(25,25,25,.10);
+  --shadow-soft:  0 6px 22px rgba(25,25,25,.08);
+  /* système de cartes unifié */
+  --card-radius:       20px;
+  --card-shadow:       0 10px 30px rgba(25,25,25,.09);
+  --card-shadow-hover: 0 20px 44px rgba(25,25,25,.16);
+  --card-img-h:        clamp(158px, 17vw, 196px);
+  --card-ease:         cubic-bezier(.22,.61,.36,1);
+  --font-d: 'Luckiest Guy', system-ui, sans-serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+  --font-s: 'Caveat', cursive;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-b);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { font-family: var(--font-b); cursor: pointer; border: none; background: none; }
+
+/* ---- UTILITY ---- */
+.sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+
+.btn-hero {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--orange); color: var(--white);
+  font-family: var(--font-b); font-weight: 800; font-style: italic;
+  font-size: 18px; letter-spacing: .5px;
+  padding: 18px 56px; border-radius: 999px;
+  border: none; cursor: pointer;
+  transition: background .15s, transform .15s;
+  white-space: nowrap;
+}
+.btn-hero:hover { background: var(--orange-dark); transform: scale(1.03); }
+.btn-hero:active { transform: scale(.98); }
+
+/* Focus visible accessible */
+a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.btn-outline {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; color: var(--white);
+  font-family: var(--font-b); font-weight: 700;
+  font-size: 15px; padding: 14px 36px; border-radius: 999px;
+  border: 2px solid rgba(255,255,255,.5);
+  cursor: pointer; transition: border-color .15s, background .15s;
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+
+/* ============================================================
+   HEADER
+   ============================================================ */
+.site-header {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+  transition: background .3s, box-shadow .3s;
+}
+.site-header.scrolled {
+  background: var(--green-deep);
+  box-shadow: 0 2px 24px rgba(28,40,18,.5);
+}
+.header-inner {
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 20px;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 16px;
+}
+
+/* Left — logo + burger */
+.header-left { display: flex; align-items: center; gap: 12px; }
+
+.logo-box {
+  display: flex; align-items: center;
+  flex-shrink: 0;
+  transition: transform .15s;
+}
+.logo-box:hover { transform: scale(1.04); }
+.logo-box img {
+  height: 52px; width: auto; display: block;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.35));
+}
+
+.burger-btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  background: none; border: none; cursor: pointer;
+  flex-direction: column; gap: 5px; padding: 4px;
+}
+.burger-btn span {
+  display: block; width: 22px; height: 2px;
+  background: var(--white); border-radius: 2px;
+  transition: transform .25s, opacity .25s;
+}
+.burger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.burger-btn.open span:nth-child(2) { opacity: 0; }
+.burger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Center nav pill */
+.nav-pill {
+  display: none;
+  background: rgba(26,47,23,.62);
+  border: 1px solid rgba(255,255,255,.08);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 999px;
+  padding: 6px 8px;
+  gap: 2px;
+}
+@media (min-width: 900px) { .nav-pill { display: flex; align-items: center; } }
+.nav-pill a {
+  color: var(--white); font-size: 13px; font-weight: 600;
+  padding: 8px 14px; border-radius: 999px;
+  transition: background .15s;
+  white-space: nowrap;
+}
+.nav-pill a:hover { background: rgba(255,255,255,.12); }
+.nav-pill a.nav-cta {
+  background: var(--orange); color: var(--white);
+  padding: 8px 18px; border-radius: 999px;
+  font-weight: 700;
+  transition: background .15s, transform .12s;
+}
+.nav-pill a.nav-cta:hover { background: var(--orange-dark); transform: scale(1.03); }
+
+/* Right icons */
+.header-right { display: flex; align-items: center; gap: 8px; }
+.header-icon {
+  width: 44px; height: 44px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--orange); color: var(--white);
+  border: none; cursor: pointer;
+  transition: background .15s, transform .15s;
+  flex-shrink: 0;
+}
+.header-icon:hover { background: var(--orange-dark); transform: scale(1.06); }
+.header-icon svg { width: 20px; height: 20px; fill: currentColor; }
+
+/* ============================================================
+   MOBILE MENU — panneau blanc gauche (style Quick)
+   ============================================================ */
+.mobile-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,.5);
+  z-index: 600; opacity: 0; pointer-events: none;
+  transition: opacity .3s;
+}
+.mobile-overlay.open { opacity: 1; pointer-events: all; }
+
+.mobile-menu {
+  position: fixed; top: 0; left: 0; bottom: 0;
+  width: min(420px, 85vw);
+  background: var(--white); z-index: 700;
+  transform: translateX(-100%);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+  overflow-y: auto;
+  display: flex; flex-direction: column;
+  padding: 24px 0 40px;
+}
+.mobile-menu.open { transform: translateX(0); }
+
+.mobile-menu-close {
+  align-self: flex-start; margin: 0 0 16px 20px;
+  width: 36px; height: 36px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--paper); border: none; cursor: pointer; font-size: 20px;
+}
+.mobile-menu-close:hover { background: #e0e0e0; }
+
+.mobile-menu nav { flex: 1; }
+.mobile-menu nav a {
+  display: block; padding: 16px 28px;
+  font-size: 20px; font-weight: 800; font-style: italic;
+  color: var(--ink); border-bottom: 1px solid #f0f0f0;
+  transition: color .15s, padding-left .15s;
+}
+.mobile-menu nav a:hover { color: var(--orange); padding-left: 36px; }
+
+.mobile-menu-footer {
+  padding: 24px 28px 0;
+  display: flex; flex-direction: column; gap: 12px;
+}
+.mobile-menu-footer a {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 15px; font-weight: 700; color: var(--ink);
+  padding: 4px 0; transition: color .15s;
+}
+.mobile-menu-footer a svg { width: 20px; height: 20px; fill: var(--green-500); }
+.mobile-menu-footer a:hover { color: var(--green-500); }
+.mobile-menu .mobile-order-btn {
+  margin: 20px 28px 0;
+}
+
+/* ============================================================
+   HERO — plein écran, photo food, vague blanche en bas
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100dvh;
+  padding-top: 72px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+  background: var(--green-deep);
+}
+
+/* Fond hero : photos kiosque & camion en fondu enchaîné */
+.hero-bg { position: absolute; inset: 0; overflow: hidden; }
+.hero-slide {
+  position: absolute; inset: 0;
+  background-size: cover; background-position: center;
+  opacity: 0;
+  animation: heroFade 16s ease-in-out infinite, heroKen 16s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+.hero-slide.s2 { animation-delay: -8s, -8s; }
+@keyframes heroFade {
+  0%   { opacity: 1; }
+  44%  { opacity: 1; }
+  50%  { opacity: 0; }
+  94%  { opacity: 0; }
+  100% { opacity: 1; }
+}
+@keyframes heroKen {
+  0%   { transform: scale(1.05); }
+  50%  { transform: scale(1.13); }
+  100% { transform: scale(1.05); }
+}
+/* Gradient sombre atmosphérique par-dessus (teinté vert profond) */
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(120% 90% at 85% 15%, rgba(240,94,38,.22) 0%, transparent 55%),
+    linear-gradient(to right, rgba(26,47,23,.94) 0%, rgba(26,47,23,.62) 45%, rgba(26,47,23,.22) 100%),
+    linear-gradient(to top, rgba(26,47,23,.92) 0%, rgba(26,47,23,.32) 40%, transparent 72%);
+}
+
+/* Contenu texte du hero */
+.hero-content {
+  position: relative; z-index: 2;
+  padding: 0 clamp(20px,5vw,80px) 80px;
+  max-width: 1440px; margin: 0 auto; width: 100%;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 20px;
+}
+.hero-title {
+  width: clamp(260px, 45vw, 710px);
+  display: block;
+  margin-left: clamp(-28px, -2vw, -10px);
+}
+
+.hero-sub {
+  font-size: clamp(15px,1.4vw,18px); color: rgba(255,255,255,.7);
+  font-style: italic; max-width: 420px;
+}
+.hero-cta-row {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
+  margin-top: 8px;
+}
+.hero-legal {
+  font-size: 12px; color: rgba(255,255,255,.4);
+  font-style: italic;
+}
+
+/* Vague blanche (bas du hero → section blanche) */
+.hero-wave {
+  position: relative; z-index: 3;
+  line-height: 0; margin-top: -2px;
+}
+.hero-wave svg { width: 100%; display: block; }
+
+/* Mute button (style Quick) */
+.hero-mute {
+  position: absolute; bottom: 110px; right: 24px; z-index: 10;
+  width: 40px; height: 40px; border-radius: 50%;
+  background: rgba(255,255,255,.15); backdrop-filter: blur(4px);
+  border: none; cursor: pointer; color: var(--white);
+  display: flex; align-items: center; justify-content: center;
+  transition: background .15s;
+}
+.hero-mute:hover { background: rgba(255,255,255,.25); }
+.hero-mute svg { width: 18px; height: 18px; fill: currentColor; }
+
+/* ============================================================
+   EN CE MOMENT — titre rouge italic, scroll horizontal
+   ============================================================ */
+.now-section { background: var(--cream); padding: 60px 0 80px; }
+
+.now-header {
+  padding: 0 clamp(20px,5vw,80px);
+  margin-bottom: 40px;
+}
+.now-title {
+  font-family: var(--font-b);
+  font-weight: 800; font-style: italic;
+  font-size: clamp(44px, 6vw, 82px);
+  line-height: .92;
+  color: var(--ink);
+}
+
+/* Scroll horizontal sans scrollbar visible sur desktop */
+.now-scroll-wrap {
+  position: relative;
+}
+.now-scroll {
+  display: flex; gap: 20px;
+  overflow-x: auto;
+  padding: 8px clamp(20px,5vw,80px) 24px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.now-scroll::-webkit-scrollbar { display: none; }
+
+/* Fade-out aux bords */
+.now-scroll-wrap::after {
+  content: '';
+  position: absolute; top: 0; right: 0; bottom: 24px;
+  width: 80px;
+  background: linear-gradient(to right, transparent, var(--cream));
+  pointer-events: none;
+}
+
+.now-card {
+  flex-shrink: 0;
+  width: clamp(248px, 29vw, 312px);
+  background: var(--white);
+  border-radius: var(--card-radius); overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex; flex-direction: column;
+  position: relative; cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
+}
+.now-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
+
+.now-card-media {
+  position: relative; height: var(--card-img-h);
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.now-card-bg {
+  display: flex; align-items: center; justify-content: center;
+  font-size: clamp(72px, 9vw, 100px); line-height: 1;
+}
+.now-card-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--red); color: var(--white);
+  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
+  padding: 5px 10px; border-radius: 999px;
+}
+.now-card-body {
+  padding: 16px 18px 18px; flex: 1;
+  display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
+}
+.now-card-title {
+  font-family: var(--font-d);
+  font-size: clamp(14px,1.5vw,18px);
+  text-transform: uppercase; line-height: 1.1;
+  color: var(--ink); flex: 1;
+  -webkit-hyphens: none; hyphens: none;
+  overflow-wrap: normal; word-break: normal;
+  white-space: nowrap;
+}
+.now-card-cta {
+  display: inline-flex; align-items: center;
+  font-weight: 800; font-style: italic; font-size: 14px;
+  color: var(--white);
+  background: var(--orange);
+  padding: 10px 22px; border-radius: 999px;
+  border: none; cursor: pointer;
+  transition: background .15s, transform .12s;
+}
+.now-card-cta:hover { background: var(--orange-dark); }
+.now-card-cta:active { transform: scale(.96); }
+
+/* ============================================================
+   NOS 3 CANAUX — 3 façons de se régaler
+   ============================================================ */
+.canaux-section { background: var(--cream); padding: 80px 0 90px; }
+.canaux-head { padding: 0 clamp(20px,5vw,80px); margin-bottom: 44px; overflow: visible; }
+.canaux-eyebrow {
+  color: var(--green-500); font-size: 13px; font-weight: 800;
+  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;
+}
+.canaux-title {
+  font-family: var(--font-b);
+  font-weight: 800; font-style: italic;
+  font-size: clamp(44px, 6vw, 82px); line-height: 1.2;
+  text-transform: uppercase; letter-spacing: -.01em; color: var(--ink);
+  overflow: visible; padding: 0.1em 0 0.14em;
+}
+.canaux-grid {
+  display: grid; gap: 24px; grid-template-columns: 1fr;
+  padding: 0 clamp(20px,5vw,80px); max-width: 1440px; margin: 0 auto;
+}
+@media (min-width: 760px) { .canaux-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.canal-card {
+  position: relative; overflow: hidden; isolation: isolate;
+  border-radius: var(--card-radius); padding: 28px;
+  min-height: clamp(390px, 38vw, 470px);
+  display: flex; flex-direction: column; color: #fff;
+  background-size: cover; background-position: center;
+  box-shadow: var(--card-shadow);
+  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
+}
+.canal-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
+/* overlay lisibilité (sous le contenu) */
+.canal-card::after { content: ''; position: absolute; inset: 0; z-index: -1; }
+.canal-card.resto::after  { background: linear-gradient(180deg, rgba(12,12,12,.55) 0%, rgba(12,12,12,.18) 32%, rgba(8,8,8,.88) 100%); }
+.canal-card.camion::after { background: linear-gradient(180deg, rgba(24,14,4,.30) 0%, rgba(24,14,4,.12) 28%, rgba(34,16,4,.90) 100%); }
+.canal-card.distrib { background: linear-gradient(150deg, #3a5c2a 0%, var(--green) 52%, var(--green-deep) 100%); }
+
+.canal-num {
+  position: absolute; top: 16px; left: 26px; z-index: 0;
+  font-family: var(--font-d); font-size: clamp(86px,11vw,150px);
+  line-height: 1; opacity: .16; pointer-events: none; color: #fff;
+}
+.canal-emoji {
+  position: absolute; top: 30px; right: 26px; z-index: 0;
+  font-size: clamp(64px,8vw,104px); line-height: 1; opacity: .9; pointer-events: none;
+  filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
+}
+.canal-card-body { margin-top: auto; position: relative; z-index: 1; }
+.canal-name {
+  font-family: var(--font-d); font-size: clamp(30px,3.4vw,40px);
+  text-transform: uppercase; line-height: .95; margin-bottom: 14px;
+}
+.canal-desc { font-size: 15px; line-height: 1.5; margin-bottom: 22px; max-width: 32ch; opacity: .9; }
+.canal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
+.canal-tag {
+  font-size: 11.5px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
+  padding: 8px 14px; border-radius: 999px;
+  background: rgba(255,255,255,.16); color: #fff; backdrop-filter: blur(3px);
+}
+.canal-cta {
+  display: inline-flex; align-items: center; gap: 9px;
+  font-weight: 800; font-style: italic; font-size: 15px;
+  letter-spacing: .3px; text-transform: uppercase; color: var(--orange);
+  transition: gap .2s ease;
+}
+.canal-cta:hover { gap: 16px; }
+
+/* ============================================================
+   NOS PIZZAS — catégories + scroll produits
+   ============================================================ */
+.pizzas-section { background: var(--paper); padding: 80px 0; }
+.section-header {
+  padding: 0 clamp(20px,5vw,80px);
+  margin-bottom: 40px;
+}
+.section-label {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--green-500); margin-bottom: 10px;
+}
+.section-title-italic {
+  font-family: var(--font-b);
+  font-weight: 800; font-style: italic;
+  font-size: clamp(44px, 6vw, 82px); line-height: .92;
+  color: var(--ink);
+}
+
+/* Catégorie tabs scroll */
+.cat-scroll {
+  display: flex; gap: 10px;
+  overflow-x: auto; scrollbar-width: none;
+  padding: 0 clamp(20px,5vw,80px) 32px;
+}
+.cat-scroll::-webkit-scrollbar { display: none; }
+.cat-btn {
+  flex-shrink: 0;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  cursor: pointer; padding: 14px 20px; border-radius: 16px;
+  border: 2px solid transparent;
+  background: var(--white);
+  transition: border-color .15s, background .15s;
+  font-family: var(--font-b); font-weight: 700; font-size: 13px;
+  color: var(--ink);
+}
+.cat-btn:hover { border-color: var(--green-500); background: #e8efe5; }
+.cat-btn.active { border-color: var(--green-500); background: var(--green-500); color: var(--white); }
+.cat-btn .cat-emoji { font-size: 36px; }
+
+/* Grille produits */
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+  padding: 0 clamp(20px,5vw,80px);
+}
+.product-card {
+  background: var(--white); border-radius: var(--card-radius); overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex; flex-direction: column;
+  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
+.product-img {
+  height: var(--card-img-h); display: flex; align-items: center; justify-content: center;
+  font-size: clamp(64px,8vw,84px); position: relative;
+  background: radial-gradient(120% 120% at 30% 20%, #e8efe5, #cddec8 120%);
+}
+/* Variété de fonds en rotation — palette charte */
+.product-card:nth-child(4n+2) .product-img { background: radial-gradient(120% 120% at 30% 20%, #fde0cc, #f5a070 130%); }
+.product-card:nth-child(4n+3) .product-img { background: radial-gradient(120% 120% at 30% 20%, #f0ebe2, #ddd2c2 130%); }
+.product-card:nth-child(4n)   .product-img { background: radial-gradient(120% 120% at 30% 20%, #ddebd8, #b4d0ac 130%); }
+.product-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: var(--red); color: var(--white);
+  font-size: 10px; font-weight: 800; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; letter-spacing: .5px;
+}
+.product-badge.green { background: var(--green); }
+.product-badge.dark  { background: var(--green-deep); color: var(--orange); }
+.product-badge.orange { background: var(--orange); }
+.product-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
+.product-name {
+  font-family: var(--font-d); font-size: 19px; text-transform: uppercase;
+  line-height: 1; margin-bottom: 6px;
+  -webkit-hyphens: none; hyphens: none;
+  overflow-wrap: normal; word-break: normal;
+}
+.product-desc { font-size: 13px; color: var(--ink-70); flex: 1; line-height: 1.45; margin-bottom: 14px; }
+.product-footer { display: flex; align-items: center; justify-content: space-between; }
+.product-price { font-family: var(--font-d); font-size: 24px; color: var(--orange); }
+.btn-add {
+  background: var(--green); color: var(--white);
+  padding: 9px 18px; border-radius: 999px;
+  font-weight: 700; font-size: 13px;
+  border: none; cursor: pointer;
+  transition: background .15s, transform .12s;
+}
+.btn-add:hover { background: var(--orange); }
+.btn-add:active { transform: scale(.96); }
+
+/* ============================================================
+   TIKTOK — fond très sombre, cercles rouges, scroll vidéos
+   ============================================================ */
+.tiktok-section {
+  background: var(--green-deep);
+  padding: 80px 0 60px;
+  position: relative; overflow: hidden;
+}
+
+/* Cercles lumineux rouges (style Quick) */
+.tiktok-glow {
+  position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
+  width: 700px; height: 700px; border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 0 0  2px rgba(198,32,35,.6),
+    0 0 0 30px rgba(198,32,35,.18),
+    0 0 0 70px rgba(198,32,35,.10),
+    0 0 0 130px rgba(198,32,35,.055),
+    0 0 0 200px rgba(198,32,35,.025);
+}
+/* Deuxième anneau décalé */
+.tiktok-glow2 {
+  position: absolute; right: 80px; top: 20%; transform: none;
+  width: 300px; height: 300px; border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 0 0 1px rgba(198,32,35,.4),
+    0 0 0 20px rgba(198,32,35,.08),
+    0 0 0 50px rgba(198,32,35,.04);
+}
+
+.tiktok-header {
+  padding: 0 clamp(20px,5vw,80px);
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 20px; margin-bottom: 48px; flex-wrap: wrap;
+  position: relative; z-index: 1;
+}
+.tiktok-title-block {
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+}
+.tiktok-logo-svg { width: 64px; height: 64px; flex-shrink: 0; }
+.tiktok-handle {
+  font-family: var(--font-b);
+  font-weight: 800; font-style: italic;
+  font-size: clamp(36px,5vw,64px); line-height: .92;
+  color: var(--white);
+}
+.tiktok-handle span { display: block; }
+.tiktok-handle .handle { color: rgba(255,255,255,.85); font-size: .75em; }
+
+/* Scroll vidéos horizontal */
+.tiktok-scroll {
+  display: flex; gap: 16px;
+  overflow-x: auto; scrollbar-width: none;
+  padding: 0 clamp(20px,5vw,80px) 16px;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  position: relative; z-index: 1;
+}
+.tiktok-scroll::-webkit-scrollbar { display: none; }
+
+.tiktok-card {
+  flex-shrink: 0;
+  width: clamp(180px, 22vw, 280px);
+  aspect-ratio: 9 / 16;
+  border-radius: 14px; overflow: hidden;
+  position: relative; cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform .2s;
+  background: #1a1a1a;
+}
+.tiktok-card:hover { transform: scale(1.03); }
+.tiktok-card-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 64px; opacity: .28;
+}
+.tiktok-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 50%);
+}
+.tiktok-play-btn {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: rgba(255,255,255,.9);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 2;
+}
+.tiktok-play-btn svg { width: 20px; height: 20px; fill: var(--ink); margin-left: 3px; }
+.tiktok-card-views {
+  position: absolute; top: 10px; right: 10px;
+  background: rgba(0,0,0,.55); color: var(--white);
+  font-size: 11px; font-weight: 700;
+  padding: 3px 8px; border-radius: 999px; z-index: 2;
+}
+.tiktok-card-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 12px; z-index: 2;
+  font-size: 12px; color: var(--white); font-weight: 700;
+  line-height: 1.3;
+}
+/* Miniature profil style TikTok */
+.tiktok-card-user {
+  position: absolute; bottom: 44px; left: 12px;
+  display: flex; align-items: center; gap: 6px; z-index: 2;
+}
+.tiktok-card-avatar {
+  width: 28px; height: 28px; border-radius: 50%;
+  background: var(--orange); display: flex; align-items: center; justify-content: center;
+  font-size: 14px; border: 2px solid white;
+}
+.tiktok-card-username { font-size: 11px; color: rgba(255,255,255,.85); font-weight: 700; }
+
+/* Commentaire flottant style TikTok */
+.tiktok-comment {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(0,0,0,.55); backdrop-filter: blur(4px);
+  border-radius: 8px; padding: 6px 8px;
+  font-size: 10px; color: var(--white); z-index: 2;
+  max-width: 100px; line-height: 1.3;
+}
+
+/* ── Facebook post cards — minimal ── */
+.fb-post-card {
+  flex-shrink: 0;
+  width: clamp(200px, 22vw, 270px);
+  aspect-ratio: 4/5;
+  border-radius: 14px; overflow: hidden;
+  position: relative; cursor: pointer;
+  scroll-snap-align: start;
+  transition: transform .2s;
+  text-decoration: none;
+  background: #111;
+}
+.fb-post-card:hover { transform: scale(1.03); }
+.fb-card-bg {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 88px;
+}
+.fb-card-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.9) 0%, rgba(0,0,0,.15) 55%, transparent 100%);
+}
+.fb-card-top {
+  position: absolute; top: 12px; left: 12px; right: 12px;
+  z-index: 2; display: flex; justify-content: space-between; align-items: flex-start; gap: 6px;
+}
+.fb-card-reactions {
+  background: rgba(0,0,0,.55); color: #fff;
+  font-size: 11px; font-weight: 700;
+  padding: 4px 9px; border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.fb-card-source {
+  background: rgba(24,119,242,.7); color: #fff;
+  font-size: 10px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
+  padding: 4px 9px; border-radius: 999px;
+  backdrop-filter: blur(4px);
+}
+.fb-card-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 14px; z-index: 2;
+  font-size: 13px; color: #fff; font-weight: 600; line-height: 1.35;
+}
+/* Bouton Suivre dans le header */
+.fb-follow-cta {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(24,119,242,.9); color: #fff;
+  font-family: var(--font-b); font-weight: 700; font-size: 14px;
+  padding: 12px 22px; border-radius: 999px;
+  transition: background .15s, transform .12s;
+}
+.fb-follow-cta:hover { background: #1877F2; transform: scale(1.03); }
+.fb-follow-cta svg { flex-shrink: 0; }
+
+/* ── Facebook Page Plugin feeds ── */
+.fb-feeds-scroll {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 clamp(20px, 5vw, 60px) 16px;
+  position: relative; z-index: 1;
+}
+.fb-feeds-scroll::-webkit-scrollbar { display: none; }
+.fb-feed-wrap {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.fb-feed-label {
+  display: flex; align-items: center; gap: 8px;
+  color: rgba(255,255,255,.85);
+  font-family: var(--font-b);
+  font-size: 14px; font-weight: 700;
+  letter-spacing: .02em;
+}
+.fb-feed-label span:first-child { font-size: 20px; }
+/* Keep the iframe/widget from overflowing on small screens */
+.fb-feed-wrap .fb-page { max-width: 380px; }
+
+.tiktok-footer {
+  text-align: center; margin-top: 40px;
+  position: relative; z-index: 1;
+}
+
+/* ============================================================
+   CARTE / POINTS DE VENTE — full width style Quick
+   ============================================================ */
+.map-section {
+  position: relative; height: clamp(500px,65vh,720px);
+  overflow: hidden;
+}
+/* Fond carte stylisé (OSM-inspired) */
+.map-bg {
+  position: absolute; inset: 0;
+  background-color: #e8f0e4;
+  background-image:
+    /* Routes principales */
+    linear-gradient(rgba(255,255,255,.9) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.9) 1px, transparent 1px),
+    /* Grille secondaire */
+    linear-gradient(rgba(200,210,200,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,210,200,.5) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 40px 40px, 40px 40px;
+}
+/* Zones vertes (parcs) */
+.map-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(ellipse 200px 120px at 15% 70%, rgba(76,130,61,.35) 0%, transparent 100%),
+    radial-gradient(ellipse 140px 200px at 80% 20%, rgba(76,130,61,.3) 0%, transparent 100%),
+    radial-gradient(ellipse 180px 100px at 55% 85%, rgba(76,130,61,.25) 0%, transparent 100%);
+}
+/* Routes colorées */
+.map-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(25deg,  transparent 48%, #f5c842 48%, #f5c842 50%, transparent 50%),
+    linear-gradient(-15deg, transparent 35%, #e8a832 35%, #e8a832 36.5%, transparent 36.5%),
+    linear-gradient(80deg,  transparent 60%, #d4a020 60%, #d4a020 61.5%, transparent 61.5%);
+}
+
+/* Pins sur la carte */
+.map-pins { position: absolute; inset: 0; pointer-events: none; }
+.map-pin {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  transform: translate(-50%, -100%);
+}
+.map-pin-icon {
+  width: 36px; height: 36px; background: var(--orange); border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,.3);
+}
+.map-pin-icon span { transform: rotate(45deg); font-size: 16px; }
+.map-pin-cluster {
+  position: absolute;
+  width: 32px; height: 32px; background: var(--orange); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 13px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.3);
+  transform: translate(-50%, -50%);
+}
+
+/* Titre overlay gauche */
+.map-title-overlay {
+  position: absolute; top: 50%; left: clamp(30px,5vw,80px);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+.map-title-overlay h2 {
+  font-family: var(--font-b);
+  font-weight: 800; font-style: italic;
+  font-size: clamp(40px,6vw,80px); line-height: .88;
+  color: var(--orange);
+  text-shadow: 2px 2px 0 rgba(255,255,255,.8), 0 0 20px rgba(255,255,255,.6);
+}
+
+/* Panneau blanc droite */
+.map-panel {
+  position: absolute; top: 50%; right: clamp(20px,4vw,60px);
+  transform: translateY(-50%);
+  width: min(340px, 90vw); z-index: 2;
+  background: var(--white); border-radius: 16px;
+  padding: 28px;
+  box-shadow: 0 8px 40px rgba(0,0,0,.18);
+}
+.map-panel-title {
+  font-family: var(--font-b); font-weight: 800; font-style: italic;
+  font-size: 28px; color: var(--orange); margin-bottom: 16px;
+}
+.map-search {
+  display: flex; align-items: center; gap: 0;
+  background: #f5f5f5; border-radius: 999px;
+  overflow: hidden; margin-bottom: 18px;
+}
+.map-search-input {
+  flex: 1; border: none; background: transparent;
+  padding: 13px 18px; font-family: var(--font-b); font-size: 14px;
+  outline: none; color: var(--ink);
+}
+.map-search-input::placeholder { color: #aaa; }
+.map-search-btn {
+  padding: 13px 20px; background: var(--orange); border: none; cursor: pointer;
+  color: white; font-weight: 700; font-size: 13px;
+  white-space: nowrap; transition: background .15s;
+  font-family: var(--font-b);
+}
+.map-search-btn:hover { background: var(--orange-dark); }
+.map-panel-instructions {
+  font-size: 13px; color: #555; line-height: 1.6;
+}
+.map-panel-instructions strong { color: var(--ink); }
+.map-panel-instructions a { color: var(--orange); font-weight: 700; }
+
+/* ============================================================
+   ADRESSES & HORAIRES
+   ============================================================ */
+.places-section { background: var(--paper); padding: 80px 0 90px; }
+.places-grid {
+  max-width: 1100px; margin: 36px auto 0;
+  padding: 0 clamp(20px,5vw,80px);
+  display: grid; gap: 26px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 820px) { .places-grid { grid-template-columns: 1fr 1fr; } }
+
+.place-card {
+  background: var(--white); border-radius: var(--card-radius); overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex; flex-direction: column;
+  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
+}
+.place-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
+
+.place-head {
+  position: relative; padding: 26px 26px 24px;
+  min-height: 172px;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  color: var(--white); overflow: hidden;
+  background-size: cover; background-position: center;
+}
+.place-head.kiosque {
+  background-image: linear-gradient(180deg, rgba(41,73,38,.35) 0%, rgba(41,73,38,.5) 45%, rgba(26,47,23,.92) 100%), url('img/kiosque.jpeg');
+}
+.place-head.camion  {
+  background-image: linear-gradient(180deg, rgba(240,94,38,.30) 0%, rgba(170,55,12,.55) 45%, rgba(70,30,8,.92) 100%), url('img/camion.jpg');
+}
+.place-kicker {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+  color: rgba(255,255,255,.75); margin-bottom: 4px;
+}
+.place-name {
+  font-family: var(--font-d); font-size: clamp(26px,3.4vw,34px);
+  text-transform: uppercase; line-height: .95;
+}
+.place-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  margin-top: 14px; padding: 6px 13px; border-radius: 999px;
+  font-size: 12px; font-weight: 800; letter-spacing: .3px;
+  background: rgba(255,255,255,.16); color: #fff;
+  backdrop-filter: blur(4px);
+}
+.place-badge .dot { width: 9px; height: 9px; border-radius: 50%; background: #fff; }
+.place-badge.is-open  { background: rgba(255,255,255,.92); color: var(--green); }
+.place-badge.is-open .dot  { background: #2fb14e; box-shadow: 0 0 0 0 rgba(47,177,78,.6); animation: liveDot 1.6s ease-out infinite; }
+.place-badge.is-closed { background: rgba(0,0,0,.28); color: #fff; }
+.place-badge.is-closed .dot { background: #ff6a5e; }
+@keyframes liveDot { 0% { box-shadow: 0 0 0 0 rgba(47,177,78,.55); } 100% { box-shadow: 0 0 0 9px rgba(47,177,78,0); } }
+
+.place-body { padding: 22px 26px 26px; flex: 1; display: flex; flex-direction: column; }
+.place-contact { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
+.place-contact a, .place-contact span {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 14px; color: var(--ink-70); line-height: 1.45;
+}
+.place-contact a { color: var(--ink); font-weight: 600; transition: color .15s; }
+.place-contact a:hover { color: var(--orange); }
+.place-contact .ic { flex-shrink: 0; font-size: 15px; width: 18px; text-align: center; }
+
+.place-hours { border-top: 1px dashed #d8d2cc; padding-top: 14px; margin-bottom: 20px; }
+.place-hours-title {
+  font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--green-500); margin-bottom: 10px;
+}
+.place-hours ul { display: flex; flex-direction: column; gap: 2px; }
+.place-hours li {
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 13.5px; padding: 5px 10px; border-radius: 8px;
+  color: var(--ink-70);
+}
+.place-hours li .day { font-weight: 600; text-transform: capitalize; }
+.place-hours li .hrs { font-variant-numeric: tabular-nums; }
+.place-hours li.closed .hrs { color: #c25; font-weight: 600; }
+.place-hours li.today { background: var(--beige-soft); color: var(--ink); font-weight: 700; }
+.place-hours li.today .day::after { content: ' • aujourd’hui'; font-size: 11px; font-weight: 700; color: var(--red); }
+
+.place-actions { display: flex; gap: 10px; margin-top: auto; flex-wrap: wrap; }
+.place-actions a {
+  flex: 1; min-width: 130px; text-align: center;
+  padding: 13px 16px; border-radius: 999px;
+  font-weight: 800; font-size: 14px; transition: background .15s, transform .12s, border-color .15s, color .15s;
+}
+.place-actions a:active { transform: scale(.97); }
+.place-order { background: var(--orange); color: #fff; font-style: italic; }
+.place-order:hover { background: var(--orange-dark); }
+.place-route { background: transparent; color: var(--green); border: 2px solid var(--green); }
+.place-route:hover { background: var(--green); color: #fff; }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--green-deep); color: var(--white);
+  padding: 72px 0 0;
+}
+.footer-grid {
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 clamp(20px,5vw,80px);
+  display: grid; gap: 48px;
+  grid-template-columns: 1fr;
+  padding-bottom: 56px;
+  border-bottom: 1px solid rgba(255,255,255,.1);
+}
+@media (min-width: 640px) {
+  .footer-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (min-width: 1024px) {
+  .footer-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+}
+
+.footer-brand {}
+.footer-brand .footer-logo {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 16px;
+}
+.footer-brand .footer-logo img {
+  height: 72px; width: auto; display: block;
+}
+.footer-tagline {
+  font-size: 14px; color: rgba(255,255,255,.5); line-height: 1.6;
+  max-width: 280px; margin-bottom: 24px;
+}
+.footer-social-row { display: flex; gap: 10px; }
+.footer-social-link {
+  width: 38px; height: 38px; border-radius: 50%;
+  background: rgba(255,255,255,.08);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--white); transition: background .15s;
+}
+.footer-social-link:hover { background: var(--orange); }
+.footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
+
+.footer-col h4 {
+  font-family: var(--font-b); font-weight: 800; font-size: 13px;
+  text-transform: uppercase; letter-spacing: 1.5px;
+  color: var(--orange); margin-bottom: 16px;
+}
+.footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+.footer-col li a {
+  font-size: 14px; color: rgba(255,255,255,.55); transition: color .15s;
+}
+.footer-col li a:hover { color: var(--white); }
+
+.footer-bottom {
+  max-width: 1440px; margin: 0 auto;
+  padding: 20px clamp(20px,5vw,80px);
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-legal { display: flex; flex-wrap: wrap; gap: 16px; }
+.footer-legal a { font-size: 12px; color: rgba(255,255,255,.35); transition: color .15s; }
+.footer-legal a:hover { color: rgba(255,255,255,.65); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,.25); }
+
+.footer-health {
+  max-width: 1440px; margin: 0 auto;
+  padding: 16px clamp(20px,5vw,80px) 24px;
+  border-top: 1px solid rgba(255,255,255,.06);
+  font-size: 12px; color: rgba(255,255,255,.3); text-align: center; line-height: 1.6;
+}
+.footer-health a { color: rgba(255,255,255,.45); text-decoration: underline; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 639px) {
+  .hero-content { padding-bottom: 60px; }
+  .map-panel { right: 50%; bottom: 20px; top: auto; transform: translateX(50%); width: 90%; }
+  .map-title-overlay { top: 24px; transform: none; left: 20px; }
+  .tiktok-glow { display: none; }
+  .tiktok-glow2 { display: none; }
+}
+@media (max-width: 899px) {
+  .map-title-overlay h2 { text-shadow: 3px 3px 0 rgba(255,255,255,.9), 0 0 30px rgba(255,255,255,.8); }
+}
+
+/* ============================================================
+   SCROLL REVEAL + MICRO-INTERACTIONS
+   ============================================================ */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .65s ease, transform .65s ease; }
+.reveal.visible { opacity: 1; transform: none; }
+
+/* Cascade des enfants (cartes, onglets) */
+.stagger > * {
+  opacity: 0; transform: translateY(26px) scale(.985);
+  transition: opacity .55s cubic-bezier(.22,.61,.36,1), transform .55s cubic-bezier(.22,.61,.36,1);
+}
+.stagger.visible > * {
+  opacity: 1; transform: none;
+  transition-delay: calc(var(--d, 0) * 1ms);
+}
+
+/* Hero — entrée en cascade au chargement */
+@keyframes heroRise { from { opacity: 0; transform: translateY(32px); } to { opacity: 1; transform: none; } }
+.hero-content > * { opacity: 0; animation: heroRise .85s cubic-bezier(.22,.61,.36,1) both; }
+.hero-content > *:nth-child(1) { animation-delay: .15s; }
+.hero-content > *:nth-child(2) { animation-delay: .28s; }
+.hero-content > *:nth-child(3) { animation-delay: .42s; }
+.hero-content > *:nth-child(4) { animation-delay: .56s; }
+.hero-content > *:nth-child(5) { animation-delay: .70s; }
+
+/* Indicateur de scroll en bas du hero */
+@keyframes scrollNudge { 0%,100% { transform: translateY(0); opacity:.7; } 50% { transform: translateY(7px); opacity:.3; } }
+.hero-scroll-hint {
+  position: absolute; bottom: 104px; left: 50%; transform: translateX(-50%);
+  z-index: 4; width: 26px; height: 42px; border: 2px solid rgba(255,255,255,.5);
+  border-radius: 999px; display: flex; justify-content: center; padding-top: 7px;
+  pointer-events: none;
+}
+.hero-scroll-hint::after {
+  content: ''; width: 4px; height: 8px; border-radius: 4px; background: var(--orange-soft);
+  animation: scrollNudge 1.6s ease-in-out infinite;
+}
+@media (max-width: 639px) { .hero-scroll-hint { display: none; } }
+
+/* Sheen sur le bouton principal */
+.btn-hero { position: relative; overflow: hidden; isolation: isolate; }
+.btn-hero::after {
+  content: ''; position: absolute; top: 0; left: -75%; width: 45%; height: 100%; z-index: -1;
+  background: linear-gradient(115deg, transparent, rgba(255,255,255,.38), transparent);
+  transform: skewX(-20deg); transition: left .55s ease;
+}
+.btn-hero:hover::after { left: 130%; }
+
+/* Soulignement animé de la nav */
+.nav-pill a { position: relative; }
+.nav-pill a::after {
+  content: ''; position: absolute; left: 14px; right: 14px; bottom: 5px; height: 2px;
+  background: var(--orange); border-radius: 2px;
+  transform: scaleX(0); transform-origin: left; transition: transform .25s ease;
+}
+.nav-pill a:hover::after { transform: scaleX(1); }
+
+/* Zoom des visuels produits au survol de la carte */
+.product-img { transition: transform .4s cubic-bezier(.22,.61,.36,1); }
+.product-card:hover .product-img { transform: scale(1.06); }
+.product-card .product-badge { transition: transform .25s ease; }
+.product-card:hover .product-badge { transform: scale(1.08) rotate(-3deg); }
+
+/* Cartes "En ce moment" — léger zoom du fond + CTA qui glisse */
+.now-card-bg { transition: transform .45s cubic-bezier(.22,.61,.36,1); }
+.now-card:hover .now-card-bg { transform: scale(1.12); }
+.now-card-cta svg, .now-card-cta::after { transition: transform .2s ease; }
+
+/* Bouton play TikTok qui pulse au survol */
+@keyframes playPulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.5); } 100% { box-shadow: 0 0 0 16px rgba(255,255,255,0); } }
+.tiktok-card:hover .tiktok-play-btn { animation: playPulse 1.1s ease-out infinite; }
+
+/* Liens sociaux du footer — petit rebond */
+.footer-social-link { transition: background .2s ease, transform .2s cubic-bezier(.34,1.56,.64,1); }
+.footer-social-link:hover { transform: translateY(-3px) scale(1.06); }
+
+/* Réduction de mouvement */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .001ms !important; animation-iteration-count: 1 !important;
+    transition-duration: .001ms !important; scroll-behavior: auto !important;
+  }
+  .reveal, .stagger > *, .hero-content > * { opacity: 1 !important; transform: none !important; }
+}
+</style>
+<!-- Facebook SDK -->
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/fr_FR/sdk.js#xfbml=1&version=v20.0"></script>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     HEADER FIXE
+     ════════════════════════════════════════ -->
+<header class="site-header" id="site-header">
+  <div class="header-inner">
+
+    <!-- Gauche : logo + burger -->
+    <div class="header-left">
+      <a href="/" class="logo-box" aria-label="Pizza Family — Accueil">
+        <img src="img/logo.png" alt="Pizza Family Hersin" width="120" height="52">
+      </a>
+      <button class="burger-btn" id="burger-btn" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="mobile-menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Centre : navigation pill -->
+    <nav class="nav-pill" aria-label="Navigation principale">
+      <a href="#en-ce-moment">En ce moment</a>
+      <a href="#canaux">Comment commander</a>
+      <a href="#nos-pizzas">Nos pizzas</a>
+      <a href="#points-de-vente">Nos points de vente</a>
+      <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="nav-cta">Commander 🍕</a>
+    </nav>
+
+    <!-- Droite : icônes -->
+    <div class="header-right">
+      <button class="header-icon" aria-label="Trouver un point de vente">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      </button>
+      <button class="header-icon" style="background:rgba(255,255,255,.12); color:var(--white);" aria-label="Mon compte" onclick="this.style.background='var(--orange)'">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- ════════════════════════════════════════
+     MENU MOBILE — panneau blanc gauche
+     ════════════════════════════════════════ -->
+<div class="mobile-overlay" id="mobile-overlay" aria-hidden="true"></div>
+<div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu de navigation">
+  <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fermer le menu">✕</button>
+  <nav>
+    <a href="#en-ce-moment">En ce moment</a>
+    <a href="#canaux">Comment commander</a>
+    <a href="#nos-pizzas">Nos pizzas</a>
+    <a href="#points-de-vente">Nos adresses</a>
+  </nav>
+  <div class="mobile-menu-footer">
+    <a href="#points-de-vente">
+      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+      Mon point de vente
+    </a>
+    <a href="#">
+      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+      Mon compte
+    </a>
+  </div>
+  <div class="mobile-order-btn">
+    <a href="#nos-pizzas" class="btn-hero" style="width:100%; border-radius:12px;">Commander 🍕</a>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════
+     HERO — plein écran
+     ════════════════════════════════════════ -->
+<section class="hero" id="hero" aria-label="Bannière principale">
+
+  <!-- Fond : photos kiosque & camion en fondu enchaîné -->
+  <div class="hero-bg" aria-hidden="true">
+    <div class="hero-slide s1" style="background-image:url('img/kiosque.jpeg');"></div>
+    <div class="hero-slide s2" style="background-image:url('img/camion.jpg');"></div>
+  </div>
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- Bouton sourdine (style Quick) -->
+  <button class="hero-mute" aria-label="Couper le son">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z"/></svg>
+  </button>
+
+  <!-- Contenu texte -->
+  <div class="hero-content">
+    <img class="hero-title" src="img/pizzafamily.svg" alt="Pizza Family">
+    <p class="hero-sub">Trois façons de se régaler. Faite avec amour et beaucoup de fromage.</p>
+    <div class="hero-cta-row">
+      <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander 🍕</a>
+      <a href="#nos-pizzas" class="btn-outline" style="border-color:rgba(255,255,255,.4); font-style:italic; font-weight:700;">Découvrir la carte</a>
+    </div>
+  </div>
+
+  <!-- Indicateur de scroll -->
+  <div class="hero-scroll-hint" aria-hidden="true"></div>
+
+  <!-- Vague de transition vers le blanc -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0,55 Q360,0 720,45 Q1080,90 1440,35 L1440,80 L0,80 Z" fill="#F5F5F2"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     EN CE MOMENT
+     ════════════════════════════════════════ -->
+<section class="now-section" id="en-ce-moment" aria-labelledby="now-title">
+  <div class="now-header reveal">
+    <h2 class="now-title" id="now-title">En ce<br>moment</h2>
+  </div>
+
+  <div class="now-scroll-wrap">
+    <div class="now-scroll stagger" role="list">
+
+      <!-- Card 1 — La Family (vraie pizza du menu) -->
+      <div class="now-card" role="listitem">
+        <div class="now-card-media" style="background: linear-gradient(140deg, #3a1c06, #5a2a0a);">
+          <div class="now-card-bg" aria-hidden="true">🍕</div>
+          <span class="now-card-badge">★ Notre Family</span>
+        </div>
+        <div class="now-card-body">
+          <h3 class="now-card-title">Pizza Family</h3>
+          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
+        </div>
+      </div>
+
+      <!-- Card 2 — Carnivore -->
+      <div class="now-card" role="listitem">
+        <div class="now-card-media" style="background: linear-gradient(140deg, #2a0a06, #4a120a);">
+          <div class="now-card-bg" aria-hidden="true">🥩</div>
+          <span class="now-card-badge">🔥 Top vente</span>
+        </div>
+        <div class="now-card-body">
+          <h3 class="now-card-title">Carnivore</h3>
+          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
+        </div>
+      </div>
+
+      <!-- Card 3 — Tartiflette -->
+      <div class="now-card" role="listitem">
+        <div class="now-card-media" style="background: linear-gradient(140deg, #2e2208, #4a3410);">
+          <div class="now-card-bg" aria-hidden="true">🧀</div>
+          <span class="now-card-badge" style="background:#8B5E3C;">🧀 Fromagère</span>
+        </div>
+        <div class="now-card-body">
+          <h3 class="now-card-title">Tartiflette</h3>
+          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
+        </div>
+      </div>
+
+      <!-- Card 4 — Texane -->
+      <div class="now-card" role="listitem">
+        <div class="now-card-media" style="background: linear-gradient(140deg, #380c06, #5e160a);">
+          <div class="now-card-bg" aria-hidden="true">🌶️</div>
+          <span class="now-card-badge">🌶️ Relevée</span>
+        </div>
+        <div class="now-card-body">
+          <h3 class="now-card-title">La Texane</h3>
+          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     NOS 3 CANAUX — 3 façons de se régaler
+     ════════════════════════════════════════ -->
+<section class="canaux-section" id="canaux" aria-labelledby="canaux-title">
+  <div class="canaux-head reveal">
+    <h2 class="canaux-title" id="canaux-title">3 façons de<br>se régaler.</h2>
+  </div>
+
+  <div class="canaux-grid stagger">
+
+    <!-- 01 — Le Resto / Kiosque -->
+    <article class="canal-card resto" style="background-image:url('img/kiosque.jpeg');">
+      <span class="canal-num" aria-hidden="true">01</span>
+      <div class="canal-card-body">
+        <h3 class="canal-name">Le Kiosque</h3>
+        <p class="canal-desc">L’adresse historique à Hersin-Coupigny. Tu commandes, tu repars avec ta pizza cuite sur pierre. Ambiance famille garantie.</p>
+        <div class="canal-tags">
+          <span class="canal-tag">Soirs · 18h30</span>
+          <span class="canal-tag">À emporter</span>
+          <span class="canal-tag">Sur pierre</span>
+        </div>
+        <a class="canal-cta" href="#points-de-vente">Voir les horaires →</a>
+      </div>
+    </article>
+
+    <!-- 02 — Le Camion -->
+    <article class="canal-card camion" style="background-image:url('img/camion.jpg');">
+      <span class="canal-num" aria-hidden="true">02</span>
+      <div class="canal-card-body">
+        <h3 class="canal-name">Le Camion</h3>
+        <p class="canal-desc">Notre food truck sillonne les marchés et événements autour de Hesdin. Suis l’agenda sur Facebook, on vient à toi.</p>
+        <div class="canal-tags">
+          <span class="canal-tag">Selon agenda</span>
+          <span class="canal-tag">Sur Facebook</span>
+        </div>
+        <a class="canal-cta" href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener">Programme du camion →</a>
+      </div>
+    </article>
+
+    <!-- 03 — Les Distribs -->
+    <article class="canal-card distrib">
+      <span class="canal-num" aria-hidden="true">03</span>
+      <span class="canal-emoji" aria-hidden="true">🍕</span>
+      <div class="canal-card-body">
+        <h3 class="canal-name">Les Distribs</h3>
+        <p class="canal-desc">Distributeurs ouverts 24/7. Pizza chaude en 3 minutes chrono, CB et sans contact. Même à 3h du mat’.</p>
+        <div class="canal-tags">
+          <span class="canal-tag">24h / 7j</span>
+          <span class="canal-tag">3 min</span>
+          <span class="canal-tag">Sans contact</span>
+        </div>
+        <a class="canal-cta" href="#points-de-vente">Trouver le plus proche →</a>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     NOS PIZZAS
+     ════════════════════════════════════════ -->
+<section class="pizzas-section" id="nos-pizzas" aria-labelledby="pizzas-title">
+  <div class="section-header reveal">
+    <h2 class="section-title-italic" id="pizzas-title">Nos<br>pizzas</h2>
+  </div>
+
+  <!-- Tabs catégories -->
+  <div class="cat-scroll reveal" role="list" aria-label="Filtrer par catégorie">
+    <button class="cat-btn active" data-cat="classiques" role="listitem" aria-pressed="true">
+      <span class="cat-emoji">🍕</span>Classiques
+    </button>
+    <button class="cat-btn" data-cat="mer" role="listitem" aria-pressed="false">
+      <span class="cat-emoji">🦐</span>De la mer
+    </button>
+    <button class="cat-btn" data-cat="fromageres" role="listitem" aria-pressed="false">
+      <span class="cat-emoji">🧀</span>Fromagères
+    </button>
+    <button class="cat-btn" data-cat="specialites" role="listitem" aria-pressed="false">
+      <span class="cat-emoji">⭐</span>Spécialités
+    </button>
+    <button class="cat-btn" data-cat="pasta" role="listitem" aria-pressed="false">
+      <span class="cat-emoji">🍝</span>Pasta Box
+    </button>
+    <button class="cat-btn" data-cat="boissons" role="listitem" aria-pressed="false">
+      <span class="cat-emoji">🥤</span>Boissons
+    </button>
+  </div>
+
+  <!-- Grille produits -->
+  <div id="products-panel">
+
+    <!-- ── CLASSIQUES ── -->
+    <div class="products-grid stagger" id="panel-classiques">
+
+      <div class="product-card">
+        <div class="product-img">🍕</div>
+        <div class="product-body">
+          <h3 class="product-name">Margherita</h3>
+          <p class="product-desc">Coulis de tomate, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕</div>
+        <div class="product-body">
+          <h3 class="product-name">Regina</h3>
+          <p class="product-desc">Coulis de tomate, jambon, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕
+          <span class="product-badge">🔥 Top vente</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Reine</h3>
+          <p class="product-desc">Coulis de tomate, jambon, champignons frais, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕
+          <span class="product-badge">🌶️ Relevée</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Texane</h3>
+          <p class="product-desc">Coulis de tomate, jambon, chorizo, merguez, lardons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕</div>
+        <div class="product-body">
+          <h3 class="product-name">Louisiane</h3>
+          <p class="product-desc">Coulis de tomate, émincés de poulet rôti, poivrons, tomates fraîches, champignons frais, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕</div>
+        <div class="product-body">
+          <h3 class="product-name">Bolo</h3>
+          <p class="product-desc">Coulis de tomate, bœuf haché, oignons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕</div>
+        <div class="product-body">
+          <h3 class="product-name">Chorizo</h3>
+          <p class="product-desc">Coulis de tomate, chorizo, poivrons, oignons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥚</div>
+        <div class="product-body">
+          <h3 class="product-name">Flamenkueche</h3>
+          <p class="product-desc">Crème fraîche, lardons, oignons</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥔</div>
+        <div class="product-body">
+          <h3 class="product-name">Calabrese</h3>
+          <p class="product-desc">Crème fraîche, bœuf haché, pommes de terre, lardons, oignons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥙</div>
+        <div class="product-body">
+          <h3 class="product-name">Kebab</h3>
+          <p class="product-desc">Crème fraîche, kebab, poivrons, oignons, fromage, sauce pita</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕
+          <span class="product-badge">🌶️ Relevée</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Orientale</h3>
+          <p class="product-desc">Coulis de tomate, chorizo, merguez, poivrons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍕
+          <span class="product-badge" style="background:var(--red); color:#fff;">★ Notre Family</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Family</h3>
+          <p class="product-desc">Coulis de tomate, bœuf haché, merguez, oignons, poivrons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥩
+          <span class="product-badge">🔥 Top</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Carnivore</h3>
+          <p class="product-desc">Coulis de tomate, bœuf haché, merguez, poulet, fromage, sauce burger</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍗</div>
+        <div class="product-body">
+          <h3 class="product-name">Barbecue</h3>
+          <p class="product-desc">Coulis de tomate, poulet, merguez, lard fumé, sauce barbecue, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥬
+          <span class="product-badge green">🥬 Veggie</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Végétarienne</h3>
+          <p class="product-desc">Coulis de tomate, poivrons, oignons, champignons, tomates fraîches, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /classiques -->
+
+    <!-- ── DE LA MER ── -->
+    <div class="products-grid stagger" id="panel-mer" style="display:none;">
+
+      <div class="product-card">
+        <div class="product-img">🦐</div>
+        <div class="product-body">
+          <h3 class="product-name">Fruits de mer</h3>
+          <p class="product-desc">Coulis de tomate, moules, calamars, crevettes, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🐟</div>
+        <div class="product-body">
+          <h3 class="product-name">Saumon</h3>
+          <p class="product-desc">Crème fraîche, saumon fumé, oignons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /mer -->
+
+    <!-- ── FROMAGÈRES ── -->
+    <div class="products-grid stagger" id="panel-fromageres" style="display:none;">
+
+      <div class="product-card">
+        <div class="product-img">🧀</div>
+        <div class="product-body">
+          <h3 class="product-name">Raclette</h3>
+          <p class="product-desc">Coulis de tomate, pommes de terre, lardons, raclette, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍯
+          <span class="product-badge green">🥬 Veggie</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Chèvre-Miel</h3>
+          <p class="product-desc">Crème fraîche, fromage, fromage de chèvre, miel</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🧀</div>
+        <div class="product-body">
+          <h3 class="product-name">Welsh</h3>
+          <p class="product-desc">Coulis de tomate, jambon, cheddar, œuf</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🧀
+          <span class="product-badge">⭐ Incontournable</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">4 Fromages</h3>
+          <p class="product-desc">Coulis de tomate, fromage de chèvre, reblochon, mozzarella, emmental</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🧀</div>
+        <div class="product-body">
+          <h3 class="product-name">Maroilles</h3>
+          <p class="product-desc">Crème fraîche, fromage, pommes de terre, oignons, maroilles</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥔
+          <span class="product-badge">🔥 Top</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Tartiflette</h3>
+          <p class="product-desc">Crème fraîche, pommes de terre, lardons, oignons, reblochon, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🏔️</div>
+        <div class="product-body">
+          <h3 class="product-name">Montagnarde</h3>
+          <p class="product-desc">Crème fraîche, pommes de terre, poulet, lardons, champignons, reblochon, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🐔</div>
+        <div class="product-body">
+          <h3 class="product-name">Paysanne</h3>
+          <p class="product-desc">Crème fraîche, pommes de terre, poulet, reblochon, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🧀</div>
+        <div class="product-body">
+          <h3 class="product-name">Normande</h3>
+          <p class="product-desc">Crème fraîche, jambon, lardons, oignons, camembert, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /fromageres -->
+
+    <!-- ── SPÉCIALITÉS ── -->
+    <div class="products-grid stagger" id="panel-specialites" style="display:none;">
+
+      <div class="product-card">
+        <div class="product-img">🍔</div>
+        <div class="product-body">
+          <h3 class="product-name">Burger</h3>
+          <p class="product-desc">Coulis de tomate, bœuf haché, oignons, cheddar, sauce burger</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">👨‍🍳
+          <span class="product-badge">⭐ Du chef</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Pizza du Chef</h3>
+          <p class="product-desc">Coulis de tomate, bœuf haché, chorizo, pommes de terre, lardons, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🌶️</div>
+        <div class="product-body">
+          <h3 class="product-name">Andalouse</h3>
+          <p class="product-desc">Crème fraîche, chorizo, poulet, poivrons, oignons, sauce andalouse, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍛</div>
+        <div class="product-body">
+          <h3 class="product-name">Indienne</h3>
+          <p class="product-desc">Crème fraîche, curry, jambon, pommes de terre, poulet, fromage</p>
+          <div class="product-footer"><span class="product-price">12€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /specialites -->
+
+    <!-- ── PASTA BOX ── -->
+    <div class="products-grid stagger" id="panel-pasta" style="display:none;">
+
+      <div class="product-card">
+        <div class="product-img">🍝</div>
+        <div class="product-body">
+          <h3 class="product-name">Pasta Box Romaine</h3>
+          <p class="product-desc">Penne, coulis de tomate, lardons, chorizo, fromage</p>
+          <div class="product-footer"><span class="product-price">10€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍝</div>
+        <div class="product-body">
+          <h3 class="product-name">Pasta Box Ch'ti</h3>
+          <p class="product-desc">Penne, crème fraîche, poulet, lardons, maroilles</p>
+          <div class="product-footer"><span class="product-price">10€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍝</div>
+        <div class="product-body">
+          <h3 class="product-name">Pasta Box Bolo</h3>
+          <p class="product-desc">Penne, coulis de tomate, bœuf haché, fromage</p>
+          <div class="product-footer"><span class="product-price">10€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍝</div>
+        <div class="product-body">
+          <h3 class="product-name">Pasta Box Fermière</h3>
+          <p class="product-desc">Penne, crème fraîche, poulet, lardons, raclette</p>
+          <div class="product-footer"><span class="product-price">10€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍝🐟</div>
+        <div class="product-body">
+          <h3 class="product-name">Pasta Box Saumon</h3>
+          <p class="product-desc">Penne, crème fraîche, saumon fumé, oignons, fromage</p>
+          <div class="product-footer"><span class="product-price">10€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <!-- Menu enfant -->
+      <div class="product-card">
+        <div class="product-img">👶
+          <span class="product-badge green">Menu Enfant</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Menu Enfant</h3>
+          <p class="product-desc">Pizza 21cm (Regina ou Paysanne) + boisson au choix (Coca, Caprisun, Orangina…)</p>
+          <div class="product-footer"><span class="product-price">6,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /pasta -->
+
+    <!-- ── BOISSONS ── -->
+    <div class="products-grid stagger" id="panel-boissons" style="display:none;">
+
+      <div class="product-card">
+        <div class="product-img">🥤</div>
+        <div class="product-body">
+          <h3 class="product-name">Coca-Cola</h3>
+          <p class="product-desc">Original ou Zero sucres</p>
+          <div class="product-footer"><span class="product-price">1,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍹</div>
+        <div class="product-body">
+          <h3 class="product-name">Caprisun</h3>
+          <p class="product-desc">Jus de fruits pour les petits (et les grands)</p>
+          <div class="product-footer"><span class="product-price">1,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍊</div>
+        <div class="product-body">
+          <h3 class="product-name">Orangina</h3>
+          <p class="product-desc">La bulleuse préférée des pizzaïolos</p>
+          <div class="product-footer"><span class="product-price">1,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🥤</div>
+        <div class="product-body">
+          <h3 class="product-name">Schweppes Agrumes</h3>
+          <p class="product-desc">Pétillant et rafraîchissant</p>
+          <div class="product-footer"><span class="product-price">1,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🍵</div>
+        <div class="product-body">
+          <h3 class="product-name">Ice Tea</h3>
+          <p class="product-desc">Thé glacé, la boisson fraîcheur</p>
+          <div class="product-footer"><span class="product-price">1,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-img">🧃</div>
+        <div class="product-body">
+          <h3 class="product-name">Oasis Tropical</h3>
+          <p class="product-desc">Le goût tropical qui dépayse</p>
+          <div class="product-footer"><span class="product-price">1,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /boissons -->
+
+  </div><!-- /products-panel -->
+
+  <div style="text-align:center; margin-top:48px; padding: 0 20px;" class="reveal">
+    <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero" style="background:var(--ink);">Commander en ligne →</a>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FACEBOOK
+     ════════════════════════════════════════ -->
+<section class="tiktok-section" aria-labelledby="fb-title">
+  <!-- Halo bleu Facebook au lieu des cercles rouges -->
+  <div class="tiktok-header reveal">
+    <div class="tiktok-title-block">
+      <svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <circle cx="24" cy="24" r="24" fill="#1877F2"/>
+        <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
+      </svg>
+      <div class="tiktok-handle">
+        <span>Facebook</span>
+        <span class="handle">Pizza Family 62</span>
+      </div>
+    </div>
+    <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-follow-cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Suivre sur Facebook
+    </a>
+  </div>
+
+  <div class="tiktok-scroll stagger" role="list" style="padding-top:4px; justify-content:center;">
+
+    <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Tartiflette">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0800,#3a1500);">🧀</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">👍❤️🔥 148</span>
+        <span class="fb-card-source">Kiosque</span>
+      </div>
+      <div class="fb-card-caption">Ce soir c'est Tartiflette ! On est là jusqu'à 22h 🔥</div>
+    </a>
+
+    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Camion Hesdin">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1000,#3a2500);">🚚</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">👍❤️😍 94</span>
+        <span class="fb-card-source">Camion</span>
+      </div>
+      <div class="fb-card-caption">Le camion est à Hesdin ! Pizzas faites minute, ouvert jusqu'à 14h 😍</div>
+    </a>
+
+    <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Pizza Family signature">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0a00,#2a1500);">🍕</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">❤️🔥👍 203</span>
+        <span class="fb-card-source">Kiosque</span>
+      </div>
+      <div class="fb-card-caption">La FAMILY — bœuf haché, merguez, oignons, poivrons. La signature. 12€ 👇</div>
+    </a>
+
+    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Programme camion">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#0d1a0d,#1a3010);">📅</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">👍❤️ 67</span>
+        <span class="fb-card-source">Camion</span>
+      </div>
+      <div class="fb-card-caption">Programme du camion cette semaine — suivez la page pour aucune sortie manquée 🚚🍕</div>
+    </a>
+
+    <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Carnivore">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#200000,#400a00);">🥩</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">😍🔥❤️ 311</span>
+        <span class="fb-card-source">Kiosque</span>
+      </div>
+      <div class="fb-card-caption">La CARNIVORE — bœuf, merguez, poulet, sauce burger. 12€. T'es prêt ? 💪🍕</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     ADRESSES & HORAIRES
+     ════════════════════════════════════════ -->
+<section class="places-section" id="points-de-vente" aria-labelledby="places-title">
+  <div class="section-header reveal">
+    <h2 class="section-title-italic" id="places-title">Nos points<br>de vente</h2>
+  </div>
+
+  <div class="places-grid stagger">
+
+    <!-- ── LE KIOSQUE ── -->
+    <article class="place-card">
+      <div class="place-head kiosque">
+        <p class="place-kicker">Le Kiosque</p>
+        <h3 class="place-name">Hersin-<br>Coupigny</h3>
+        <span class="place-badge" data-place="kiosque"><span class="dot"></span>Horaires</span>
+      </div>
+      <div class="place-body">
+        <div class="place-contact">
+          <a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Rue+Victor+Hugo+Hersin-Coupigny" target="_blank" rel="noopener"><span class="ic">📍</span>Rue Victor Hugo, 62530 Hersin-Coupigny</a>
+          <a href="tel:0368386262"><span class="ic">📞</span>03 68 38 62 62</a>
+        </div>
+        <div class="place-hours">
+          <p class="place-hours-title">Horaires d’ouverture</p>
+          <ul>
+            <li data-d="1" class="closed"><span class="day">Lundi</span><span class="hrs">Fermé</span></li>
+            <li data-d="2"><span class="day">Mardi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="3"><span class="day">Mercredi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="4"><span class="day">Jeudi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="5"><span class="day">Vendredi</span><span class="hrs">18:30 – 22:00</span></li>
+            <li data-d="6"><span class="day">Samedi</span><span class="hrs">18:30 – 22:00</span></li>
+            <li data-d="0"><span class="day">Dimanche</span><span class="hrs">18:30 – 21:30</span></li>
+          </ul>
+        </div>
+        <div class="place-actions">
+          <a class="place-order" href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener">Commander 🍕</a>
+          <a class="place-route" href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Rue+Victor+Hugo+Hersin-Coupigny" target="_blank" rel="noopener">Itinéraire</a>
+        </div>
+      </div>
+    </article>
+
+    <!-- ── LE CAMION ── -->
+    <article class="place-card">
+      <div class="place-head camion">
+        <p class="place-kicker">Le Camion</p>
+        <h3 class="place-name">Hesdin</h3>
+        <span class="place-badge" data-place="camion"><span class="dot"></span>Horaires</span>
+      </div>
+      <div class="place-body">
+        <div class="place-contact">
+          <a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Avenue+des+Tilleuls+Hesdin" target="_blank" rel="noopener"><span class="ic">📍</span>Avenue des Tilleuls, 62140 Hesdin</a>
+          <a href="tel:0368386262"><span class="ic">📞</span>03 68 38 62 62</a>
+          <a href="mailto:pizzafamily62@gmail.com"><span class="ic">✉️</span>pizzafamily62@gmail.com</a>
+        </div>
+        <div class="place-hours">
+          <p class="place-hours-title">Horaires d’ouverture</p>
+          <ul>
+            <li data-d="1"><span class="day">Lundi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="2" class="closed"><span class="day">Mardi</span><span class="hrs">Fermé</span></li>
+            <li data-d="3" class="closed"><span class="day">Mercredi</span><span class="hrs">Fermé</span></li>
+            <li data-d="4"><span class="day">Jeudi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="5"><span class="day">Vendredi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="6"><span class="day">Samedi</span><span class="hrs">18:30 – 22:00</span></li>
+            <li data-d="0"><span class="day">Dimanche</span><span class="hrs">18:30 – 21:30</span></li>
+          </ul>
+        </div>
+        <div class="place-actions">
+          <a class="place-order" href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener">Commander 🍕</a>
+          <a class="place-route" href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Avenue+des+Tilleuls+Hesdin" target="_blank" rel="noopener">Itinéraire</a>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     CARTE (visuel)
+     ════════════════════════════════════════ -->
+<section class="map-section" id="carte" aria-label="Carte des points de vente">
+
+  <!-- Fond carte stylisé -->
+  <div class="map-bg" aria-hidden="true">
+    <!-- Pins -->
+    <div class="map-pins">
+      <div class="map-pin" style="top:38%;left:42%;">
+        <div class="map-pin-icon"><span>🍕</span></div>
+      </div>
+      <div class="map-pin" style="top:56%;left:55%;">
+        <div class="map-pin-icon"><span>🍕</span></div>
+      </div>
+      <div class="map-pin" style="top:30%;left:65%;">
+        <div class="map-pin-icon"><span>🍕</span></div>
+      </div>
+      <div class="map-pin-cluster" style="top:48%;left:48%;">2</div>
+      <div class="map-pin" style="top:65%;left:35%;">
+        <div class="map-pin-icon"><span>🍕</span></div>
+      </div>
+      <div class="map-pin" style="top:25%;left:30%;">
+        <div class="map-pin-icon"><span>🍕</span></div>
+      </div>
+      <div class="map-pin-cluster" style="top:60%;left:60%;">5</div>
+    </div>
+  </div>
+
+  <!-- Titre overlay gauche -->
+  <div class="map-title-overlay" aria-hidden="true">
+    <h2 id="map-title">Nos<br>points<br>de vente</h2>
+  </div>
+
+  <!-- Panneau droite -->
+  <div class="map-panel">
+    <h3 class="map-panel-title">Une faim de loup ?</h3>
+    <p class="map-panel-instructions" style="margin-bottom:18px;">
+      Le <strong>Kiosque</strong> à Hersin-Coupigny et le <strong>Camion</strong> à Hesdin.
+      Retrouve les adresses et horaires juste au-dessus.
+    </p>
+    <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener"
+       style="display:block; text-align:center; background:var(--orange); color:#fff; padding:13px; border-radius:999px; font-weight:800; font-size:14px; font-style:italic; text-decoration:none; transition:background .15s;"
+       onmouseover="this.style.background='var(--orange-dark)'" onmouseout="this.style.background='var(--orange)'">
+      Commander en ligne 🍕
+    </a>
+  </div>
+
+</section>
+
+<!-- ════════════════════════════════════════
+     FOOTER
+     ════════════════════════════════════════ -->
+<footer class="site-footer" aria-labelledby="footer-heading">
+  <h2 id="footer-heading" class="sr-only">Pied de page Pizza Family</h2>
+
+  <div class="footer-grid">
+
+    <!-- Marque -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="img/logo.png" alt="Pizza Family Hersin" width="166" height="72">
+      </div>
+      <p class="footer-tagline">Trois façons de se régaler. Pâte fraîche chaque matin, ingrédients qu'on choisit nous-mêmes, un four bien chaud.</p>
+      <div class="footer-social-row" aria-label="Réseaux sociaux">
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook — Le Kiosque" title="Facebook Le Kiosque">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook — Le Camion" title="Facebook Le Camion">
+          <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+      </div>
+      <div style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.3); line-height:1.6;">
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" style="color:rgba(255,255,255,.35);">🏪 Kiosque</a> &nbsp;·&nbsp;
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" style="color:rgba(255,255,255,.35);">🚚 Camion</a>
+      </div>
+    </div>
+
+    <div class="footer-col">
+      <h4>Nos pizzas</h4>
+      <ul>
+        <li><a href="#nos-pizzas">Classiques</a></li>
+        <li><a href="#nos-pizzas">Signature</a></li>
+        <li><a href="#nos-pizzas">Épicées</a></li>
+        <li><a href="#nos-pizzas">Veggie</a></li>
+        <li><a href="#nos-pizzas">Desserts & Boissons</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Nous trouver</h4>
+      <ul>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Rue+Victor+Hugo+Hersin-Coupigny" target="_blank" rel="noopener">🏪 Kiosque — Rue Victor Hugo, Hersin-Coupigny</a></li>
+        <li><a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Avenue+des+Tilleuls+Hesdin" target="_blank" rel="noopener">🚚 Camion — Avenue des Tilleuls, Hesdin</a></li>
+        <li><a href="tel:0368386262">📞 03 68 38 62 62</a></li>
+        <li><a href="mailto:pizzafamily62@gmail.com">✉️ pizzafamily62@gmail.com</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-col">
+      <h4>Pizza Family</h4>
+      <ul>
+        <li><a href="#">Notre histoire</a></li>
+        <li><a href="#">Fidélité</a></li>
+        <li><a href="#">Nos engagements</a></li>
+        <li><a href="#">Carrière</a></li>
+        <li><a href="#">Nous contacter</a></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <div class="footer-legal">
+      <a href="#">Mentions légales</a>
+      <a href="#">Données personnelles</a>
+      <a href="#">Gérer mes cookies</a>
+      <a href="#">CGU</a>
+    </div>
+    <p class="footer-copy">© 2026 Pizza Family</p>
+  </div>
+
+  <div class="footer-health">
+    Pour votre santé, mangez au moins cinq fruits et légumes par jour.
+    <a href="https://www.mangerbouger.fr" target="_blank" rel="noopener noreferrer">www.mangerbouger.fr</a>
+  </div>
+
+</footer>
+
+<!-- ════════════════════════════════════════
+     JAVASCRIPT
+     ════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Header transparent → opaque au scroll ── */
+  var header = document.getElementById('site-header');
+  window.addEventListener('scroll', function () {
+    header.classList.toggle('scrolled', window.scrollY > 60);
+  }, { passive: true });
+
+  /* ── Mobile menu ── */
+  var burgerBtn     = document.getElementById('burger-btn');
+  var mobileMenu    = document.getElementById('mobile-menu');
+  var mobileOverlay = document.getElementById('mobile-overlay');
+  var closeBtn      = document.getElementById('mobile-menu-close');
+
+  function openMenu() {
+    mobileMenu.classList.add('open');
+    mobileOverlay.classList.add('open');
+    mobileMenu.setAttribute('aria-hidden', 'false');
+    mobileOverlay.setAttribute('aria-hidden', 'false');
+    burgerBtn.classList.add('open');
+    burgerBtn.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMenu() {
+    mobileMenu.classList.remove('open');
+    mobileOverlay.classList.remove('open');
+    mobileMenu.setAttribute('aria-hidden', 'true');
+    mobileOverlay.setAttribute('aria-hidden', 'true');
+    burgerBtn.classList.remove('open');
+    burgerBtn.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  burgerBtn.addEventListener('click', function () {
+    mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
+  });
+  closeBtn.addEventListener('click', closeMenu);
+  mobileOverlay.addEventListener('click', closeMenu);
+  mobileMenu.querySelectorAll('a').forEach(function (a) {
+    a.addEventListener('click', closeMenu);
+  });
+
+  /* ── Catégorie tabs pizzas ── */
+  var catBtns = document.querySelectorAll('.cat-btn');
+  var panels  = {
+    classiques:  document.getElementById('panel-classiques'),
+    mer:         document.getElementById('panel-mer'),
+    fromageres:  document.getElementById('panel-fromageres'),
+    specialites: document.getElementById('panel-specialites'),
+    pasta:       document.getElementById('panel-pasta'),
+    boissons:    document.getElementById('panel-boissons'),
+  };
+
+  catBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      catBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
+      this.classList.add('active');
+      this.setAttribute('aria-pressed', 'true');
+      var cat = this.dataset.cat;
+      Object.values(panels).forEach(function (p) { if (p) p.style.display = 'none'; });
+      var panel = panels[cat];
+      if (panel) {
+        panel.style.display = 'grid';
+        /* rejoue la cascade à chaque changement d'onglet */
+        panel.classList.remove('visible');
+        void panel.offsetWidth;            /* force le reflow */
+        applyStaggerDelays(panel);
+        requestAnimationFrame(function () { panel.classList.add('visible'); });
+      }
+    });
+  });
+
+  /* ── Scroll reveal + cascade (stagger) ── */
+  function applyStaggerDelays(el) {
+    var kids = el.children, step = 70, d = 0;
+    for (var i = 0; i < kids.length; i++) {
+      kids[i].style.setProperty('--d', d);
+      d += step;
+    }
+  }
+  document.querySelectorAll('.stagger').forEach(applyStaggerDelays);
+
+  var animEls = document.querySelectorAll('.reveal, .stagger');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    animEls.forEach(function (el) { obs.observe(el); });
+  } else {
+    animEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── Smooth scroll sur les liens anchor ── */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        var offset = header.offsetHeight + 12;
+        var top = target.getBoundingClientRect().top + window.scrollY - offset;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  /* ── Horaires : statut ouvert/fermé en direct + jour surligné ── */
+  var schedules = {
+    /* clés = jour JS (0 = dimanche … 6 = samedi), minutes depuis minuit */
+    kiosque: { 0:[1110,1290], 1:null,        2:[1110,1290], 3:[1110,1290], 4:[1110,1290], 5:[1110,1320], 6:[1110,1320] },
+    camion:  { 0:[1110,1290], 1:[1110,1290], 2:null,        3:null,        4:[1110,1290], 5:[1110,1290], 6:[1110,1320] }
+  };
+  var dayNames = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
+  function fmtMin(m) { var h = Math.floor(m / 60), mm = m % 60; return h + 'h' + (mm < 10 ? '0' + mm : mm); }
+
+  (function liveHours() {
+    var now = new Date(), day = now.getDay(), mins = now.getHours() * 60 + now.getMinutes();
+
+    document.querySelectorAll('.place-badge').forEach(function (badge) {
+      var sched = schedules[badge.dataset.place];
+      if (!sched) return;
+      var slot = sched[day];
+      var open = slot && mins >= slot[0] && mins < slot[1];
+      badge.classList.remove('is-open', 'is-closed');
+
+      if (open) {
+        badge.classList.add('is-open');
+        badge.innerHTML = '<span class="dot"></span>Ouvert · jusqu’à ' + fmtMin(slot[1]);
+      } else {
+        badge.classList.add('is-closed');
+        var label = 'Fermé';
+        for (var i = 0; i <= 7; i++) {
+          var d = (day + i) % 7, s = sched[d];
+          if (i === 0 && s && mins < s[0]) { label = 'Fermé · ouvre à ' + fmtMin(s[0]); break; }
+          if (i >= 1 && s) {
+            label = (i === 1 ? 'Fermé · ouvre demain ' : 'Fermé · ouvre ' + dayNames[d] + ' ') + fmtMin(s[0]);
+            break;
+          }
+        }
+        badge.innerHTML = '<span class="dot"></span>' + label;
+      }
+    });
+
+    document.querySelectorAll('.place-hours li[data-d="' + day + '"]').forEach(function (li) {
+      li.classList.add('today');
+    });
+  })();
+
+})();
+</script>
+
+</body>
+</html>
