@@ -26,10 +26,10 @@
   --red:          #C62023;   /* rouge urgence */
   --red-dark:     #a31a1d;
   --red-light:    #d92427;
-  --green:        #294926;   /* vert foncé du logo */
-  --green-deep:   #1a2f17;   /* surface sombre principale */
-  --green-800:    #223d1e;
-  --green-500:    #4C823D;   /* vert moyen du logo */
+  --green:        #FF1F1F;   /* rouge identité — remplace le vert */
+  --green-deep:   #3a0605;   /* surface sombre principale (rouge foncé) */
+  --green-800:    #7a1210;
+  --green-500:    #4C823D;   /* vert conservé — onglets catégorie uniquement */
   --beige:        #e4dbd2;
   --beige-soft:   #ede7df;
   --beige-deep:   #b0a090;
@@ -151,7 +151,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 /* Center nav pill */
 .nav-pill {
   display: none;
-  background: rgba(26,47,23,.62);
+  background: rgba(58,6,5,.62);
   border: 1px solid rgba(255,255,255,.08);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -236,8 +236,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   font-size: 15px; font-weight: 700; color: var(--ink);
   padding: 4px 0; transition: color .15s;
 }
-.mobile-menu-footer a svg { width: 20px; height: 20px; fill: var(--green-500); }
-.mobile-menu-footer a:hover { color: var(--green-500); }
+.mobile-menu-footer a svg { width: 20px; height: 20px; fill: var(--green); }
+.mobile-menu-footer a:hover { color: var(--green); }
 .mobile-menu .mobile-order-btn {
   margin: 20px 28px 0;
 }
@@ -281,8 +281,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   position: absolute; inset: 0;
   background:
     radial-gradient(120% 90% at 85% 15%, rgba(240,94,38,.22) 0%, transparent 55%),
-    linear-gradient(to right, rgba(26,47,23,.94) 0%, rgba(26,47,23,.62) 45%, rgba(26,47,23,.22) 100%),
-    linear-gradient(to top, rgba(26,47,23,.92) 0%, rgba(26,47,23,.32) 40%, transparent 72%);
+    linear-gradient(to right, rgba(58,6,5,.94) 0%, rgba(58,6,5,.62) 45%, rgba(58,6,5,.22) 100%),
+    linear-gradient(to top, rgba(58,6,5,.92) 0%, rgba(58,6,5,.32) 40%, transparent 72%);
 }
 
 /* Contenu texte du hero */
@@ -429,7 +429,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .canaux-section { background: var(--cream); padding: 80px 0 90px; }
 .canaux-head { padding: 0 clamp(20px,5vw,80px); margin-bottom: 44px; overflow: visible; }
 .canaux-eyebrow {
-  color: var(--green-500); font-size: 13px; font-weight: 800;
+  color: var(--green); font-size: 13px; font-weight: 800;
   letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;
 }
 .canaux-title {
@@ -460,7 +460,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .canal-card.resto::after  { background: linear-gradient(180deg, rgba(12,12,12,.55) 0%, rgba(12,12,12,.18) 32%, rgba(8,8,8,.88) 100%); }
 .canal-card.camion::after { background: linear-gradient(180deg, rgba(24,14,4,.30) 0%, rgba(24,14,4,.12) 28%, rgba(34,16,4,.90) 100%); }
 .canal-card.distrib { background-color: var(--green-deep); background-size: cover; background-position: center; }
-.canal-card.distrib::after { background: linear-gradient(180deg, rgba(26,47,23,.30) 0%, rgba(26,47,23,.12) 28%, rgba(26,47,23,.88) 100%); }
+.canal-card.distrib::after { background: linear-gradient(180deg, rgba(58,6,5,.30) 0%, rgba(58,6,5,.12) 28%, rgba(58,6,5,.88) 100%); }
 
 .canal-num {
   position: absolute; top: 16px; left: 26px; z-index: 0;
@@ -502,7 +502,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 .section-label {
   font-size: 12px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 2px; color: var(--green-500); margin-bottom: 10px;
+  letter-spacing: 2px; color: var(--green); margin-bottom: 10px;
 }
 .section-title-italic {
   font-family: var(--font-b);
@@ -549,12 +549,12 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .product-img {
   height: var(--card-img-h); display: flex; align-items: center; justify-content: center;
   font-size: clamp(64px,8vw,84px); position: relative;
-  background: radial-gradient(120% 120% at 30% 20%, #e8efe5, #cddec8 120%);
+  background: radial-gradient(120% 120% at 30% 20%, #f5e2e0, #e0b5b0 120%);
 }
 /* Variété de fonds en rotation — palette charte */
 .product-card:nth-child(4n+2) .product-img { background: radial-gradient(120% 120% at 30% 20%, #fde0cc, #f5a070 130%); }
 .product-card:nth-child(4n+3) .product-img { background: radial-gradient(120% 120% at 30% 20%, #f0ebe2, #ddd2c2 130%); }
-.product-card:nth-child(4n)   .product-img { background: radial-gradient(120% 120% at 30% 20%, #ddebd8, #b4d0ac 130%); }
+.product-card:nth-child(4n)   .product-img { background: radial-gradient(120% 120% at 30% 20%, #f7d8d6, #e59b95 130%); }
 .product-badge {
   position: absolute; top: 12px; right: 12px;
   background: var(--red); color: var(--white);
@@ -937,7 +937,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   background-size: cover; background-position: center;
 }
 .place-head.kiosque {
-  background-image: linear-gradient(180deg, rgba(41,73,38,.35) 0%, rgba(41,73,38,.5) 45%, rgba(26,47,23,.92) 100%), url('img/kiosque.jpeg');
+  background-image: linear-gradient(180deg, rgba(255,31,31,.35) 0%, rgba(255,31,31,.5) 45%, rgba(58,6,5,.92) 100%), url('img/kiosque.jpeg');
 }
 .place-head.camion  {
   background-image: linear-gradient(180deg, rgba(240,94,38,.30) 0%, rgba(170,55,12,.55) 45%, rgba(70,30,8,.92) 100%), url('img/camion.jpg');
@@ -977,7 +977,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .place-hours { border-top: 1px dashed #d8d2cc; padding-top: 14px; margin-bottom: 20px; }
 .place-hours-title {
   font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
-  color: var(--green-500); margin-bottom: 10px;
+  color: var(--green); margin-bottom: 10px;
 }
 .place-hours ul { display: flex; flex-direction: column; gap: 2px; }
 .place-hours li {
