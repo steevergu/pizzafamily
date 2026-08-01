@@ -258,21 +258,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   background: var(--green-deep);
 }
 
-/* Fond hero : photos kiosque & camion en fondu enchaîné */
+/* Fond hero : photos kiosque, camion & distrib en fondu enchaîné */
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
 .hero-slide {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   opacity: 0;
-  animation: heroFade 16s ease-in-out infinite, heroKen 16s ease-in-out infinite;
+  animation: heroFade 24s ease-in-out infinite, heroKen 24s ease-in-out infinite;
   will-change: opacity, transform;
 }
 .hero-slide.s2 { animation-delay: -8s, -8s; }
+.hero-slide.s3 { animation-delay: -16s, -16s; }
 @keyframes heroFade {
   0%   { opacity: 1; }
-  44%  { opacity: 1; }
-  50%  { opacity: 0; }
-  94%  { opacity: 0; }
+  29%  { opacity: 1; }
+  33%  { opacity: 0; }
+  96%  { opacity: 0; }
   100% { opacity: 1; }
 }
 @keyframes heroKen {
@@ -1262,10 +1263,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
      ════════════════════════════════════════ -->
 <section class="hero" id="hero" aria-label="Bannière principale">
 
-  <!-- Fond : photos kiosque & camion en fondu enchaîné -->
+  <!-- Fond : photos kiosque, camion & distrib en fondu enchaîné -->
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-slide s1" style="background-image:url('img/kiosque.jpeg');"></div>
     <div class="hero-slide s2" style="background-image:url('img/camion.jpg');"></div>
+    <div class="hero-slide s3" style="background-image:url('img/distributeur.png');"></div>
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
 
