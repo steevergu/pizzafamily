@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>L'application Pizza Family — Téléchargez-la</title>
+<meta name="description" content="Téléchargez l'application Pizza Family sur l'App Store ou Google Play : commandez, cumulez des points fidélité et trouvez le distributeur le plus proche.">
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/png" href="img/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Luckiest+Guy&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,700;0,9..40,800;1,9..40,700;1,9..40,800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --orange:      #F05E26;
+  --orange-dark: #d44c1c;
+  --red:         #FF1F1F;
+  --green-deep:  #191919;
+  --green-500:   #4C823D;
+  --cream:       #F5F5F2;
+  --ink:         #191919;
+  --ink-70:      rgba(25,25,25,.7);
+  --white:       #FFFFFF;
+  --font-d: 'Luckiest Guy', system-ui, sans-serif;
+  --font-b: 'DM Sans', system-ui, sans-serif;
+}
+* , *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-b);
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+button { font-family: var(--font-b); cursor: pointer; }
+
+/* ---- HERO ---- */
+.app-hero {
+  position: relative;
+  min-height: 100dvh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: flex-start;
+  text-align: center;
+  padding: 48px 24px 40px;
+  overflow: hidden;
+  background: var(--green-deep);
+}
+.app-hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(120% 70% at 50% 0%, rgba(240,94,38,.35) 0%, transparent 60%),
+    url('img/distributeur.png');
+  background-size: cover; background-position: center 20%;
+  filter: saturate(1.05);
+}
+.app-hero::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(25,25,25,.55) 0%, rgba(25,25,25,.75) 45%, rgba(25,25,25,.97) 100%);
+}
+.app-hero > * { position: relative; z-index: 2; }
+
+.app-logo {
+  width: 88px; height: 88px; border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  margin-bottom: 22px;
+}
+
+.app-eyebrow {
+  font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 14px;
+}
+
+.app-title {
+  font-family: var(--font-b); font-weight: 800; font-style: italic;
+  font-size: clamp(28px, 7.5vw, 44px); line-height: 1.08;
+  color: var(--white);
+  margin-bottom: 16px;
+  width: 100%;
+  max-width: 420px;
+}
+
+.app-sub {
+  font-size: 15px; color: rgba(255,255,255,.75);
+  max-width: 340px;
+  margin: 0 auto 34px;
+  line-height: 1.6;
+}
+
+/* ---- BADGES ---- */
+.store-badges {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 14px;
+  margin-bottom: 18px;
+  width: 100%;
+}
+.store-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #000; color: #fff;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 12px;
+  padding: 10px 20px;
+  width: min(240px, 80vw);
+  transition: transform .15s, background .15s;
+  position: relative;
+}
+.store-badge:hover { transform: translateY(-2px); background: #111; }
+.store-badge:active { transform: scale(.97); }
+.store-badge svg.glyph { width: 26px; height: 26px; flex-shrink: 0; }
+.store-badge .badge-text { text-align: left; line-height: 1.15; }
+.store-badge .badge-text .small { display: block; font-size: 10px; opacity: .85; }
+.store-badge .badge-text .big { display: block; font-size: 17px; font-weight: 600; font-family: -apple-system, 'DM Sans', sans-serif; letter-spacing: .2px; }
+
+.soon-pill {
+  font-size: 11px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
+  color: var(--white); background: var(--orange);
+  padding: 3px 10px; border-radius: 999px;
+  margin-top: 6px;
+}
+
+.app-toast {
+  position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
+  background: var(--white); color: var(--ink);
+  font-size: 14px; font-weight: 700;
+  padding: 14px 22px; border-radius: 999px;
+  box-shadow: 0 12px 30px rgba(0,0,0,.25);
+  opacity: 0; pointer-events: none;
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 50;
+  white-space: nowrap;
+}
+.app-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* ---- FEATURES ---- */
+.features-section { padding: 56px 24px 64px; }
+.features-title {
+  font-family: var(--font-b); font-weight: 800; font-style: italic;
+  font-size: clamp(24px, 6vw, 30px); line-height: 1.1;
+  text-align: center; margin-bottom: 36px;
+}
+.features-grid {
+  display: grid; gap: 18px;
+  max-width: 420px; margin: 0 auto;
+}
+.feature-card {
+  display: flex; align-items: flex-start; gap: 16px;
+  background: var(--white);
+  border-radius: 18px;
+  padding: 18px 20px;
+  box-shadow: 0 6px 22px rgba(25,25,25,.07);
+}
+.feature-icon {
+  width: 44px; height: 44px; border-radius: 12px;
+  background: rgba(240,94,38,.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px; flex-shrink: 0;
+}
+.feature-body h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
+.feature-body p { font-size: 13px; color: var(--ink-70); line-height: 1.45; }
+
+/* ---- FOOTER ---- */
+.app-footer {
+  padding: 32px 24px 40px;
+  text-align: center;
+  color: rgba(25,25,25,.5);
+  font-size: 12px;
+}
+.app-footer a { color: var(--orange); font-weight: 700; }
+
+@media (min-width: 640px) {
+  .store-badges { flex-direction: row; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<section class="app-hero">
+  <img class="app-logo" src="img/logo.png" alt="Pizza Family">
+  <div class="app-eyebrow">Distributeur Pizza Family</div>
+  <h1 class="app-title">L'appli qui te fait gagner du temps (et des pizzas)</h1>
+  <p class="app-sub">Commande en 1 clic, cumule des points fidélité et repère le distributeur le plus proche. Disponible sur iPhone et Android.</p>
+
+  <div class="store-badges">
+    <a href="#" class="store-badge" data-store="apple" aria-label="Télécharger sur l'App Store — bientôt disponible">
+      <svg class="glyph" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
+      <span class="badge-text">
+        <span class="small">Télécharger sur l'</span>
+        <span class="big">App Store</span>
+      </span>
+    </a>
+    <a href="#" class="store-badge" data-store="google" aria-label="Disponible sur Google Play — bientôt disponible">
+      <svg class="glyph" viewBox="0 0 512 512" aria-hidden="true">
+        <path fill="#00D2FF" d="M99 8.5C92 12 87 19 87 29v454c0 10 5 17 12 20.5L328 256 99 8.5z"/>
+        <path fill="#3BE1FF" d="M99 8.5L328 256 99 503.5c1 .5 2 1 3 1.3L385 328l-58-72 58-72L102 7.2c-1 .3-2 .8-3 1.3z"/>
+        <path fill="#F6D002" d="M385 328l55-32.5c14-8.2 14-28.7 0-36.9L385 226l-57 30 57 72z"/>
+        <path fill="#FC3D5C" d="M328 256L102 504.8c6 2.7 13.3 2.2 20-1.3l263-152.5-57-95z"/>
+        <path fill="#33E37B" d="M328 256l57-95L122 8.5c-6.7-3.5-14-4-20-1.3L328 256z"/>
+      </svg>
+      <span class="badge-text">
+        <span class="small">Disponible sur</span>
+        <span class="big">Google Play</span>
+      </span>
+    </a>
+  </div>
+  <div class="soon-pill">Disponible très prochainement</div>
+</section>
+
+<section class="features-section">
+  <h2 class="features-title">Pourquoi l'appli ?</h2>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">⚡</div>
+      <div class="feature-body">
+        <h3>Commande en 1 clic</h3>
+        <p>Retrouve tes pizzas préférées et commande en quelques secondes, sans faire la queue.</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎁</div>
+      <div class="feature-body">
+        <h3>Programme fidélité</h3>
+        <p>Cumule des points à chaque commande et débloque des pizzas offertes.</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📍</div>
+      <div class="feature-body">
+        <h3>Trouve un distributeur</h3>
+        <p>Localise le distributeur, le kiosque ou le camion Pizza Family le plus proche de toi.</p>
+      </div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔔</div>
+      <div class="feature-body">
+        <h3>Notifications</h3>
+        <p>Sois prévenu dès qu'une nouvelle pizza ou une offre spéciale arrive.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="app-footer">
+  <p>Pizza Family — Hersin-Coupigny &amp; Hesdin</p>
+  <p style="margin-top:6px;"><a href="index.html">Retour au site</a></p>
+</footer>
+
+<div class="app-toast" id="toast">L'application arrive très bientôt 🍕</div>
+
+<script>
+document.querySelectorAll('.store-badge').forEach(function (btn) {
+  btn.addEventListener('click', function (e) {
+    e.preventDefault();
+    var toast = document.getElementById('toast');
+    toast.classList.add('show');
+    clearTimeout(window.__toastTimer);
+    window.__toastTimer = setTimeout(function () {
+      toast.classList.remove('show');
+    }, 2200);
+  });
+});
+</script>
+
+</body>
+</html>
