@@ -53,7 +53,7 @@ button { font-family: var(--font-b); cursor: pointer; }
   content: '';
   position: absolute; inset: 0;
   background-image:
-    radial-gradient(120% 70% at 50% 0%, rgba(240,94,38,.35) 0%, transparent 60%),
+    radial-gradient(120% 70% at 50% 0%, rgba(255,31,31,.45) 0%, transparent 60%),
     url('img/distributeur.png');
   background-size: cover; background-position: center 20%;
   filter: saturate(1.05);
@@ -61,7 +61,7 @@ button { font-family: var(--font-b); cursor: pointer; }
 .app-hero::after {
   content: '';
   position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(25,25,25,.55) 0%, rgba(25,25,25,.75) 45%, rgba(25,25,25,.97) 100%);
+  background: linear-gradient(180deg, rgba(255,31,31,.35) 0%, rgba(25,25,25,.75) 45%, rgba(25,25,25,.97) 100%);
 }
 .app-hero > * { position: relative; z-index: 2; }
 
@@ -136,42 +136,6 @@ button { font-family: var(--font-b); cursor: pointer; }
 }
 .app-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* ---- FEATURES ---- */
-.features-section { padding: 56px 24px 64px; }
-.features-title {
-  font-family: var(--font-b); font-weight: 800; font-style: italic;
-  font-size: clamp(24px, 6vw, 30px); line-height: 1.1;
-  text-align: center; margin-bottom: 36px;
-}
-.features-grid {
-  display: grid; gap: 18px;
-  max-width: 420px; margin: 0 auto;
-}
-.feature-card {
-  display: flex; align-items: flex-start; gap: 16px;
-  background: var(--white);
-  border-radius: 18px;
-  padding: 18px 20px;
-  box-shadow: 0 6px 22px rgba(25,25,25,.07);
-}
-.feature-icon {
-  width: 44px; height: 44px; border-radius: 12px;
-  background: rgba(240,94,38,.12);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 22px; flex-shrink: 0;
-}
-.feature-body h3 { font-size: 15px; font-weight: 800; margin-bottom: 4px; }
-.feature-body p { font-size: 13px; color: var(--ink-70); line-height: 1.45; }
-
-/* ---- FOOTER ---- */
-.app-footer {
-  padding: 32px 24px 40px;
-  text-align: center;
-  color: rgba(25,25,25,.5);
-  font-size: 12px;
-}
-.app-footer a { color: var(--orange); font-weight: 700; }
-
 @media (min-width: 640px) {
   .store-badges { flex-direction: row; justify-content: center; }
 }
@@ -209,45 +173,6 @@ button { font-family: var(--font-b); cursor: pointer; }
   </div>
   <div class="soon-pill">Disponible très prochainement</div>
 </section>
-
-<section class="features-section">
-  <h2 class="features-title">Pourquoi l'appli ?</h2>
-  <div class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon">⚡</div>
-      <div class="feature-body">
-        <h3>Commande en 1 clic</h3>
-        <p>Retrouve tes pizzas préférées et commande en quelques secondes, sans faire la queue.</p>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🎁</div>
-      <div class="feature-body">
-        <h3>Programme fidélité</h3>
-        <p>Cumule des points à chaque commande et débloque des pizzas offertes.</p>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">📍</div>
-      <div class="feature-body">
-        <h3>Trouve un distributeur</h3>
-        <p>Localise le distributeur, le kiosque ou le camion Pizza Family le plus proche de toi.</p>
-      </div>
-    </div>
-    <div class="feature-card">
-      <div class="feature-icon">🔔</div>
-      <div class="feature-body">
-        <h3>Notifications</h3>
-        <p>Sois prévenu dès qu'une nouvelle pizza ou une offre spéciale arrive.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<footer class="app-footer">
-  <p>Pizza Family — Hersin-Coupigny &amp; Hesdin</p>
-  <p style="margin-top:6px;"><a href="index.html">Retour au site</a></p>
-</footer>
 
 <div class="app-toast" id="toast">L'application arrive très bientôt 🍕</div>
 
