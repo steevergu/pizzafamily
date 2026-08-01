@@ -296,10 +296,27 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   max-width: 1440px; margin: 0 auto; width: 100%;
   display: flex; flex-direction: column; align-items: flex-start; gap: 20px;
 }
-.hero-title {
-  width: clamp(260px, 45vw, 710px);
-  display: block;
-  margin-left: clamp(-28px, -2vw, -10px);
+.hero-title-block {
+  --hero-w: clamp(220px, 38vw, 600px);
+  width: var(--hero-w);
+  display: flex; flex-direction: column;
+}
+.hero-word {
+  width: 100%;
+  background-image: url('img/pizzafamily.svg');
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+}
+.hero-word-pizza {
+  height: calc(var(--hero-w) * .268);
+  background-position: 0% 5.4%;
+  margin-left: calc(var(--hero-w) * -.043);
+}
+.hero-word-family {
+  height: calc(var(--hero-w) * .233);
+  background-position: 0% 96%;
+  margin-left: calc(var(--hero-w) * -.11);
+  margin-top: calc(var(--hero-w) * .018);
 }
 
 .hero-sub {
@@ -1254,7 +1271,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 
   <!-- Contenu texte -->
   <div class="hero-content">
-    <img class="hero-title" src="img/pizzafamily.svg" alt="Pizza Family">
+    <div class="hero-title-block" role="img" aria-label="Pizza Family">
+      <div class="hero-word hero-word-pizza" aria-hidden="true"></div>
+      <div class="hero-word hero-word-family" aria-hidden="true"></div>
+    </div>
     <p class="hero-sub">Trois façons de se régaler. Faite avec amour et beaucoup de fromage.</p>
     <div class="hero-cta-row">
       <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander 🍕</a>
