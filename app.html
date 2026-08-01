@@ -47,21 +47,12 @@ button { font-family: var(--font-b); cursor: pointer; }
   text-align: center;
   padding: 48px 24px 40px;
   overflow: hidden;
-  background: var(--green-deep);
+  background: linear-gradient(160deg, #ff5f4a 0%, #FF1F1F 45%, #b40e0e 100%);
 }
 .app-hero::before {
   content: '';
   position: absolute; inset: 0;
-  background-image:
-    radial-gradient(120% 70% at 50% 0%, rgba(255,31,31,.45) 0%, transparent 60%),
-    url('img/distributeur.png');
-  background-size: cover; background-position: center 20%;
-  filter: saturate(1.05);
-}
-.app-hero::after {
-  content: '';
-  position: absolute; inset: 0;
-  background: linear-gradient(180deg, rgba(255,31,31,.35) 0%, rgba(25,25,25,.75) 45%, rgba(25,25,25,.97) 100%);
+  background-image: radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.30) 0%, transparent 65%);
 }
 .app-hero > * { position: relative; z-index: 2; }
 
@@ -69,11 +60,6 @@ button { font-family: var(--font-b); cursor: pointer; }
   width: 88px; height: 88px; border-radius: 22px;
   box-shadow: 0 10px 30px rgba(0,0,0,.35);
   margin-bottom: 22px;
-}
-
-.app-eyebrow {
-  font-size: 12px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-  color: var(--orange); margin-bottom: 14px;
 }
 
 .app-title {
@@ -116,13 +102,6 @@ button { font-family: var(--font-b); cursor: pointer; }
 .store-badge .badge-text .small { display: block; font-size: 10px; opacity: .85; }
 .store-badge .badge-text .big { display: block; font-size: 17px; font-weight: 600; font-family: -apple-system, 'DM Sans', sans-serif; letter-spacing: .2px; }
 
-.soon-pill {
-  font-size: 11px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
-  color: var(--white); background: var(--orange);
-  padding: 3px 10px; border-radius: 999px;
-  margin-top: 6px;
-}
-
 .app-toast {
   position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
   background: var(--white); color: var(--ink);
@@ -145,8 +124,7 @@ button { font-family: var(--font-b); cursor: pointer; }
 
 <section class="app-hero">
   <img class="app-logo" src="img/logo.png" alt="Pizza Family">
-  <div class="app-eyebrow">Distributeur Pizza Family</div>
-  <h1 class="app-title">L'appli qui te fait gagner du temps (et des pizzas)</h1>
+  <h1 class="app-title">L'appli Pizza Family arrive</h1>
   <p class="app-sub">Commande en 1 clic, cumule des points fidélité et repère le distributeur le plus proche. Disponible sur iPhone et Android.</p>
 
   <div class="store-badges">
@@ -171,7 +149,6 @@ button { font-family: var(--font-b); cursor: pointer; }
       </span>
     </a>
   </div>
-  <div class="soon-pill">Disponible très prochainement</div>
 </section>
 
 <div class="app-toast" id="toast">L'application arrive très bientôt 🍕</div>
