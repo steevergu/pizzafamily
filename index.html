@@ -1923,7 +1923,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 <!-- ════════════════════════════════════════
      FACEBOOK
      ════════════════════════════════════════ -->
-<section class="tiktok-section" aria-labelledby="fb-title">
+<section class="tiktok-section" aria-labelledby="fb-title-kiosque">
   <!-- Halo bleu Facebook au lieu des cercles rouges -->
   <div class="tiktok-header reveal">
     <div class="tiktok-title-block">
@@ -1931,7 +1931,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
         <circle cx="24" cy="24" r="24" fill="#1877F2"/>
         <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
       </svg>
-      <div class="tiktok-handle">
+      <div class="tiktok-handle" id="fb-title-kiosque">
         <span>Facebook</span>
         <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
       </div>
@@ -1949,19 +1949,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
       <div class="fb-card-overlay"></div>
       <div class="fb-card-top">
         <span class="fb-card-reactions">👍❤️🔥 148</span>
-        <span class="fb-card-source">Kiosque</span>
       </div>
       <div class="fb-card-caption">Ce soir c'est Tartiflette ! On est là jusqu'à 22h 🔥</div>
-    </a>
-
-    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Camion Hesdin">
-      <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1000,#3a2500);">🚚</div>
-      <div class="fb-card-overlay"></div>
-      <div class="fb-card-top">
-        <span class="fb-card-reactions">👍❤️😍 94</span>
-        <span class="fb-card-source">Camion</span>
-      </div>
-      <div class="fb-card-caption">Le camion est à Hesdin ! Pizzas faites minute, ouvert jusqu'à 14h 😍</div>
     </a>
 
     <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Pizza Family signature">
@@ -1969,19 +1958,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
       <div class="fb-card-overlay"></div>
       <div class="fb-card-top">
         <span class="fb-card-reactions">❤️🔥👍 203</span>
-        <span class="fb-card-source">Kiosque</span>
       </div>
       <div class="fb-card-caption">La FAMILY — bœuf haché, merguez, oignons, poivrons. La signature. 12€ 👇</div>
-    </a>
-
-    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Programme camion">
-      <div class="fb-card-bg" style="background:linear-gradient(140deg,#0d1a0d,#1a3010);">📅</div>
-      <div class="fb-card-overlay"></div>
-      <div class="fb-card-top">
-        <span class="fb-card-reactions">👍❤️ 67</span>
-        <span class="fb-card-source">Camion</span>
-      </div>
-      <div class="fb-card-caption">Programme du camion cette semaine — suivez la page pour aucune sortie manquée 🚚🍕</div>
     </a>
 
     <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Carnivore">
@@ -1989,9 +1967,52 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
       <div class="fb-card-overlay"></div>
       <div class="fb-card-top">
         <span class="fb-card-reactions">😍🔥❤️ 311</span>
-        <span class="fb-card-source">Kiosque</span>
       </div>
       <div class="fb-card-caption">La CARNIVORE — bœuf, merguez, poulet, sauce burger. 12€. T'es prêt ? 💪🍕</div>
+    </a>
+
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     FACEBOOK — CAMION
+     ════════════════════════════════════════ -->
+<section class="tiktok-section" aria-labelledby="fb-title-camion" style="padding-top:56px;">
+  <div class="tiktok-header reveal">
+    <div class="tiktok-title-block">
+      <svg width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" style="flex-shrink:0;">
+        <circle cx="24" cy="24" r="24" fill="#1877F2"/>
+        <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
+      </svg>
+      <div class="tiktok-handle" id="fb-title-camion">
+        <span>Facebook</span>
+        <span class="handle">Pizza Family 62 Camion</span>
+      </div>
+    </div>
+    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-follow-cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Suivre sur Facebook
+    </a>
+  </div>
+
+  <div class="tiktok-scroll stagger" role="list" style="padding-top:4px; justify-content:center;">
+
+    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Camion Hesdin">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1000,#3a2500);">🚚</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">👍❤️😍 94</span>
+      </div>
+      <div class="fb-card-caption">Le camion est à Hesdin ! Pizzas faites minute, ouvert jusqu'à 14h 😍</div>
+    </a>
+
+    <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Programme camion">
+      <div class="fb-card-bg" style="background:linear-gradient(140deg,#0d1a0d,#1a3010);">📅</div>
+      <div class="fb-card-overlay"></div>
+      <div class="fb-card-top">
+        <span class="fb-card-reactions">👍❤️ 67</span>
+      </div>
+      <div class="fb-card-caption">Programme du camion cette semaine — suivez la page pour aucune sortie manquée 🚚🍕</div>
     </a>
 
   </div>
