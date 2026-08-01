@@ -54,15 +54,6 @@ button { font-family: var(--font-b); cursor: pointer; }
   position: absolute; inset: 0;
   background-image: radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.30) 0%, transparent 65%);
 }
-.app-hero .deco {
-  position: absolute; border-radius: 50%;
-  background: rgba(255,255,255,.12);
-  filter: blur(2px);
-  pointer-events: none;
-}
-.app-hero .deco-1 { width: 260px; height: 260px; top: -80px; left: -70px; background: rgba(255,255,255,.14); }
-.app-hero .deco-2 { width: 340px; height: 340px; bottom: -140px; right: -110px; background: rgba(180,14,14,.35); }
-.app-hero .deco-3 { width: 140px; height: 140px; top: 18%; right: 6%; background: rgba(255,255,255,.10); }
 .app-hero .deco-emoji {
   position: absolute; font-size: 42px; opacity: .16;
   filter: grayscale(1) brightness(2);
@@ -74,6 +65,8 @@ button { font-family: var(--font-b); cursor: pointer; }
 .app-hero .deco-emoji.e4 { bottom: 16%; right: 8%; font-size: 60px; transform: rotate(-10deg); }
 .app-hero .deco-emoji.e5 { top: 46%; left: 4%; font-size: 30px; transform: rotate(-25deg); }
 .app-hero .deco-emoji.e6 { top: 40%; right: 4%; font-size: 30px; transform: rotate(20deg); }
+.app-hero .deco-emoji.e7 { top: 30%; left: 18%; font-size: 26px; transform: rotate(8deg); }
+.app-hero .deco-emoji.e8 { bottom: 32%; right: 20%; font-size: 32px; transform: rotate(-14deg); }
 .app-hero > * { position: relative; z-index: 2; }
 
 .app-logo-wrap {
@@ -150,15 +143,14 @@ button { font-family: var(--font-b); cursor: pointer; }
 <body>
 
 <section class="app-hero">
-  <div class="deco deco-1" aria-hidden="true"></div>
-  <div class="deco deco-2" aria-hidden="true"></div>
-  <div class="deco deco-3" aria-hidden="true"></div>
   <span class="deco-emoji e1" aria-hidden="true">🍕</span>
-  <span class="deco-emoji e2" aria-hidden="true">🧀</span>
+  <span class="deco-emoji e2" aria-hidden="true">🍅</span>
   <span class="deco-emoji e3" aria-hidden="true">🍕</span>
   <span class="deco-emoji e4" aria-hidden="true">🍕</span>
   <span class="deco-emoji e5" aria-hidden="true">🫒</span>
-  <span class="deco-emoji e6" aria-hidden="true">🌶️</span>
+  <span class="deco-emoji e6" aria-hidden="true">🍄</span>
+  <span class="deco-emoji e7" aria-hidden="true">🫒</span>
+  <span class="deco-emoji e8" aria-hidden="true">🍅</span>
   <div class="app-logo-wrap">
     <img class="app-logo" src="img/logo.png" alt="Pizza Family">
   </div>
