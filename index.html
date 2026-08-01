@@ -590,7 +590,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .fb-panel:last-child { margin-bottom: 0; }
 .fb-panel .tiktok-header { padding: 0; margin-bottom: 28px; }
 .fb-panel .tiktok-handle { font-size: clamp(24px,3vw,36px); }
-.fb-panel .tiktok-scroll { padding: 0 0 6px; }
+.fb-panel .tiktok-scroll {
+  padding: 0 0 6px;
+  -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
+}
 
 .tiktok-section {
   background: var(--green-deep);
