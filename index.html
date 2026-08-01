@@ -20,16 +20,17 @@
 
 :root {
   /* ---- Palette de marque exacte du logo ---- */
-  --orange:       #F05E26;   /* orange primaire — action */
-  --orange-dark:  #d44c1c;   /* hover orange */
-  --orange-soft:  #F57A28;   /* orange secondaire — accent */
-  --red:          #FF1F1F;   /* rouge unique — urgence + identité */
+  /* Action / conversion — seule couleur de bouton "Commander" partout */
+  --orange:       #F05E26;
+  --orange-dark:  #d44c1c;
+  --orange-soft:  #F57A28;
+  /* Identité / structure — nav, footer, badges de statut. Jamais sur un bouton d'action */
+  --red:          #FF1F1F;
   --red-dark:     #d4181c;
   --red-light:    #ff4a4a;
-  --green:        #FF1F1F;   /* rouge identité — remplace le vert */
-  --green-deep:   #191919;   /* surface sombre principale (noir) */
-  --green-800:    #191919;
-  --green-500:    #4C823D;   /* vert conservé — onglets catégorie uniquement */
+  --green:        #FF1F1F;   /* alias historique de --red, structure uniquement */
+  --green-deep:   #191919;   /* alias de --ink, gardé pour compat des surfaces sombres */
+  --green-500:    #4C823D;   /* vert conservé — onglets catégorie + badges veggie */
   --beige:        #e4dbd2;
   --beige-soft:   #ede7df;
   --beige-deep:   #b0a090;
@@ -563,7 +564,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   font-size: 10px; font-weight: 800; text-transform: uppercase;
   padding: 4px 10px; border-radius: 999px; letter-spacing: .5px;
 }
-.product-badge.green { background: var(--green); }
+.product-badge.green { background: var(--green-500); }
 .product-badge.dark  { background: var(--green-deep); color: var(--orange); }
 .product-badge.orange { background: var(--orange); }
 .product-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
@@ -577,13 +578,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .product-footer { display: flex; align-items: center; justify-content: space-between; }
 .product-price { font-family: var(--font-d); font-size: 24px; color: var(--orange); }
 .btn-add {
-  background: var(--green); color: var(--white);
+  background: var(--orange); color: var(--white);
   padding: 9px 18px; border-radius: 999px;
   font-weight: 700; font-size: 13px;
   border: none; cursor: pointer;
   transition: background .15s, transform .12s;
 }
-.btn-add:hover { background: var(--orange); }
+.btn-add:hover { background: var(--orange-dark); }
 .btn-add:active { transform: scale(.96); }
 
 /* ============================================================
@@ -1915,7 +1916,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   </div><!-- /products-panel -->
 
   <div style="text-align:center; margin-top:48px; padding: 0 20px;" class="reveal">
-    <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero" style="background:#FF1F1F;">Commander en ligne →</a>
+    <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander en ligne →</a>
   </div>
 </section>
 
