@@ -54,19 +54,45 @@ button { font-family: var(--font-b); cursor: pointer; }
   position: absolute; inset: 0;
   background-image: radial-gradient(120% 60% at 50% 0%, rgba(255,255,255,.30) 0%, transparent 65%);
 }
-.app-hero .deco-emoji {
-  position: absolute; font-size: 42px; opacity: .16;
-  filter: grayscale(1) brightness(2);
+.deco-float {
+  position: absolute;
+  animation: emojiBob 6s ease-in-out infinite;
   pointer-events: none;
 }
-.app-hero .deco-emoji.e1 { top: 8%; left: 8%; font-size: 54px; transform: rotate(-18deg); }
-.app-hero .deco-emoji.e2 { top: 14%; right: 10%; font-size: 34px; transform: rotate(12deg); }
-.app-hero .deco-emoji.e3 { bottom: 10%; left: 10%; font-size: 46px; transform: rotate(10deg); }
-.app-hero .deco-emoji.e4 { bottom: 16%; right: 8%; font-size: 60px; transform: rotate(-10deg); }
-.app-hero .deco-emoji.e5 { top: 46%; left: 4%; font-size: 30px; transform: rotate(-25deg); }
-.app-hero .deco-emoji.e6 { top: 40%; right: 4%; font-size: 30px; transform: rotate(20deg); }
-.app-hero .deco-emoji.e7 { top: 30%; left: 18%; font-size: 26px; transform: rotate(8deg); }
-.app-hero .deco-emoji.e8 { bottom: 32%; right: 20%; font-size: 32px; transform: rotate(-14deg); }
+@keyframes emojiBob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+.app-hero .deco-emoji {
+  display: inline-block;
+  font-size: 42px; opacity: .38;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,.25));
+  will-change: transform;
+}
+.deco-float.e1 { top: 6%;  left: 7%; }
+.deco-float.e2 { top: 12%; right: 9%; }
+.deco-float.e3 { bottom: 9%;  left: 9%; }
+.deco-float.e4 { bottom: 14%; right: 7%; }
+.deco-float.e5 { top: 44%; left: 3%; }
+.deco-float.e6 { top: 38%; right: 3%; }
+.deco-float.e7 { top: 26%; left: 16%; }
+.deco-float.e8 { bottom: 30%; right: 18%; }
+.deco-float.e9 { top: 4%;  left: 42%; }
+.deco-float.e10 { bottom: 4%; right: 40%; }
+.deco-float.e11 { top: 58%; left: 22%; }
+.deco-float.e12 { top: 62%; right: 22%; }
+.deco-float.e1 { animation-delay: 0s; }
+.deco-float.e2 { animation-delay: .8s; }
+.deco-float.e3 { animation-delay: 1.6s; }
+.deco-float.e4 { animation-delay: 2.4s; }
+.deco-float.e5 { animation-delay: .4s; }
+.deco-float.e6 { animation-delay: 1.2s; }
+.deco-float.e7 { animation-delay: 2s; }
+.deco-float.e8 { animation-delay: 2.8s; }
+.deco-float.e9 { animation-delay: .6s; }
+.deco-float.e10 { animation-delay: 1.4s; }
+.deco-float.e11 { animation-delay: 2.2s; }
+.deco-float.e12 { animation-delay: 3s; }
 .app-hero > * { position: relative; z-index: 2; }
 
 .app-logo-wrap {
@@ -143,14 +169,18 @@ button { font-family: var(--font-b); cursor: pointer; }
 <body>
 
 <section class="app-hero">
-  <span class="deco-emoji e1" aria-hidden="true">🍕</span>
-  <span class="deco-emoji e2" aria-hidden="true">🍅</span>
-  <span class="deco-emoji e3" aria-hidden="true">🍕</span>
-  <span class="deco-emoji e4" aria-hidden="true">🍕</span>
-  <span class="deco-emoji e5" aria-hidden="true">🫒</span>
-  <span class="deco-emoji e6" aria-hidden="true">🍄</span>
-  <span class="deco-emoji e7" aria-hidden="true">🫒</span>
-  <span class="deco-emoji e8" aria-hidden="true">🍅</span>
+  <span class="deco-float e1" aria-hidden="true"><span class="deco-emoji" data-rot="-18" data-depth="22" style="font-size:56px;">🍕</span></span>
+  <span class="deco-float e2" aria-hidden="true"><span class="deco-emoji" data-rot="12" data-depth="16" style="font-size:36px;">🍅</span></span>
+  <span class="deco-float e3" aria-hidden="true"><span class="deco-emoji" data-rot="10" data-depth="20" style="font-size:48px;">🍕</span></span>
+  <span class="deco-float e4" aria-hidden="true"><span class="deco-emoji" data-rot="-10" data-depth="26" style="font-size:62px;">🍕</span></span>
+  <span class="deco-float e5" aria-hidden="true"><span class="deco-emoji" data-rot="-25" data-depth="14" style="font-size:32px;">🫒</span></span>
+  <span class="deco-float e6" aria-hidden="true"><span class="deco-emoji" data-rot="20" data-depth="14" style="font-size:32px;">🍄</span></span>
+  <span class="deco-float e7" aria-hidden="true"><span class="deco-emoji" data-rot="8" data-depth="12" style="font-size:28px;">🫒</span></span>
+  <span class="deco-float e8" aria-hidden="true"><span class="deco-emoji" data-rot="-14" data-depth="18" style="font-size:34px;">🍅</span></span>
+  <span class="deco-float e9" aria-hidden="true"><span class="deco-emoji" data-rot="16" data-depth="10" style="font-size:26px;">🍄</span></span>
+  <span class="deco-float e10" aria-hidden="true"><span class="deco-emoji" data-rot="-8" data-depth="24" style="font-size:44px;">🍕</span></span>
+  <span class="deco-float e11" aria-hidden="true"><span class="deco-emoji" data-rot="22" data-depth="12" style="font-size:28px;">🫒</span></span>
+  <span class="deco-float e12" aria-hidden="true"><span class="deco-emoji" data-rot="-16" data-depth="16" style="font-size:30px;">🍅</span></span>
   <div class="app-logo-wrap">
     <img class="app-logo" src="img/logo.png" alt="Pizza Family">
   </div>
@@ -195,6 +225,27 @@ document.querySelectorAll('.store-badge').forEach(function (btn) {
     }, 2200);
   });
 });
+
+/* Parallaxe légère des emojis en fond, suit la souris sans capter le focus */
+var decoEmojis = Array.prototype.slice.call(document.querySelectorAll('.deco-emoji'));
+function applyDeco(nx, ny) {
+  decoEmojis.forEach(function (el) {
+    var rot = parseFloat(el.getAttribute('data-rot')) || 0;
+    var depth = parseFloat(el.getAttribute('data-depth')) || 12;
+    var tx = nx * depth;
+    var ty = ny * depth;
+    el.style.transform = 'translate(' + tx.toFixed(1) + 'px,' + ty.toFixed(1) + 'px) rotate(' + rot + 'deg)';
+  });
+}
+applyDeco(0, 0);
+var hero = document.querySelector('.app-hero');
+hero.addEventListener('mousemove', function (e) {
+  var rect = hero.getBoundingClientRect();
+  var nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+  var ny = ((e.clientY - rect.top) / rect.height) * 2 - 1;
+  applyDeco(nx, ny);
+});
+hero.addEventListener('mouseleave', function () { applyDeco(0, 0); });
 </script>
 
 </body>
