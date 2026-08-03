@@ -816,8 +816,72 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 /* ============================================================
    DISTRIBUTEURS — trouver le plus proche
    ============================================================ */
-.distrib-section { background: var(--cream); padding: 80px 0 90px; }
-.distrib-inner { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px); }
+.distrib-section {
+  position: relative; overflow: hidden;
+  background: var(--cream); padding: 80px 0 90px;
+}
+.distrib-inner {
+  position: relative; z-index: 2;
+  max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px);
+}
+
+/* ---- Fond carte stylisé (OSM-inspired) ---- */
+.map-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background-color: #e8f0e4;
+  background-image:
+    linear-gradient(rgba(255,255,255,.9) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.9) 1px, transparent 1px),
+    linear-gradient(rgba(200,210,200,.5) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(200,210,200,.5) 1px, transparent 1px);
+  background-size: 120px 120px, 120px 120px, 40px 40px, 40px 40px;
+}
+/* Zones vertes (parcs) */
+.map-bg::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    radial-gradient(ellipse 200px 120px at 15% 70%, rgba(76,130,61,.35) 0%, transparent 100%),
+    radial-gradient(ellipse 140px 200px at 80% 20%, rgba(76,130,61,.3) 0%, transparent 100%),
+    radial-gradient(ellipse 180px 100px at 55% 85%, rgba(76,130,61,.25) 0%, transparent 100%);
+}
+/* Routes colorées */
+.map-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(25deg,  transparent 48%, #f5c842 48%, #f5c842 50%, transparent 50%),
+    linear-gradient(-15deg, transparent 35%, #e8a832 35%, #e8a832 36.5%, transparent 36.5%),
+    linear-gradient(80deg,  transparent 60%, #d4a020 60%, #d4a020 61.5%, transparent 61.5%);
+}
+/* Voile clair pour garder le texte lisible par-dessus la carte */
+.distrib-scrim {
+  position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(180deg, rgba(245,245,242,.45) 0%, rgba(245,245,242,.20) 45%, rgba(245,245,242,.50) 100%);
+}
+
+/* Pins pizza sur la carte */
+.map-pins { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.map-pin {
+  position: absolute;
+  display: flex; flex-direction: column; align-items: center;
+  transform: translate(-50%, -100%);
+}
+.map-pin-icon {
+  width: 36px; height: 36px; background: var(--red); border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 3px 10px rgba(0,0,0,.3);
+}
+.map-pin-icon span { transform: rotate(45deg); font-size: 16px; }
+.map-pin-cluster {
+  position: absolute;
+  width: 32px; height: 32px; background: var(--red); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-weight: 800; font-size: 13px;
+  box-shadow: 0 3px 10px rgba(0,0,0,.3);
+  transform: translate(-50%, -50%);
+}
 .distrib-head { margin-bottom: 32px; }
 .distrib-lead {
   margin-top: 16px; max-width: 520px;
@@ -2081,10 +2145,23 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
      CARTE (visuel)
      ════════════════════════════════════════ -->
 <section class="distrib-section" id="carte" aria-labelledby="distrib-title">
+
+  <!-- Fond carte stylisé + pins pizza -->
+  <div class="map-bg" aria-hidden="true"></div>
+  <div class="map-pins" aria-hidden="true">
+    <div class="map-pin" style="top:14%;left:72%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+    <div class="map-pin" style="top:34%;left:88%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+    <div class="map-pin-cluster" style="top:10%;left:62%;">3</div>
+    <div class="map-pin" style="top:72%;left:4%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+    <div class="map-pin" style="top:80%;left:74%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+    <div class="map-pin-cluster" style="top:62%;left:95%;">5</div>
+    <div class="map-pin" style="top:95%;left:36%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+  </div>
+  <div class="distrib-scrim" aria-hidden="true"></div>
+
   <div class="distrib-inner">
 
     <div class="distrib-head reveal">
-      <div class="section-label">Distributeurs 24h/24 · 7j/7</div>
       <h2 class="section-title-italic" id="distrib-title">Trouve le distributeur<br>le plus proche</h2>
       <p class="distrib-lead">
         Nos distributeurs de pizzas fraîches sont ouverts jour et nuit.
