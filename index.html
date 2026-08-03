@@ -312,41 +312,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   margin-top: 8px;
 }
 
-/* Encart appli — volontairement distinct des boutons pour ne pas
-   concurrencer le CTA principal "Commander" */
-.hero-app-teaser {
-  display: inline-flex; align-items: center; gap: 14px;
-  margin-top: 6px; padding: 10px 18px 10px 10px;
-  background: rgba(255,255,255,.12);
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: 999px;
-  -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px);
-  color: var(--white);
-  transition: background .18s, border-color .18s, transform .18s;
-  max-width: 100%;
-}
-.hero-app-teaser:hover {
-  background: rgba(255,255,255,.2);
+/* Bouton "Télécharger l'appli" du hero — même gabarit que les autres CTA */
+.btn-app {
+  gap: 8px;
   border-color: rgba(255,255,255,.4);
-  transform: translateY(-2px);
+  font-style: italic; font-weight: 700;
 }
-.hero-app-icon {
-  width: 42px; height: 42px; border-radius: 12px;
-  background: var(--white);
-  display: flex; align-items: center; justify-content: center;
-  padding: 5px; flex-shrink: 0;
-}
-.hero-app-icon img { width: 100%; height: 100%; object-fit: contain; }
-.hero-app-copy { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
-.hero-app-copy strong { font-size: 14px; font-weight: 800; }
-.hero-app-copy span { font-size: 12px; color: rgba(255,255,255,.72); }
-.hero-app-cta {
-  font-size: 13px; font-weight: 800; font-style: italic;
-  white-space: nowrap; flex-shrink: 0;
-}
-@media (max-width: 520px) {
-  .hero-app-teaser { padding: 10px 14px 10px 10px; gap: 10px; }
-  .hero-app-cta { display: none; }
+.btn-app svg { width: 17px; height: 17px; fill: currentColor; flex-shrink: 0; }
 }
 .hero-legal {
   font-size: 12px; color: rgba(255,255,255,.4);
@@ -1359,16 +1331,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     <div class="hero-cta-row">
       <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander 🍕</a>
       <a href="#nos-pizzas" class="btn-outline" style="border-color:rgba(255,255,255,.4); font-style:italic; font-weight:700;">Découvrir la carte</a>
+      <a href="app.html" target="_blank" rel="noopener" class="btn-outline btn-app">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v10.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V3a1 1 0 0 1 1-1zM5 19a1 1 0 1 0 0 2h14a1 1 0 1 0 0-2H5z"/></svg>
+        Télécharger l'appli
+      </a>
     </div>
-
-    <a href="app.html" target="_blank" rel="noopener" class="hero-app-teaser">
-      <span class="hero-app-icon"><img src="img/logo.png" alt="" aria-hidden="true"></span>
-      <span class="hero-app-copy">
-        <strong>L'appli Pizza Family</strong>
-        <span>Commande express, fidélité et distributeurs 24h/24</span>
-      </span>
-      <span class="hero-app-cta" aria-hidden="true">Télécharger →</span>
-    </a>
   </div>
 
   <!-- Vague de transition vers le blanc -->
