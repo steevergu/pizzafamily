@@ -311,9 +311,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
   margin-top: 8px;
 }
-.hero-cta-row-2 { margin-top: 12px; }
-.hero-app-link { gap: 8px; }
-.hero-app-link svg { width: 16px; height: 16px; fill: currentColor; flex-shrink: 0; }
 .hero-legal {
   font-size: 12px; color: rgba(255,255,255,.4);
   font-style: italic;
@@ -641,7 +638,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .tiktok-logo-svg { width: 64px; height: 64px; flex-shrink: 0; }
 /* Le webp a ~20% de marge transparente : on agrandit et on rogne la marge
    pour que le disque visible fasse bien 56px et s'aligne comme une icône pleine. */
-.fb-brand-logo { flex-shrink: 0; display: block; }
+/* Le png a ~20% de marge transparente : on agrandit et on rogne la marge
+   pour que le disque visible fasse bien 56px et s'aligne comme une icône pleine. */
+.fb-brand-logo {
+  width: 93px; height: 93px;
+  margin: -18.5px;
+  flex-shrink: 0; display: block;
+}
 .tiktok-handle {
   font-family: var(--font-b);
   font-weight: 800; font-style: italic;
@@ -1322,12 +1325,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
       <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander 🍕</a>
       <a href="#nos-pizzas" class="btn-outline" style="border-color:rgba(255,255,255,.4); font-style:italic; font-weight:700;">Découvrir la carte</a>
     </div>
-    <div class="hero-cta-row hero-cta-row-2">
-      <a href="app.html" target="_blank" rel="noopener" class="btn-outline hero-app-link" style="border-color:rgba(255,255,255,.4); font-style:italic; font-weight:700;">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v10.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V3a1 1 0 0 1 1-1zM5 19a1 1 0 1 0 0 2h14a1 1 0 1 0 0-2H5z"/></svg>
-        Télécharger l'appli
-      </a>
-    </div>
   </div>
 
   <!-- Vague de transition vers le blanc -->
@@ -1983,10 +1980,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-kiosque">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <svg class="fb-brand-logo" width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="24" fill="#1877F2"/>
-          <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
-        </svg>
+        <img src="img/logo-facebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
         <div class="tiktok-handle" id="fb-title-kiosque">
           <span>Facebook</span>
           <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
@@ -2041,10 +2035,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-camion">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <svg class="fb-brand-logo" width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="24" cy="24" r="24" fill="#1877F2"/>
-          <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
-        </svg>
+        <img src="img/logo-facebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
         <div class="tiktok-handle" id="fb-title-camion">
           <span>Facebook</span>
           <span class="handle">Pizza Family 62 Camion</span>
