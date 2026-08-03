@@ -19,12 +19,12 @@
    ============================================================ */
 
 :root {
-  /* ---- Palette de marque exacte du logo ---- */
-  /* Action / conversion — seule couleur de bouton "Commander" partout */
-  --orange:       #F05E26;
-  --orange-dark:  #d44c1c;
-  --orange-soft:  #F57A28;
-  /* Identité / structure — nav, footer, badges de statut. Jamais sur un bouton d'action */
+  /* ---- Palette de marque : rouge unique #FF1F1F (demande client) ---- */
+  /* Anciens tokens orange, désormais alias du rouge de marque */
+  --orange:       #FF1F1F;
+  --orange-dark:  #d4181c;
+  --orange-soft:  #FF1F1F;
+  /* Identité / structure — nav, footer, badges de statut */
   --red:          #FF1F1F;
   --red-dark:     #d4181c;
   --red-light:    #ff4a4a;
@@ -285,7 +285,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .hero-overlay {
   position: absolute; inset: 0;
   background:
-    radial-gradient(120% 90% at 85% 15%, rgba(240,94,38,.18) 0%, transparent 55%),
+    radial-gradient(120% 90% at 85% 15%, rgba(255,31,31,.18) 0%, transparent 55%),
     linear-gradient(to right, rgba(10,10,10,.86) 0%, rgba(10,10,10,.52) 45%, rgba(10,10,10,.16) 100%),
     linear-gradient(to top, rgba(10,10,10,.85) 0%, rgba(10,10,10,.25) 40%, transparent 72%);
 }
@@ -1909,7 +1909,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
      ════════════════════════════════════════ -->
 <section class="fb-wrap" aria-labelledby="fb-wrap-title">
   <div class="section-header reveal" style="padding:0 clamp(20px,5vw,80px); margin-bottom:40px;">
-    <div class="section-label">Sur les réseaux</div>
     <h2 class="section-title-italic" id="fb-wrap-title">Nos pages<br>Facebook</h2>
   </div>
 
