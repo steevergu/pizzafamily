@@ -30,7 +30,7 @@
   --red-light:    #ff4a4a;
   --green:        #FF1F1F;   /* alias historique de --red, structure uniquement */
   --green-deep:   #191919;   /* alias de --ink, gardé pour compat des surfaces sombres */
-  --green-500:    #4C823D;   /* vert conservé — onglets catégorie + badges veggie */
+  --green-500:    #4C823D;   /* vert résiduel — zones de parc sur la carte uniquement */
   --beige:        #e4dbd2;
   --beige-soft:   #ede7df;
   --beige-deep:   #b0a090;
@@ -521,8 +521,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   font-family: var(--font-b); font-weight: 700; font-size: 13px;
   color: var(--ink);
 }
-.cat-btn:hover { border-color: var(--green-500); background: #e8efe5; }
-.cat-btn.active { border-color: var(--green-500); background: var(--green-500); color: var(--white); }
+.cat-btn:hover { border-color: var(--red); background: #ffe8e8; }
+.cat-btn.active { border-color: var(--red); background: var(--red); color: var(--white); }
 .cat-btn .cat-emoji { font-size: 36px; }
 
 /* Grille produits */
@@ -554,7 +554,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   font-size: 10px; font-weight: 800; text-transform: uppercase;
   padding: 4px 10px; border-radius: 999px; letter-spacing: .5px;
 }
-.product-badge.green { background: var(--green-500); }
+.product-badge.green { background: var(--red); }
 .product-badge.dark  { background: var(--green-deep); color: var(--orange); }
 .product-badge.orange { background: var(--orange); }
 .product-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
@@ -636,6 +636,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
 }
 .tiktok-logo-svg { width: 64px; height: 64px; flex-shrink: 0; }
+/* Le webp a ~20% de marge transparente : on agrandit et on rogne la marge
+   pour que le disque visible fasse bien 56px et s'aligne comme une icône pleine. */
+.fb-brand-logo {
+  width: 93px; height: 93px;
+  margin: -18.5px;
+  flex-shrink: 0; display: block;
+}
 .tiktok-handle {
   font-family: var(--font-b);
   font-weight: 800; font-style: italic;
@@ -1914,7 +1921,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-kiosque">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <img src="img/logo facebook.webp" width="56" height="56" alt="" aria-hidden="true" style="flex-shrink:0; display:block; border-radius:50%;">
+        <img src="img/logo facebook.webp" class="fb-brand-logo" alt="" aria-hidden="true">
         <div class="tiktok-handle" id="fb-title-kiosque">
           <span>Facebook</span>
           <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
@@ -1969,7 +1976,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-camion">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <img src="img/logo facebook.webp" width="56" height="56" alt="" aria-hidden="true" style="flex-shrink:0; display:block; border-radius:50%;">
+        <img src="img/logo facebook.webp" class="fb-brand-logo" alt="" aria-hidden="true">
         <div class="tiktok-handle" id="fb-title-camion">
           <span>Facebook</span>
           <span class="handle">Pizza Family 62 Camion</span>
