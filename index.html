@@ -2461,20 +2461,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
                  pas trié par distance.
    ============================================================ */
 var DISTRIBUTEURS = [
-  /* --- Points de vente réels, adresses confirmées --- */
-  {
-    nom: 'Hersin-Coupigny — Le Kiosque',
-    ville: 'Hersin-Coupigny', cp: '62530',
-    adr: 'Rue Victor Hugo, 62530 Hersin-Coupigny',
-    lat: 50.4478, lng: 2.6483
-  },
-  {
-    nom: 'Hesdin — Le Camion',
-    ville: 'Hesdin', cp: '62140',
-    adr: 'Avenue des Tilleuls, 62140 Hesdin',
-    lat: 50.3736, lng: 2.0386
-  },
-
   /* --- ⚠ EMPLACEMENTS PROVISOIRES — À CONFIRMER PAR LE CLIENT ⚠ ---
      Communes réelles du secteur avec coordonnées de centre-ville, mises ici
      pour visualiser et tester la section avec un volume réaliste.
@@ -2530,7 +2516,14 @@ var DISTRIBUTEURS = [
   }
 
   var expanded = false;
-  var VISIBLE = 6;
+
+  /* Nombre de cartes repliées = 2 rangées pleines.
+     On lit le nombre de colonnes réellement calculé par la grille (il change
+     selon la largeur), pour ne jamais laisser une rangée incomplète. */
+  function visibleCount() {
+    var cols = getComputedStyle(listEl).gridTemplateColumns.split(' ').filter(Boolean).length;
+    return Math.max(2, cols) * 2;
+  }
 
   function render() {
     var q = (searchEl.value || '').trim().toLowerCase();
@@ -2572,8 +2565,9 @@ var DISTRIBUTEURS = [
         'Clique sur « Autour de moi » pour voir les plus proches.';
     }
 
-    var hidden = Math.max(0, items.length - VISIBLE);
-    var shown  = (expanded || !hidden) ? items : items.slice(0, VISIBLE);
+    var visible = visibleCount();
+    var hidden  = Math.max(0, items.length - visible);
+    var shown   = (expanded || !hidden) ? items : items.slice(0, visible);
 
     listEl.innerHTML = shown.map(function (d) {
       var dest = (d.lat != null && d.lng != null) ? (d.lat + ',' + d.lng) : d.adr;
@@ -2637,6 +2631,13 @@ var DISTRIBUTEURS = [
     if (collapsing) {
       document.getElementById('carte').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  });
+
+  // Le nombre de colonnes change avec la largeur : on recalcule le repli
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(render, 150);
   });
 
   render();
