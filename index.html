@@ -966,6 +966,26 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   box-shadow: var(--card-shadow);
 }
 
+/* Repli de la liste : la dernière rangée s'estompe pour signaler la suite */
+.distrib-grid.is-clipped {
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, rgba(0,0,0,.12) 100%);
+  mask-image: linear-gradient(to bottom, #000 62%, rgba(0,0,0,.12) 100%);
+}
+.distrib-more { display: flex; justify-content: center; margin-top: 22px; }
+.distrib-more-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--white); color: var(--ink);
+  border: 2px solid rgba(25,25,25,.12); border-radius: 999px;
+  padding: 13px 28px;
+  font-family: var(--font-b); font-weight: 800; font-size: 14px;
+  cursor: pointer;
+  box-shadow: var(--card-shadow);
+  transition: border-color .15s, color .15s, transform .15s;
+}
+.distrib-more-btn:hover { border-color: var(--red); color: var(--red); transform: translateY(-2px); }
+.distrib-more-btn:active { transform: translateY(0) scale(.98); }
+.distrib-more-btn .chev { font-size: 12px; line-height: 1; }
+
 /* ============================================================
    ADRESSES & HORAIRES
    ============================================================ */
@@ -2183,6 +2203,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     <p class="distrib-status" id="distribStatus" role="status" aria-live="polite"></p>
 
     <div class="distrib-grid" id="distribList"></div>
+    <div class="distrib-more" id="distribMore"></div>
 
   </div>
 </section>
@@ -2490,6 +2511,7 @@ var DISTRIBUTEURS = [
   var statusEl = document.getElementById('distribStatus');
   var geoBtn   = document.getElementById('distribGeo');
   var searchEl = document.getElementById('distribSearch');
+  var moreWrap = document.getElementById('distribMore');
   if (!listEl) return;
 
   var userPos = null;
@@ -2506,6 +2528,9 @@ var DISTRIBUTEURS = [
   function formatDist(km) {
     return km < 1 ? Math.round(km * 1000) + ' m' : km.toFixed(1).replace('.', ',') + ' km';
   }
+
+  var expanded = false;
+  var VISIBLE = 6;
 
   function render() {
     var q = (searchEl.value || '').trim().toLowerCase();
@@ -2547,7 +2572,10 @@ var DISTRIBUTEURS = [
         'Clique sur « Autour de moi » pour voir les plus proches.';
     }
 
-    listEl.innerHTML = items.map(function (d) {
+    var hidden = Math.max(0, items.length - VISIBLE);
+    var shown  = (expanded || !hidden) ? items : items.slice(0, VISIBLE);
+
+    listEl.innerHTML = shown.map(function (d) {
       var dest = (d.lat != null && d.lng != null) ? (d.lat + ',' + d.lng) : d.adr;
       var maps = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest);
       return '<article class="distrib-card">' +
@@ -2564,6 +2592,19 @@ var DISTRIBUTEURS = [
         '<a class="distrib-route" href="' + maps + '" target="_blank" rel="noopener">Itinéraire →</a>' +
       '</article>';
     }).join('');
+
+    listEl.classList.toggle('is-clipped', !expanded && hidden > 0);
+
+    if (!hidden) {
+      moreWrap.innerHTML = '';
+    } else if (!expanded) {
+      moreWrap.innerHTML = '<button type="button" class="distrib-more-btn">' +
+        'Voir les ' + hidden + ' autres distributeurs' +
+        '<span class="chev" aria-hidden="true">▾</span></button>';
+    } else {
+      moreWrap.innerHTML = '<button type="button" class="distrib-more-btn is-open">' +
+        'Réduire la liste<span class="chev" aria-hidden="true">▴</span></button>';
+    }
   }
 
   geoBtn.addEventListener('click', function () {
@@ -2576,6 +2617,7 @@ var DISTRIBUTEURS = [
     navigator.geolocation.getCurrentPosition(function (pos) {
       userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
       geoBtn.disabled = false;
+      expanded = false;
       render();
     }, function () {
       geoBtn.disabled = false;
@@ -2583,7 +2625,20 @@ var DISTRIBUTEURS = [
     }, { timeout: 8000 });
   });
 
-  searchEl.addEventListener('input', render);
+  searchEl.addEventListener('input', function () { expanded = false; render(); });
+
+  // Bouton "voir plus / réduire" (délégation : le bouton est re-créé à chaque rendu)
+  moreWrap.addEventListener('click', function (e) {
+    var btn = e.target.closest ? e.target.closest('.distrib-more-btn') : null;
+    if (!btn) return;
+    var collapsing = expanded;
+    expanded = !expanded;
+    render();
+    if (collapsing) {
+      document.getElementById('carte').scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  });
+
   render();
 })();
 </script>
