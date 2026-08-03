@@ -2440,6 +2440,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
                  pas trié par distance.
    ============================================================ */
 var DISTRIBUTEURS = [
+  /* --- Points de vente réels, adresses confirmées --- */
   {
     nom: 'Hersin-Coupigny — Le Kiosque',
     ville: 'Hersin-Coupigny', cp: '62530',
@@ -2451,8 +2452,37 @@ var DISTRIBUTEURS = [
     ville: 'Hesdin', cp: '62140',
     adr: 'Avenue des Tilleuls, 62140 Hesdin',
     lat: 50.3736, lng: 2.0386
-  }
-  // ,{ nom: '', ville: '', cp: '', adr: '', lat: null, lng: null }
+  },
+
+  /* --- ⚠ EMPLACEMENTS PROVISOIRES — À CONFIRMER PAR LE CLIENT ⚠ ---
+     Communes réelles du secteur avec coordonnées de centre-ville, mises ici
+     pour visualiser et tester la section avec un volume réaliste.
+     AVANT MISE EN LIGNE : confirmer quelles communes ont réellement un
+     distributeur, puis remplacer "adr" par l'adresse exacte (rue + n°)
+     et "lat"/"lng" par les coordonnées du distributeur lui-même. */
+  { nom: 'Distributeur Béthune',              ville: 'Béthune',              cp: '62400', adr: 'Béthune (62400)',              lat: 50.5303, lng: 2.6407 },
+  { nom: 'Distributeur Bruay-la-Buissière',   ville: 'Bruay-la-Buissière',   cp: '62700', adr: 'Bruay-la-Buissière (62700)',   lat: 50.4839, lng: 2.5470 },
+  { nom: 'Distributeur Nœux-les-Mines',       ville: 'Nœux-les-Mines',       cp: '62290', adr: 'Nœux-les-Mines (62290)',       lat: 50.4797, lng: 2.6636 },
+  { nom: 'Distributeur Barlin',               ville: 'Barlin',               cp: '62620', adr: 'Barlin (62620)',               lat: 50.4553, lng: 2.6144 },
+  { nom: 'Distributeur Bully-les-Mines',      ville: 'Bully-les-Mines',      cp: '62160', adr: 'Bully-les-Mines (62160)',      lat: 50.4453, lng: 2.7256 },
+  { nom: 'Distributeur Sains-en-Gohelle',     ville: 'Sains-en-Gohelle',     cp: '62114', adr: 'Sains-en-Gohelle (62114)',     lat: 50.4425, lng: 2.6889 },
+  { nom: 'Distributeur Houdain',              ville: 'Houdain',              cp: '62150', adr: 'Houdain (62150)',              lat: 50.4544, lng: 2.5406 },
+  { nom: 'Distributeur Divion',               ville: 'Divion',               cp: '62460', adr: 'Divion (62460)',               lat: 50.4692, lng: 2.5111 },
+  { nom: 'Distributeur Auchel',               ville: 'Auchel',               cp: '62260', adr: 'Auchel (62260)',               lat: 50.5050, lng: 2.4736 },
+  { nom: 'Distributeur Lillers',              ville: 'Lillers',              cp: '62190', adr: 'Lillers (62190)',              lat: 50.5631, lng: 2.4842 },
+  { nom: 'Distributeur Isbergues',            ville: 'Isbergues',            cp: '62330', adr: 'Isbergues (62330)',            lat: 50.6236, lng: 2.4553 },
+  { nom: 'Distributeur Aire-sur-la-Lys',      ville: 'Aire-sur-la-Lys',      cp: '62120', adr: 'Aire-sur-la-Lys (62120)',      lat: 50.6383, lng: 2.3969 },
+  { nom: 'Distributeur Beuvry',               ville: 'Beuvry',               cp: '62660', adr: 'Beuvry (62660)',               lat: 50.5233, lng: 2.6867 },
+  { nom: 'Distributeur Vermelles',            ville: 'Vermelles',            cp: '62980', adr: 'Vermelles (62980)',            lat: 50.4767, lng: 2.7561 },
+  { nom: 'Distributeur Douvrin',              ville: 'Douvrin',              cp: '62138', adr: 'Douvrin (62138)',              lat: 50.5081, lng: 2.8264 },
+  { nom: 'Distributeur Liévin',               ville: 'Liévin',               cp: '62800', adr: 'Liévin (62800)',               lat: 50.4222, lng: 2.7761 },
+  { nom: 'Distributeur Lens',                 ville: 'Lens',                 cp: '62300', adr: 'Lens (62300)',                 lat: 50.4292, lng: 2.8318 },
+  { nom: 'Distributeur Carvin',               ville: 'Carvin',               cp: '62220', adr: 'Carvin (62220)',               lat: 50.4936, lng: 2.9578 },
+  { nom: 'Distributeur Hénin-Beaumont',       ville: 'Hénin-Beaumont',       cp: '62110', adr: 'Hénin-Beaumont (62110)',       lat: 50.4139, lng: 2.9522 },
+  { nom: 'Distributeur Arras',                ville: 'Arras',                cp: '62000', adr: 'Arras (62000)',                lat: 50.2910, lng: 2.7778 },
+  { nom: 'Distributeur Saint-Pol-sur-Ternoise', ville: 'Saint-Pol-sur-Ternoise', cp: '62130', adr: 'Saint-Pol-sur-Ternoise (62130)', lat: 50.3800, lng: 2.3372 },
+  { nom: 'Distributeur Fruges',               ville: 'Fruges',               cp: '62310', adr: 'Fruges (62310)',               lat: 50.5122, lng: 2.1339 },
+  { nom: 'Distributeur Montreuil-sur-Mer',    ville: 'Montreuil-sur-Mer',    cp: '62170', adr: 'Montreuil-sur-Mer (62170)',    lat: 50.4650, lng: 1.7639 }
 ];
 
 (function () {
@@ -2500,13 +2530,26 @@ var DISTRIBUTEURS = [
     }
 
     if (!items.length) {
+      statusEl.textContent = '';
       listEl.innerHTML = '<div class="distrib-empty">Aucun distributeur trouvé pour « ' +
         q.replace(/[<>&]/g, '') + ' ». Essaie une autre ville ou un code postal.</div>';
       return;
     }
 
+    if (userPos) {
+      statusEl.textContent = items.length + ' distributeur' + (items.length > 1 ? 's' : '') +
+        ', du plus proche au plus loin.';
+    } else if (q) {
+      statusEl.textContent = items.length + ' distributeur' + (items.length > 1 ? 's' : '') + ' trouvé' +
+        (items.length > 1 ? 's' : '') + ' pour « ' + q + ' ».';
+    } else {
+      statusEl.textContent = items.length + ' distributeurs ouverts 24h/24. ' +
+        'Clique sur « Autour de moi » pour voir les plus proches.';
+    }
+
     listEl.innerHTML = items.map(function (d) {
-      var maps = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(d.adr);
+      var dest = (d.lat != null && d.lng != null) ? (d.lat + ',' + d.lng) : d.adr;
+      var maps = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest);
       return '<article class="distrib-card">' +
         '<div class="distrib-card-top">' +
           '<h3>' + d.nom + '</h3>' +
@@ -2533,7 +2576,6 @@ var DISTRIBUTEURS = [
     navigator.geolocation.getCurrentPosition(function (pos) {
       userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
       geoBtn.disabled = false;
-      statusEl.textContent = 'Distributeurs triés du plus proche au plus loin.';
       render();
     }, function () {
       geoBtn.disabled = false;
