@@ -814,117 +814,93 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 
 /* ============================================================
-   CARTE / POINTS DE VENTE — full width style Quick
+   DISTRIBUTEURS — trouver le plus proche
    ============================================================ */
-.map-section {
-  position: relative; height: clamp(500px,65vh,720px);
-  overflow: hidden;
-}
-/* Fond carte stylisé (OSM-inspired) */
-.map-bg {
-  position: absolute; inset: 0;
-  background-color: #e8f0e4;
-  background-image:
-    /* Routes principales */
-    linear-gradient(rgba(255,255,255,.9) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.9) 1px, transparent 1px),
-    /* Grille secondaire */
-    linear-gradient(rgba(200,210,200,.5) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200,210,200,.5) 1px, transparent 1px);
-  background-size: 120px 120px, 120px 120px, 40px 40px, 40px 40px;
-}
-/* Zones vertes (parcs) */
-.map-bg::before {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    radial-gradient(ellipse 200px 120px at 15% 70%, rgba(76,130,61,.35) 0%, transparent 100%),
-    radial-gradient(ellipse 140px 200px at 80% 20%, rgba(76,130,61,.3) 0%, transparent 100%),
-    radial-gradient(ellipse 180px 100px at 55% 85%, rgba(76,130,61,.25) 0%, transparent 100%);
-}
-/* Routes colorées */
-.map-bg::after {
-  content: '';
-  position: absolute; inset: 0;
-  background-image:
-    linear-gradient(25deg,  transparent 48%, #f5c842 48%, #f5c842 50%, transparent 50%),
-    linear-gradient(-15deg, transparent 35%, #e8a832 35%, #e8a832 36.5%, transparent 36.5%),
-    linear-gradient(80deg,  transparent 60%, #d4a020 60%, #d4a020 61.5%, transparent 61.5%);
+.distrib-section { background: var(--cream); padding: 80px 0 90px; }
+.distrib-inner { max-width: 1240px; margin: 0 auto; padding: 0 clamp(20px,5vw,80px); }
+.distrib-head { margin-bottom: 32px; }
+.distrib-lead {
+  margin-top: 16px; max-width: 520px;
+  font-size: 15px; line-height: 1.6; color: var(--ink-70);
 }
 
-/* Pins sur la carte */
-.map-pins { position: absolute; inset: 0; pointer-events: none; }
-.map-pin {
-  position: absolute;
-  display: flex; flex-direction: column; align-items: center;
-  transform: translate(-50%, -100%);
+/* Barre d'outils : geoloc + recherche */
+.distrib-tools {
+  display: flex; flex-wrap: wrap; gap: 12px;
+  margin-bottom: 20px;
 }
-.map-pin-icon {
-  width: 36px; height: 36px; background: var(--orange); border-radius: 50% 50% 50% 0;
-  transform: rotate(-45deg);
-  display: flex; align-items: center; justify-content: center;
-  box-shadow: 0 3px 10px rgba(0,0,0,.3);
+.distrib-geo-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--red); color: var(--white);
+  border: none; border-radius: 999px;
+  padding: 14px 24px;
+  font-family: var(--font-b); font-weight: 800; font-size: 14px; font-style: italic;
+  cursor: pointer; white-space: nowrap;
+  transition: background .15s, transform .15s;
 }
-.map-pin-icon span { transform: rotate(45deg); font-size: 16px; }
-.map-pin-cluster {
-  position: absolute;
-  width: 32px; height: 32px; background: var(--orange); border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  color: white; font-weight: 800; font-size: 13px;
-  box-shadow: 0 3px 10px rgba(0,0,0,.3);
-  transform: translate(-50%, -50%);
+.distrib-geo-btn:hover { background: var(--red-dark); transform: scale(1.03); }
+.distrib-geo-btn:active { transform: scale(.98); }
+.distrib-geo-btn[disabled] { opacity: .6; cursor: default; transform: none; }
+.distrib-search { flex: 1; min-width: 220px; }
+.distrib-input {
+  width: 100%; height: 100%;
+  background: var(--white); border: 2px solid rgba(25,25,25,.10);
+  border-radius: 999px; padding: 13px 22px;
+  font-family: var(--font-b); font-size: 14px; color: var(--ink);
+  outline: none; transition: border-color .15s;
+}
+.distrib-input:focus { border-color: var(--red); }
+.distrib-input::placeholder { color: #aaa; }
+
+.distrib-status {
+  font-size: 13px; color: var(--ink-70);
+  margin-bottom: 22px; min-height: 20px;
 }
 
-/* Titre overlay gauche */
-.map-title-overlay {
-  position: absolute; top: 50%; left: clamp(30px,5vw,80px);
-  transform: translateY(-50%);
-  z-index: 2;
+/* Cartes distributeurs */
+.distrib-grid {
+  display: grid; gap: 16px;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
 }
-.map-title-overlay h2 {
-  font-family: var(--font-b);
-  font-weight: 800; font-style: italic;
-  font-size: clamp(40px,6vw,80px); line-height: .88;
-  color: var(--orange);
-  text-shadow: 2px 2px 0 rgba(255,255,255,.8), 0 0 20px rgba(255,255,255,.6);
+.distrib-card {
+  background: var(--white);
+  border-radius: var(--card-radius);
+  padding: 20px 22px;
+  box-shadow: var(--card-shadow);
+  display: flex; flex-direction: column; gap: 10px;
+  transition: transform .2s var(--card-ease), box-shadow .2s var(--card-ease);
 }
-
-/* Panneau blanc droite */
-.map-panel {
-  position: absolute; top: 50%; right: clamp(20px,4vw,60px);
-  transform: translateY(-50%);
-  width: min(340px, 90vw); z-index: 2;
-  background: var(--white); border-radius: 16px;
-  padding: 28px;
-  box-shadow: 0 8px 40px rgba(0,0,0,.18);
+.distrib-card:hover { transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
+.distrib-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
+.distrib-card h3 {
+  font-family: var(--font-d); font-size: 18px; text-transform: uppercase;
+  line-height: 1.1; -webkit-hyphens: none; hyphens: none;
 }
-.map-panel-title {
-  font-family: var(--font-b); font-weight: 800; font-style: italic;
-  font-size: 28px; color: var(--orange); margin-bottom: 16px;
+.distrib-dist {
+  background: var(--red); color: var(--white);
+  font-size: 11px; font-weight: 800; white-space: nowrap;
+  padding: 4px 10px; border-radius: 999px; flex-shrink: 0;
 }
-.map-search {
-  display: flex; align-items: center; gap: 0;
-  background: #f5f5f5; border-radius: 999px;
-  overflow: hidden; margin-bottom: 18px;
+.distrib-addr { font-size: 13px; color: var(--ink-70); line-height: 1.5; }
+.distrib-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.distrib-tag {
+  font-size: 11px; font-weight: 700;
+  background: rgba(25,25,25,.06); color: var(--ink-70);
+  padding: 4px 10px; border-radius: 999px;
 }
-.map-search-input {
-  flex: 1; border: none; background: transparent;
-  padding: 13px 18px; font-family: var(--font-b); font-size: 14px;
-  outline: none; color: var(--ink);
+.distrib-route {
+  margin-top: 4px; align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 6px;
+  color: var(--red); font-weight: 800; font-size: 13px; font-style: italic;
 }
-.map-search-input::placeholder { color: #aaa; }
-.map-search-btn {
-  padding: 13px 20px; background: var(--orange); border: none; cursor: pointer;
-  color: white; font-weight: 700; font-size: 13px;
-  white-space: nowrap; transition: background .15s;
-  font-family: var(--font-b);
+.distrib-route:hover { text-decoration: underline; }
+.distrib-empty {
+  grid-column: 1 / -1;
+  background: var(--white); border-radius: var(--card-radius);
+  padding: 28px; text-align: center;
+  font-size: 14px; color: var(--ink-70);
+  box-shadow: var(--card-shadow);
 }
-.map-search-btn:hover { background: var(--orange-dark); }
-.map-panel-instructions {
-  font-size: 13px; color: #555; line-height: 1.6;
-}
-.map-panel-instructions strong { color: var(--ink); }
-.map-panel-instructions a { color: var(--orange); font-weight: 700; }
 
 /* ============================================================
    ADRESSES & HORAIRES
@@ -1099,13 +1075,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
    ============================================================ */
 @media (max-width: 639px) {
   .hero-content { padding-bottom: 60px; }
-  .map-panel { right: 50%; bottom: 20px; top: auto; transform: translateX(50%); width: 90%; }
-  .map-title-overlay { top: 24px; transform: none; left: 20px; }
   .tiktok-glow { display: none; }
   .tiktok-glow2 { display: none; }
-}
-@media (max-width: 899px) {
-  .map-title-overlay h2 { text-shadow: 3px 3px 0 rgba(255,255,255,.9), 0 0 30px rgba(255,255,255,.8); }
+  .distrib-tools { flex-direction: column; }
+  .distrib-geo-btn { justify-content: center; }
 }
 
 /* ============================================================
@@ -2107,51 +2080,34 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 <!-- ════════════════════════════════════════
      CARTE (visuel)
      ════════════════════════════════════════ -->
-<section class="map-section" id="carte" aria-label="Carte des points de vente">
+<section class="distrib-section" id="carte" aria-labelledby="distrib-title">
+  <div class="distrib-inner">
 
-  <!-- Fond carte stylisé -->
-  <div class="map-bg" aria-hidden="true">
-    <!-- Pins -->
-    <div class="map-pins">
-      <div class="map-pin" style="top:38%;left:42%;">
-        <div class="map-pin-icon"><span>🍕</span></div>
-      </div>
-      <div class="map-pin" style="top:56%;left:55%;">
-        <div class="map-pin-icon"><span>🍕</span></div>
-      </div>
-      <div class="map-pin" style="top:30%;left:65%;">
-        <div class="map-pin-icon"><span>🍕</span></div>
-      </div>
-      <div class="map-pin-cluster" style="top:48%;left:48%;">2</div>
-      <div class="map-pin" style="top:65%;left:35%;">
-        <div class="map-pin-icon"><span>🍕</span></div>
-      </div>
-      <div class="map-pin" style="top:25%;left:30%;">
-        <div class="map-pin-icon"><span>🍕</span></div>
-      </div>
-      <div class="map-pin-cluster" style="top:60%;left:60%;">5</div>
+    <div class="distrib-head reveal">
+      <div class="section-label">Distributeurs 24h/24 · 7j/7</div>
+      <h2 class="section-title-italic" id="distrib-title">Trouve le distributeur<br>le plus proche</h2>
+      <p class="distrib-lead">
+        Nos distributeurs de pizzas fraîches sont ouverts jour et nuit.
+        Localise-toi ou tape ta ville pour voir les plus proches de chez toi.
+      </p>
     </div>
-  </div>
 
-  <!-- Titre overlay gauche -->
-  <div class="map-title-overlay" aria-hidden="true">
-    <h2 id="map-title">Nos<br>points<br>de vente</h2>
-  </div>
+    <div class="distrib-tools reveal">
+      <button type="button" class="distrib-geo-btn" id="distribGeo">
+        <span aria-hidden="true">📍</span> Autour de moi
+      </button>
+      <div class="distrib-search">
+        <input type="search" id="distribSearch" class="distrib-input"
+               placeholder="Ville ou code postal (ex. 62530)"
+               aria-label="Rechercher un distributeur par ville ou code postal">
+      </div>
+    </div>
 
-  <!-- Panneau droite -->
-  <div class="map-panel">
-    <h3 class="map-panel-title">Une faim de loup ?</h3>
-    <p class="map-panel-instructions" style="margin-bottom:18px;">
-      Le <strong>Kiosque</strong> à Hersin-Coupigny et le <strong>Camion</strong> à Hesdin.
-      Retrouve les adresses et horaires juste au-dessus.
-    </p>
-    <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener"
-       style="display:block; text-align:center; background:var(--orange); color:#fff; padding:13px; border-radius:999px; font-weight:800; font-size:14px; font-style:italic; text-decoration:none; transition:background .15s;"
-       onmouseover="this.style.background='var(--orange-dark)'" onmouseout="this.style.background='var(--orange)'">
-      Commander en ligne 🍕
-    </a>
-  </div>
+    <p class="distrib-status" id="distribStatus" role="status" aria-live="polite"></p>
 
+    <div class="distrib-grid" id="distribList"></div>
+
+  </div>
 </section>
 
 <!-- ════════════════════════════════════════
@@ -2387,6 +2343,129 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     });
   })();
 
+})();
+</script>
+
+<script>
+/* ============================================================
+   DISTRIBUTEURS — liste + recherche + "autour de moi"
+
+   ► POUR AJOUTER UN DISTRIBUTEUR : copie une ligne ci-dessous.
+     nom   : le nom affiché sur la carte
+     ville : ville (sert à la recherche)
+     cp    : code postal (sert aussi à la recherche)
+     adr   : adresse complète, affichée et utilisée pour l'itinéraire
+     lat / lng : coordonnées GPS — servent au tri "le plus proche".
+                 Pour les obtenir : Google Maps > clic droit sur le point
+                 > le premier élément du menu copie "50.4312, 2.6489".
+                 Si tu n'as pas encore les coordonnées, laisse lat/lng à null :
+                 le distributeur reste listé et cherchable, il ne sera juste
+                 pas trié par distance.
+   ============================================================ */
+var DISTRIBUTEURS = [
+  {
+    nom: 'Hersin-Coupigny — Le Kiosque',
+    ville: 'Hersin-Coupigny', cp: '62530',
+    adr: 'Rue Victor Hugo, 62530 Hersin-Coupigny',
+    lat: 50.4478, lng: 2.6483
+  },
+  {
+    nom: 'Hesdin — Le Camion',
+    ville: 'Hesdin', cp: '62140',
+    adr: 'Avenue des Tilleuls, 62140 Hesdin',
+    lat: 50.3736, lng: 2.0386
+  }
+  // ,{ nom: '', ville: '', cp: '', adr: '', lat: null, lng: null }
+];
+
+(function () {
+  var listEl   = document.getElementById('distribList');
+  var statusEl = document.getElementById('distribStatus');
+  var geoBtn   = document.getElementById('distribGeo');
+  var searchEl = document.getElementById('distribSearch');
+  if (!listEl) return;
+
+  var userPos = null;
+
+  function distanceKm(a, b, c, d) {
+    var R = 6371, toRad = Math.PI / 180;
+    var dLat = (c - a) * toRad, dLng = (d - b) * toRad;
+    var s = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(a * toRad) * Math.cos(c * toRad) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+    return R * 2 * Math.atan2(Math.sqrt(s), Math.sqrt(1 - s));
+  }
+
+  function formatDist(km) {
+    return km < 1 ? Math.round(km * 1000) + ' m' : km.toFixed(1).replace('.', ',') + ' km';
+  }
+
+  function render() {
+    var q = (searchEl.value || '').trim().toLowerCase();
+
+    var items = DISTRIBUTEURS.filter(function (d) {
+      if (!q) return true;
+      return (d.ville + ' ' + d.cp + ' ' + d.nom + ' ' + d.adr).toLowerCase().indexOf(q) !== -1;
+    }).map(function (d) {
+      var copy = Object.assign({}, d);
+      copy.km = (userPos && d.lat != null && d.lng != null)
+        ? distanceKm(userPos.lat, userPos.lng, d.lat, d.lng)
+        : null;
+      return copy;
+    });
+
+    if (userPos) {
+      items.sort(function (x, y) {
+        if (x.km == null) return 1;
+        if (y.km == null) return -1;
+        return x.km - y.km;
+      });
+    }
+
+    if (!items.length) {
+      listEl.innerHTML = '<div class="distrib-empty">Aucun distributeur trouvé pour « ' +
+        q.replace(/[<>&]/g, '') + ' ». Essaie une autre ville ou un code postal.</div>';
+      return;
+    }
+
+    listEl.innerHTML = items.map(function (d) {
+      var maps = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(d.adr);
+      return '<article class="distrib-card">' +
+        '<div class="distrib-card-top">' +
+          '<h3>' + d.nom + '</h3>' +
+          (d.km != null ? '<span class="distrib-dist">' + formatDist(d.km) + '</span>' : '') +
+        '</div>' +
+        '<p class="distrib-addr">' + d.adr + '</p>' +
+        '<div class="distrib-tags">' +
+          '<span class="distrib-tag">24h/24 · 7j/7</span>' +
+          '<span class="distrib-tag">Chaude en 3 min</span>' +
+          '<span class="distrib-tag">CB &amp; sans contact</span>' +
+        '</div>' +
+        '<a class="distrib-route" href="' + maps + '" target="_blank" rel="noopener">Itinéraire →</a>' +
+      '</article>';
+    }).join('');
+  }
+
+  geoBtn.addEventListener('click', function () {
+    if (!navigator.geolocation) {
+      statusEl.textContent = "La géolocalisation n'est pas disponible sur ce navigateur. Tape ta ville dans la recherche.";
+      return;
+    }
+    geoBtn.disabled = true;
+    statusEl.textContent = 'Recherche de ta position…';
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      userPos = { lat: pos.coords.latitude, lng: pos.coords.longitude };
+      geoBtn.disabled = false;
+      statusEl.textContent = 'Distributeurs triés du plus proche au plus loin.';
+      render();
+    }, function () {
+      geoBtn.disabled = false;
+      statusEl.textContent = "Impossible de te localiser. Tape ta ville ou ton code postal ci-dessus.";
+    }, { timeout: 8000 });
+  });
+
+  searchEl.addEventListener('input', render);
+  render();
 })();
 </script>
 
