@@ -641,11 +641,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .tiktok-logo-svg { width: 64px; height: 64px; flex-shrink: 0; }
 /* Le webp a ~20% de marge transparente : on agrandit et on rogne la marge
    pour que le disque visible fasse bien 56px et s'aligne comme une icône pleine. */
-.fb-brand-logo {
-  width: 93px; height: 93px;
-  margin: -18.5px;
-  flex-shrink: 0; display: block;
-}
+.fb-brand-logo { flex-shrink: 0; display: block; }
 .tiktok-handle {
   font-family: var(--font-b);
   font-weight: 800; font-style: italic;
@@ -1987,7 +1983,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-kiosque">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <img src="img/logo facebook.webp" class="fb-brand-logo" alt="" aria-hidden="true">
+        <svg class="fb-brand-logo" width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="24" fill="#1877F2"/>
+          <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
+        </svg>
         <div class="tiktok-handle" id="fb-title-kiosque">
           <span>Facebook</span>
           <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
@@ -2042,7 +2041,10 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-camion">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <img src="img/logo facebook.webp" class="fb-brand-logo" alt="" aria-hidden="true">
+        <svg class="fb-brand-logo" width="56" height="56" viewBox="0 0 48 48" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="24" cy="24" r="24" fill="#1877F2"/>
+          <path d="M33 24h-6v-4c0-1.1.9-2 2-2h2v-4h-2c-3.3 0-6 2.7-6 6v4h-4v4h4v12h4V28h4l2-4z" fill="white"/>
+        </svg>
         <div class="tiktok-handle" id="fb-title-camion">
           <span>Facebook</span>
           <span class="handle">Pizza Family 62 Camion</span>
