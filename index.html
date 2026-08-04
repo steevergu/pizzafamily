@@ -937,6 +937,13 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   transition: transform .2s var(--card-ease), box-shadow .2s var(--card-ease);
 }
 .distrib-card:hover { transform: translateY(-3px); box-shadow: var(--card-shadow-hover); }
+@keyframes distribCardIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+.distrib-card.is-entering {
+  animation: distribCardIn .42s var(--card-ease) both;
+}
 .distrib-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 10px; }
 .distrib-card h3 {
   font-family: var(--font-d); font-size: 18px; text-transform: uppercase;
@@ -969,6 +976,11 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 
 /* Repli de la liste : la dernière rangée s'estompe pour signaler la suite */
+.distrib-grid {
+  -webkit-mask-image: linear-gradient(to bottom, #000 100%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 100%, transparent 100%);
+  transition: -webkit-mask-image .3s ease, mask-image .3s ease;
+}
 .distrib-grid.is-clipped {
   -webkit-mask-image: linear-gradient(to bottom, #000 62%, rgba(0,0,0,.12) 100%);
   mask-image: linear-gradient(to bottom, #000 62%, rgba(0,0,0,.12) 100%);
@@ -1440,7 +1452,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     <!-- 03 — Les Distribs -->
     <article class="canal-card distrib" style="background-image:url('img/distributeur.png');">
       <span class="canal-num" aria-hidden="true">03</span>
-      <span class="canal-emoji" aria-hidden="true">🍕</span>
       <div class="canal-card-body">
         <h3 class="canal-name">Les Distribs</h3>
         <p class="canal-desc">Distributeurs ouverts 24/7. Pizza chaude en 3 minutes chrono, CB et sans contact. Même à 3h du mat’.</p>
@@ -1483,6 +1494,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     </button>
     <button class="cat-btn" data-cat="boissons" role="listitem" aria-pressed="false">
       <span class="cat-emoji">🥤</span>Boissons
+    </button>
+    <button class="cat-btn" data-cat="enfant" role="listitem" aria-pressed="false">
+      <span class="cat-emoji">👶</span>Menu Enfant
     </button>
   </div>
 
@@ -1882,18 +1896,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
         </div>
       </div>
 
-      <!-- Menu enfant -->
-      <div class="product-card">
-        <div class="product-img">👶
-          <span class="product-badge green">Menu Enfant</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Menu Enfant</h3>
-          <p class="product-desc">Pizza 21cm (Regina ou Paysanne) + boisson au choix (Coca, Caprisun, Orangina…)</p>
-          <div class="product-footer"><span class="product-price">6,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
 
     </div><!-- /pasta -->
 
@@ -1962,6 +1964,22 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 
     </div><!-- /boissons -->
 
+    <div class="products-grid stagger" id="panel-enfant" style="display:none;">
+
+      <div class="product-card">
+        <div class="product-img">👶
+          <span class="product-badge green">Menu Enfant</span>
+        </div>
+        <div class="product-body">
+          <h3 class="product-name">Menu Enfant</h3>
+          <p class="product-desc">Pizza au choix (Ø 21cm) : Régina ou Paysanne — Boisson au choix : Coca Cola, Caprisun, Orangina, Schweppes Agrumes, Ice Tea ou Oasis Tropical</p>
+          <div class="product-footer"><span class="product-price">6,50€</span>
+            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
+        </div>
+      </div>
+
+    </div><!-- /enfant -->
+
   </div><!-- /products-panel -->
 
   <div style="text-align:center; margin-top:48px; padding: 0 20px;" class="reveal">
@@ -1980,7 +1998,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-kiosque">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <img src="img/logo-facebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
+        <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
         <div class="tiktok-handle" id="fb-title-kiosque">
           <span>Facebook</span>
           <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
@@ -2035,7 +2053,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   <div class="fb-panel reveal" aria-labelledby="fb-title-camion">
     <div class="tiktok-header">
       <div class="tiktok-title-block">
-        <img src="img/logo-facebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
+        <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
         <div class="tiktok-handle" id="fb-title-camion">
           <span>Facebook</span>
           <span class="handle">Pizza Family 62 Camion</span>
@@ -2345,6 +2363,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     specialites: document.getElementById('panel-specialites'),
     pasta:       document.getElementById('panel-pasta'),
     boissons:    document.getElementById('panel-boissons'),
+    enfant:      document.getElementById('panel-enfant'),
   };
 
   catBtns.forEach(function (btn) {
@@ -2518,6 +2537,7 @@ var DISTRIBUTEURS = [
   }
 
   var expanded = false;
+  var animateToggle = false;
 
   /* Nombre de cartes repliées = 2 rangées pleines.
      On lit le nombre de colonnes réellement calculé par la grille (il change
@@ -2570,11 +2590,18 @@ var DISTRIBUTEURS = [
     var visible = visibleCount();
     var hidden  = Math.max(0, items.length - visible);
     var shown   = (expanded || !hidden) ? items : items.slice(0, visible);
+    var wasVisible = listEl.__shownCount || 0;
+    var doAnimate = animateToggle;
+    animateToggle = false;
 
-    listEl.innerHTML = shown.map(function (d) {
+    listEl.innerHTML = shown.map(function (d, i) {
       var dest = (d.lat != null && d.lng != null) ? (d.lat + ',' + d.lng) : d.adr;
       var maps = 'https://www.google.com/maps/dir/?api=1&destination=' + encodeURIComponent(dest);
-      return '<article class="distrib-card">' +
+      // Au clic "voir plus/réduire" : seules les cartes nouvellement visibles
+      // entrent en fondu, avec un léger décalage — pas de flash sur toute la grille.
+      var isNew = doAnimate && i >= Math.min(wasVisible, shown.length);
+      var animAttr = isNew ? ' class="distrib-card is-entering" style="animation-delay:' + ((i - wasVisible) * 45) + 'ms"' : ' class="distrib-card"';
+      return '<article' + animAttr + '>' +
         '<div class="distrib-card-top">' +
           '<h3>' + d.nom + '</h3>' +
           (d.km != null ? '<span class="distrib-dist">' + formatDist(d.km) + '</span>' : '') +
@@ -2588,6 +2615,7 @@ var DISTRIBUTEURS = [
         '<a class="distrib-route" href="' + maps + '" target="_blank" rel="noopener">Itinéraire →</a>' +
       '</article>';
     }).join('');
+    listEl.__shownCount = shown.length;
 
     listEl.classList.toggle('is-clipped', !expanded && hidden > 0);
 
@@ -2629,6 +2657,7 @@ var DISTRIBUTEURS = [
     if (!btn) return;
     var collapsing = expanded;
     expanded = !expanded;
+    animateToggle = true;
     render();
     if (collapsing) {
       document.getElementById('carte').scrollIntoView({ behavior: 'smooth', block: 'start' });
