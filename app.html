@@ -130,21 +130,16 @@ button { font-family: var(--font-b); cursor: pointer; }
   width: 100%;
 }
 .store-badge {
-  display: inline-flex; align-items: center; gap: 10px;
-  background: #000; color: #fff;
-  border: 1px solid rgba(255,255,255,.25);
-  border-radius: 12px;
-  padding: 10px 20px;
+  display: block;
   width: min(240px, 80vw);
-  transition: transform .15s, background .15s;
-  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  line-height: 0;
+  transition: transform .15s;
 }
-.store-badge:hover { transform: translateY(-2px); background: #111; }
+.store-badge:hover { transform: translateY(-2px); }
 .store-badge:active { transform: scale(.97); }
-.store-badge svg.glyph { width: 26px; height: 26px; flex-shrink: 0; }
-.store-badge .badge-text { text-align: left; line-height: 1.15; }
-.store-badge .badge-text .small { display: block; font-size: 10px; opacity: .85; }
-.store-badge .badge-text .big { display: block; font-size: 17px; font-weight: 600; font-family: -apple-system, 'DM Sans', sans-serif; letter-spacing: .2px; }
+.store-badge img { display: block; width: 100%; height: auto; }
 
 .app-toast {
   position: fixed; left: 50%; bottom: 28px; transform: translateX(-50%) translateY(20px);
@@ -187,24 +182,10 @@ button { font-family: var(--font-b); cursor: pointer; }
 
   <div class="store-badges">
     <a href="#" class="store-badge" data-store="apple" aria-label="Télécharger sur l'App Store — bientôt disponible">
-      <svg class="glyph" viewBox="0 0 384 512" fill="currentColor" aria-hidden="true"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141 4 184.8 4 273.5c0 26.2 4.8 53.3 14.4 81.2 12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg>
-      <span class="badge-text">
-        <span class="small">Télécharger sur l'</span>
-        <span class="big">App Store</span>
-      </span>
+      <img src="img/bouton-appstore.png" alt="Télécharger sur l'App Store">
     </a>
     <a href="#" class="store-badge" data-store="google" aria-label="Disponible sur Google Play — bientôt disponible">
-      <svg class="glyph" viewBox="0 0 512 512" aria-hidden="true">
-        <path fill="#00D2FF" d="M99 8.5C92 12 87 19 87 29v454c0 10 5 17 12 20.5L328 256 99 8.5z"/>
-        <path fill="#3BE1FF" d="M99 8.5L328 256 99 503.5c1 .5 2 1 3 1.3L385 328l-58-72 58-72L102 7.2c-1 .3-2 .8-3 1.3z"/>
-        <path fill="#F6D002" d="M385 328l55-32.5c14-8.2 14-28.7 0-36.9L385 226l-57 30 57 72z"/>
-        <path fill="#FC3D5C" d="M328 256L102 504.8c6 2.7 13.3 2.2 20-1.3l263-152.5-57-95z"/>
-        <path fill="#33E37B" d="M328 256l57-95L122 8.5c-6.7-3.5-14-4-20-1.3L328 256z"/>
-      </svg>
-      <span class="badge-text">
-        <span class="small">Disponible sur</span>
-        <span class="big">Google Play</span>
-      </span>
+      <img src="img/bouton-googleplay.png" alt="Disponible sur Google Play">
     </a>
   </div>
 </section>
