@@ -218,26 +218,19 @@ a:focus-visible, button:focus-visible, input:focus-visible {
   background: var(--green-deep);
 }
 
-/* Fond hero : photos kiosque, livraison & distrib en fondu enchaîné */
+/* Fond hero : une seule photo (le kiosque), légère respiration façon Ken Burns.
+   Le distributeur, très chargé en texte imprimé, cassait l'ambiance en
+   alternance — on garde un seul visuel cohérent avec le reste de la DA. */
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
 .hero-slide {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
-  opacity: 0;
-  animation: heroFade 16s ease-in-out infinite, heroKen 16s ease-in-out infinite;
-  will-change: opacity, transform;
-}
-.hero-slide.s2 { animation-delay: -8s, -8s; }
-@keyframes heroFade {
-  0%   { opacity: 1; }
-  44%  { opacity: 1; }
-  50%  { opacity: 0; }
-  94%  { opacity: 0; }
-  100% { opacity: 1; }
+  animation: heroKen 22s ease-in-out infinite;
+  will-change: transform;
 }
 @keyframes heroKen {
   0%   { transform: scale(1.05); }
-  50%  { transform: scale(1.13); }
+  50%  { transform: scale(1.12); }
   100% { transform: scale(1.05); }
 }
 /* Gradient sombre atmosphérique par-dessus (neutre) */
@@ -1109,10 +1102,9 @@ a:focus-visible, button:focus-visible, input:focus-visible {
      ════════════════════════════════════════ -->
 <section class="hero" id="hero" aria-label="Bannière principale">
 
-  <!-- Fond : photos kiosque, livraison & distrib en fondu enchaîné -->
+  <!-- Fond : photo du kiosque, seule, avec un léger zoom continu -->
   <div class="hero-bg" aria-hidden="true">
-    <div class="hero-slide s1" style="background-image:url('img/kiosque.jpeg');"></div>
-    <div class="hero-slide s2" style="background-image:url('img/distributeur.png');"></div>
+    <div class="hero-slide" style="background-image:url('img/kiosque.jpeg');"></div>
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
 
