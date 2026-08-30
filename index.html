@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pizza Family — Trois façons de se régaler</title>
-<meta name="description" content="Pizza Family — Pizza fraîche au kiosque, en camion ou au distrib ouvert 24/7. Pâte faite chaque jour.">
-<meta property="og:title" content="Pizza Family — Trois façons de se régaler">
-<meta property="og:description" content="Pizza fraîche. Au kiosque, en camion, ou au distrib 24/7.">
+<title>Pizza Family — Événementiel, distributeur, kiosque, livraison</title>
+<meta name="description" content="Pizza Family — Pizza fraîche pour vos événements, au kiosque, en livraison dans les 7 Vallées, ou au distributeur ouvert 24/7. Pâte faite chaque jour.">
+<meta property="og:title" content="Pizza Family — Événementiel, distributeur, kiosque, livraison">
+<meta property="og:description" content="Pizza fraîche. Événementiel, kiosque, livraison dans les 7 Vallées, ou distributeur 24/7.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/png" href="img/logo.png">
 <link rel="apple-touch-icon" href="img/logo.png">
@@ -85,22 +85,12 @@ button { font-family: var(--font-b); cursor: pointer; border: none; background: 
 .btn-hero:active { transform: scale(.98); }
 
 /* Focus visible accessible */
-a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visible {
+a:focus-visible, button:focus-visible, input:focus-visible {
   outline: 3px solid var(--orange);
   outline-offset: 2px;
   border-radius: 6px;
 }
 
-.btn-outline {
-  display: inline-flex; align-items: center; justify-content: center;
-  background: transparent; color: var(--white);
-  font-family: var(--font-b); font-weight: 700;
-  font-size: 15px; padding: 14px 36px; border-radius: 999px;
-  border: 2px solid rgba(255,255,255,.5);
-  cursor: pointer; transition: border-color .15s, background .15s;
-}
-.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
-.hero-cta-row .btn-hero { font-size: 15px; font-weight: 700; padding: 14px 36px; }
 
 /* ============================================================
    HEADER
@@ -113,9 +103,9 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 .header-inner {
   max-width: 1440px; margin: 0 auto;
-  padding: 0 20px;
+  padding: 0 clamp(20px,5vw,80px);
   height: 68px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: grid; grid-template-columns: 1fr auto 1fr; align-items: center;
   gap: 16px;
 }
 
@@ -135,7 +125,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 
 .burger-btn {
   display: flex; align-items: center; justify-content: center;
-  width: 40px; height: 40px;
+  width: 44px; height: 44px;
   background: none; border: none; cursor: pointer;
   flex-direction: column; gap: 5px; padding: 4px;
 }
@@ -172,25 +162,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   transition: background .15s, transform .12s;
 }
 .nav-pill a.nav-cta:hover { background: rgba(255,255,255,.12); transform: scale(1.03); }
-
-/* Right icons */
-.header-right {
-  display: flex; align-items: center;
-}
-.header-app-btn {
-  display: inline-flex; align-items: center; gap: 8px;
-  background: rgba(255,31,31,.9);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 999px;
-  padding: 10px 18px;
-  color: var(--white);
-  font-family: var(--font-b); font-weight: 700; font-size: 13px;
-  white-space: nowrap;
-  transition: background .15s, transform .15s;
-}
-.header-app-btn:hover { background: var(--red-dark, #d4181c); transform: scale(1.04); }
-.header-app-btn svg { width: 18px; height: 18px; fill: currentColor; flex-shrink: 0; }
-@media (max-width: 480px) { .header-app-btn span { display: none; } .header-app-btn { padding: 10px; } }
 
 /* ============================================================
    MOBILE MENU — panneau blanc gauche (style Quick)
@@ -231,19 +202,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 .mobile-menu nav a:hover { color: var(--orange); padding-left: 36px; }
 
-.mobile-menu-footer {
-  padding: 24px 28px 0;
-  display: flex; flex-direction: column; gap: 12px;
-}
-.mobile-menu-footer a {
-  display: flex; align-items: center; gap: 10px;
-  font-size: 15px; font-weight: 700; color: var(--ink);
-  padding: 4px 0; transition: color .15s;
-}
-.mobile-menu-footer a svg { width: 20px; height: 20px; fill: var(--green); }
-.mobile-menu-footer a:hover { color: var(--green); }
 .mobile-menu .mobile-order-btn {
-  margin: 20px 28px 0;
+  margin: 24px 28px 0;
 }
 
 /* ============================================================
@@ -258,22 +218,21 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   background: var(--green-deep);
 }
 
-/* Fond hero : photos kiosque, camion & distrib en fondu enchaîné */
+/* Fond hero : photos kiosque, livraison & distrib en fondu enchaîné */
 .hero-bg { position: absolute; inset: 0; overflow: hidden; }
 .hero-slide {
   position: absolute; inset: 0;
   background-size: cover; background-position: center;
   opacity: 0;
-  animation: heroFade 24s ease-in-out infinite, heroKen 24s ease-in-out infinite;
+  animation: heroFade 16s ease-in-out infinite, heroKen 16s ease-in-out infinite;
   will-change: opacity, transform;
 }
-.hero-slide.s2 { animation-delay: -16s, -16s; }
-.hero-slide.s3 { animation-delay: -8s, -8s; }
+.hero-slide.s2 { animation-delay: -8s, -8s; }
 @keyframes heroFade {
   0%   { opacity: 1; }
-  29%  { opacity: 1; }
-  33%  { opacity: 0; }
-  96%  { opacity: 0; }
+  44%  { opacity: 1; }
+  50%  { opacity: 0; }
+  94%  { opacity: 0; }
   100% { opacity: 1; }
 }
 @keyframes heroKen {
@@ -307,15 +266,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   font-size: clamp(15px,1.4vw,18px); color: rgba(255,255,255,.7);
   font-style: italic; max-width: 420px;
 }
-.hero-cta-row {
-  display: flex; flex-wrap: wrap; align-items: center; gap: 14px;
-  margin-top: 8px;
-}
-.hero-legal {
-  font-size: 12px; color: rgba(255,255,255,.4);
-  font-style: italic;
-}
-
 /* Vague blanche (bas du hero → section blanche) */
 .hero-wave {
   position: relative; z-index: 3;
@@ -324,263 +274,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .hero-wave svg { width: 100%; display: block; }
 
 /* ============================================================
-   EN CE MOMENT — titre rouge italic, scroll horizontal
-   ============================================================ */
-.now-section { background: var(--cream); padding: 60px 0 80px; }
-
-.now-header {
-  padding: 0 clamp(20px,5vw,80px);
-  margin-bottom: 40px;
-}
-.now-title {
-  font-family: var(--font-b);
-  font-weight: 800; font-style: italic;
-  font-size: clamp(44px, 6vw, 82px);
-  line-height: .92;
-  color: var(--ink);
-}
-
-/* Scroll horizontal sans scrollbar visible sur desktop */
-.now-scroll-wrap {
-  position: relative;
-}
-.now-scroll {
-  display: flex; gap: 20px;
-  overflow-x: auto;
-  padding: 8px clamp(20px,5vw,80px) 24px;
-  scroll-snap-type: x mandatory;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-.now-scroll::-webkit-scrollbar { display: none; }
-
-/* Fade-out aux bords */
-.now-scroll-wrap::after {
-  content: '';
-  position: absolute; top: 0; right: 0; bottom: 24px;
-  width: 80px;
-  background: linear-gradient(to right, transparent, var(--cream));
-  pointer-events: none;
-}
-
-.now-card {
-  flex-shrink: 0;
-  width: clamp(248px, 29vw, 312px);
-  background: var(--white);
-  border-radius: var(--card-radius); overflow: hidden;
-  box-shadow: var(--card-shadow);
-  display: flex; flex-direction: column;
-  position: relative; cursor: pointer;
-  scroll-snap-align: start;
-  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
-}
-.now-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
-
-.now-card-media {
-  position: relative; height: var(--card-img-h);
-  display: flex; align-items: center; justify-content: center;
-  overflow: hidden;
-}
-.now-card-bg {
-  display: flex; align-items: center; justify-content: center;
-  font-size: clamp(72px, 9vw, 100px); line-height: 1;
-}
-.now-card-badge {
-  position: absolute; top: 12px; right: 12px;
-  background: var(--red); color: var(--white);
-  font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .5px;
-  padding: 5px 10px; border-radius: 999px;
-}
-.now-card-body {
-  padding: 16px 18px 18px; flex: 1;
-  display: flex; flex-direction: column; align-items: flex-start; gap: 14px;
-}
-.now-card-title {
-  font-family: var(--font-d);
-  font-size: clamp(14px,1.5vw,18px);
-  text-transform: uppercase; line-height: 1.1;
-  color: var(--ink); flex: 1;
-  -webkit-hyphens: none; hyphens: none;
-  overflow-wrap: normal; word-break: normal;
-  white-space: nowrap;
-}
-.now-card-cta {
-  display: inline-flex; align-items: center;
-  font-weight: 800; font-style: italic; font-size: 14px;
-  color: var(--white);
-  background: var(--orange);
-  padding: 10px 22px; border-radius: 999px;
-  border: none; cursor: pointer;
-  transition: background .15s, transform .12s;
-}
-.now-card-cta:hover { background: var(--orange-dark); }
-.now-card-cta:active { transform: scale(.96); }
-
-/* ============================================================
-   NOS 3 CANAUX — 3 façons de se régaler
-   ============================================================ */
-.canaux-section { background: var(--cream); padding: 80px 0 90px; }
-.canaux-head { padding: 0 clamp(20px,5vw,80px); margin-bottom: 44px; overflow: visible; }
-.canaux-eyebrow {
-  color: var(--green); font-size: 13px; font-weight: 800;
-  letter-spacing: 3px; text-transform: uppercase; margin-bottom: 14px;
-}
-.canaux-title {
-  font-family: var(--font-b);
-  font-weight: 800; font-style: italic;
-  font-size: clamp(44px, 6vw, 82px); line-height: 1.2;
-  text-transform: uppercase; letter-spacing: -.01em; color: var(--ink);
-  overflow: visible; padding: 0.1em 0 0.14em;
-}
-.canaux-grid {
-  display: grid; gap: 24px; grid-template-columns: 1fr;
-  padding: 0 clamp(20px,5vw,80px); max-width: 1440px; margin: 0 auto;
-}
-@media (min-width: 760px) { .canaux-grid { grid-template-columns: repeat(3, 1fr); } }
-
-.canal-card {
-  position: relative; overflow: hidden; isolation: isolate;
-  border-radius: var(--card-radius); padding: 28px;
-  min-height: clamp(390px, 38vw, 470px);
-  display: flex; flex-direction: column; color: #fff;
-  background-size: cover; background-position: center;
-  box-shadow: var(--card-shadow);
-  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
-}
-.canal-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
-/* overlay lisibilité (sous le contenu) */
-.canal-card::after { content: ''; position: absolute; inset: 0; z-index: -1; }
-.canal-card.resto::after  { background: linear-gradient(180deg, rgba(12,12,12,.55) 0%, rgba(12,12,12,.18) 32%, rgba(8,8,8,.88) 100%); }
-.canal-card.camion::after { background: linear-gradient(180deg, rgba(24,14,4,.30) 0%, rgba(24,14,4,.12) 28%, rgba(34,16,4,.90) 100%); }
-.canal-card.distrib { background-color: var(--green-deep); background-size: cover; background-position: center; }
-.canal-card.distrib::after { background: linear-gradient(180deg, rgba(10,10,10,.30) 0%, rgba(10,10,10,.12) 28%, rgba(10,10,10,.88) 100%); }
-
-.canal-num {
-  position: absolute; top: 16px; left: 26px; z-index: 0;
-  font-family: var(--font-d); font-size: clamp(86px,11vw,150px);
-  line-height: 1; opacity: .16; pointer-events: none; color: #fff;
-}
-.canal-emoji {
-  position: absolute; top: 30px; right: 26px; z-index: 0;
-  font-size: clamp(64px,8vw,104px); line-height: 1; opacity: .9; pointer-events: none;
-  filter: drop-shadow(0 6px 14px rgba(0,0,0,.35));
-}
-.canal-card-body { margin-top: auto; position: relative; z-index: 1; }
-.canal-name {
-  font-family: var(--font-d); font-size: clamp(30px,3.4vw,40px);
-  text-transform: uppercase; line-height: .95; margin-bottom: 14px;
-}
-.canal-desc { font-size: 15px; line-height: 1.5; margin-bottom: 22px; max-width: 32ch; opacity: .9; }
-.canal-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; }
-.canal-tag {
-  font-size: 11.5px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase;
-  padding: 8px 14px; border-radius: 999px;
-  background: rgba(255,255,255,.16); color: #fff; backdrop-filter: blur(3px);
-}
-.canal-cta {
-  display: inline-flex; align-items: center; gap: 9px;
-  font-weight: 800; font-style: italic; font-size: 15px;
-  letter-spacing: .3px; text-transform: uppercase; color: var(--orange);
-  transition: gap .2s ease;
-}
-.canal-cta:hover { gap: 16px; }
-
-/* ============================================================
-   NOS PIZZAS — catégories + scroll produits
-   ============================================================ */
-.pizzas-section { background: var(--paper); padding: 80px 0; }
-.section-header {
-  padding: 0 clamp(20px,5vw,80px);
-  margin-bottom: 40px;
-}
-.section-label {
-  font-size: 12px; font-weight: 700; text-transform: uppercase;
-  letter-spacing: 2px; color: var(--green); margin-bottom: 10px;
-}
-.section-title-italic {
-  font-family: var(--font-b);
-  font-weight: 800; font-style: italic;
-  font-size: clamp(44px, 6vw, 82px); line-height: .92;
-  color: var(--ink);
-}
-
-/* Catégorie tabs scroll */
-.cat-scroll {
-  display: flex; gap: 10px;
-  overflow-x: auto; scrollbar-width: none;
-  padding: 0 clamp(20px,5vw,80px) 32px;
-}
-.cat-scroll::-webkit-scrollbar { display: none; }
-.cat-btn {
-  flex-shrink: 0;
-  display: flex; flex-direction: column; align-items: center; gap: 8px;
-  cursor: pointer; padding: 14px 20px; border-radius: 16px;
-  border: 2px solid transparent;
-  background: var(--white);
-  transition: border-color .15s, background .15s;
-  font-family: var(--font-b); font-weight: 700; font-size: 13px;
-  color: var(--ink);
-}
-.cat-btn:hover { border-color: var(--red); background: #ffe8e8; }
-.cat-btn.active { border-color: var(--red); background: var(--red); color: var(--white); }
-.cat-btn .cat-emoji { font-size: 36px; }
-
-/* Grille produits */
-.products-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 20px;
-  padding: 0 clamp(20px,5vw,80px);
-}
-.product-card {
-  background: var(--white); border-radius: var(--card-radius); overflow: hidden;
-  box-shadow: var(--card-shadow);
-  display: flex; flex-direction: column;
-  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
-}
-.product-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
-.product-img {
-  height: var(--card-img-h); display: flex; align-items: center; justify-content: center;
-  font-size: clamp(64px,8vw,84px); position: relative;
-  background: radial-gradient(120% 120% at 30% 20%, #f5e2e0, #e0b5b0 120%);
-}
-/* Variété de fonds en rotation — palette charte */
-.product-card:nth-child(4n+2) .product-img { background: radial-gradient(120% 120% at 30% 20%, #fde0cc, #f5a070 130%); }
-.product-card:nth-child(4n+3) .product-img { background: radial-gradient(120% 120% at 30% 20%, #f0ebe2, #ddd2c2 130%); }
-.product-card:nth-child(4n)   .product-img { background: radial-gradient(120% 120% at 30% 20%, #f7d8d6, #e59b95 130%); }
-.product-badge {
-  position: absolute; top: 12px; right: 12px;
-  background: var(--red); color: var(--white);
-  font-size: 10px; font-weight: 800; text-transform: uppercase;
-  padding: 4px 10px; border-radius: 999px; letter-spacing: .5px;
-}
-.product-badge.green { background: var(--red); }
-.product-badge.dark  { background: var(--green-deep); color: var(--orange); }
-.product-badge.orange { background: var(--orange); }
-.product-body { padding: 16px 18px 20px; flex: 1; display: flex; flex-direction: column; }
-.product-name {
-  font-family: var(--font-d); font-size: 19px; text-transform: uppercase;
-  line-height: 1; margin-bottom: 6px;
-  -webkit-hyphens: none; hyphens: none;
-  overflow-wrap: normal; word-break: normal;
-}
-.product-desc { font-size: 13px; color: var(--ink-70); flex: 1; line-height: 1.45; margin-bottom: 14px; }
-.product-footer { display: flex; align-items: center; justify-content: space-between; }
-.product-price { font-family: var(--font-d); font-size: 24px; color: var(--orange); }
-.btn-add {
-  background: var(--orange); color: var(--white);
-  padding: 9px 18px; border-radius: 999px;
-  font-weight: 700; font-size: 13px;
-  border: none; cursor: pointer;
-  transition: background .15s, transform .12s;
-}
-.btn-add:hover { background: var(--orange-dark); }
-.btn-add:active { transform: scale(.96); }
-
-/* ============================================================
    TIKTOK — fond très sombre, cercles rouges, scroll vidéos
    ============================================================ */
-.fb-wrap { background: var(--paper); padding: 80px 0 90px; }
 .fb-panel {
   background: var(--green-deep);
   border-radius: 28px;
@@ -595,35 +290,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   padding: 0 0 6px;
   -webkit-mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
   mask-image: linear-gradient(to right, transparent 0, black 16px, black calc(100% - 16px), transparent 100%);
-}
-
-.tiktok-section {
-  background: var(--green-deep);
-  padding: 80px 0 60px;
-  position: relative; overflow: hidden;
-}
-
-/* Cercles lumineux rouges (style Quick) */
-.tiktok-glow {
-  position: absolute; right: -120px; top: 50%; transform: translateY(-50%);
-  width: 700px; height: 700px; border-radius: 50%;
-  pointer-events: none;
-  box-shadow:
-    0 0 0  2px rgba(255,31,31,.6),
-    0 0 0 30px rgba(255,31,31,.18),
-    0 0 0 70px rgba(255,31,31,.10),
-    0 0 0 130px rgba(255,31,31,.055),
-    0 0 0 200px rgba(255,31,31,.025);
-}
-/* Deuxième anneau décalé */
-.tiktok-glow2 {
-  position: absolute; right: 80px; top: 20%; transform: none;
-  width: 300px; height: 300px; border-radius: 50%;
-  pointer-events: none;
-  box-shadow:
-    0 0 0 1px rgba(255,31,31,.4),
-    0 0 0 20px rgba(255,31,31,.08),
-    0 0 0 50px rgba(255,31,31,.04);
 }
 
 .tiktok-header {
@@ -774,7 +440,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(24,119,242,.9); color: #fff;
   font-family: var(--font-b); font-weight: 700; font-size: 14px;
-  padding: 12px 22px; border-radius: 999px;
+  padding: 13px 22px; border: 2px solid transparent; border-radius: 999px;
   transition: background .15s, transform .12s;
 }
 .fb-follow-cta:hover { background: #1877F2; transform: scale(1.03); }
@@ -816,16 +482,149 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 
 /* ============================================================
+   EN-TÊTES DE SECTION — génériques, réutilisés partout
+   ============================================================ */
+.section-header {
+  padding: 0 clamp(20px,5vw,80px);
+  margin-bottom: 40px;
+}
+.section-label {
+  font-size: 12px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 2px; color: var(--green); margin-bottom: 10px;
+}
+.section-title-italic {
+  font-family: var(--font-b);
+  font-weight: 800; font-style: italic;
+  font-size: clamp(44px, 6vw, 82px); line-height: .92;
+  color: var(--ink);
+}
+.section-lead {
+  margin-top: 16px; font-size: 15px; line-height: 1.65;
+  color: var(--ink-70); max-width: 560px;
+}
+
+/* ---- Composition en deux colonnes : texte à gauche, action/visuel à droite ----
+   Réutilisée par Événementiel, Kiosque et Livraison. ---- */
+.split-layout {
+  max-width: 1440px; margin: 0 auto;
+  padding: 0 clamp(20px,5vw,80px);
+  display: grid; gap: 40px;
+  grid-template-columns: 1fr;
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .split-layout { grid-template-columns: 1fr 1fr; gap: 56px; }
+}
+.split-layout .section-header { padding: 0; margin-bottom: 0; }
+
+/* Petites pastilles dynamiques — remplacent la liste à puces plate,
+   réutilisées sous les titres de section (Événementiel, Appli, Kiosque, Livraison).
+   Empilées (une par ligne) pour une taille et un alignement toujours cohérents. */
+.split-points {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 10px;
+  margin: 20px 0 28px; padding: 0;
+}
+.split-points li {
+  display: flex; align-items: center; gap: 10px;
+  background: var(--white); box-shadow: 0 6px 16px rgba(25,25,25,.07);
+  padding: 10px 18px 10px 10px; border-radius: 999px;
+  font-size: 13.5px; font-weight: 700; color: var(--ink);
+}
+.split-points .ic {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  background: rgba(255,31,31,.10); color: var(--red);
+  display: flex; align-items: center; justify-content: center; font-size: 12px;
+}
+
+/* ============================================================
+   ÉVÉNEMENTIEL
+   ============================================================ */
+.evt-section { position: relative; overflow: hidden; background: var(--cream); padding: 80px 0 90px; }
+.evt-glow {
+  position: absolute; left: -120px; top: 30px; z-index: 0;
+  width: 420px; height: 420px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle closest-side, rgba(255,31,31,.13) 0%, transparent 100%);
+}
+.evt-section .split-layout { position: relative; z-index: 1; }
+.evt-form {
+  background: var(--white); border-radius: var(--card-radius);
+  padding: 26px clamp(22px,3vw,32px); box-shadow: var(--card-shadow);
+  display: flex; flex-direction: column; gap: 14px;
+  max-width: 440px; width: 100%; justify-self: start;
+}
+@media (min-width: 900px) { .evt-form { justify-self: end; } }
+.evt-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+@media (max-width: 420px) { .evt-row { grid-template-columns: 1fr; } }
+.evt-field { display: flex; flex-direction: column; gap: 6px; }
+.evt-field label { font-size: 12px; font-weight: 800; letter-spacing: .3px; color: var(--ink); }
+.evt-field input, .evt-field textarea {
+  border: 2px solid rgba(25,25,25,.10); border-radius: 12px;
+  padding: 13px; font-family: var(--font-b); font-size: 14px; color: var(--ink);
+  outline: none; transition: border-color .15s; background: var(--cream); width: 100%;
+}
+.evt-field input:focus, .evt-field textarea:focus { border-color: var(--red); }
+.evt-field textarea { resize: vertical; min-height: 74px; font-family: var(--font-b); }
+.evt-checkbox {
+  display: flex; align-items: center; gap: 9px;
+  font-size: 13px; font-weight: 700; color: var(--ink);
+  cursor: pointer; user-select: none; margin-top: -4px;
+}
+.evt-checkbox input {
+  width: 17px; height: 17px; accent-color: var(--red);
+  cursor: pointer; flex-shrink: 0;
+}
+.evt-submit {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  background: var(--red); color: var(--white); border: 2px solid transparent; border-radius: 999px;
+  padding: 13px 26px; font-family: var(--font-b); font-weight: 800; font-style: italic; font-size: 14px;
+  cursor: pointer; transition: background .15s, transform .15s; margin-top: 2px;
+}
+.evt-submit:hover { background: var(--red-dark); transform: scale(1.02); }
+.evt-note { font-size: 11.5px; color: var(--ink-70); margin-top: -6px; line-height: 1.5; }
+
+/* ============================================================
+   KIOSQUE & LIVRAISON — même composition qu'Événementiel :
+   .split-layout, .section-header, .section-title-italic et
+   .section-lead sont réutilisés tels quels, sans surcharge locale,
+   pour garder exactement les mêmes tailles et espacements que le
+   reste du site. Seuls les éléments propres à cette section
+   (photo, coordonnées/horaires) ont leur propre style, structurel
+   uniquement — jamais de taille de texte redéfinie ici.
+   ============================================================ */
+.kiosque-section { background: var(--cream); padding: 80px 0 90px; }
+.livraison-section { background: var(--cream); padding: 80px 0 90px; }
+
+.kiosque-section .split-layout,
+.livraison-section .split-layout { align-items: center; margin-bottom: 40px; }
+
+/* Même rythme vertical que sous .section-lead ailleurs (cf. .split-points) */
+.place-meta { margin-top: 20px; }
+
+/* Même proportion d'image pour les deux sections, quelle que soit la photo source */
+.place-photo {
+  position: relative;
+  border-radius: var(--card-radius); overflow: hidden;
+  box-shadow: var(--card-shadow);
+  aspect-ratio: 4 / 3;
+}
+.place-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.place-photo .place-badge { position: absolute; z-index: 1; top: 18px; left: 18px; }
+
+/* ============================================================
    DISTRIBUTEURS — trouver le plus proche
    ============================================================ */
 .distrib-section {
-  position: relative; overflow: hidden;
   background: var(--cream); padding: 80px 0 90px;
 }
+.distrib-finder { position: relative; overflow: hidden; }
 .distrib-inner {
   position: relative; z-index: 2;
+  max-width: 1440px; margin: 0 auto;
   padding: 0 clamp(20px,5vw,80px);
 }
+/* Le fb-panel suit la zone carte : marge sur du fond uni, pas sur la
+   texture de carte, pour un vrai espace visible avant le panneau. */
+.distrib-section .fb-panel { margin-top: 56px; }
 
 /* ---- Fond carte stylisé (OSM-inspired) ---- */
 .map-bg {
@@ -898,8 +697,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .distrib-geo-btn {
   display: inline-flex; align-items: center; gap: 8px;
   background: var(--red); color: var(--white);
-  border: none; border-radius: 999px;
-  padding: 14px 24px;
+  border: 2px solid transparent; border-radius: 999px;
+  padding: 13px 24px;
   font-family: var(--font-b); font-weight: 800; font-size: 14px; font-style: italic;
   cursor: pointer; white-space: nowrap;
   transition: background .15s, transform .15s;
@@ -1001,46 +800,39 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .distrib-more-btn .chev { font-size: 12px; line-height: 1; }
 
 /* ============================================================
-   ADRESSES & HORAIRES
+   APPLI — réserver depuis le téléphone, récupérer au distributeur
    ============================================================ */
-.places-section { background: var(--paper); padding: 80px 0 90px; }
-.places-grid {
-  max-width: 1100px; margin: 36px auto 0;
+.app-promo-section {
+  position: relative; overflow: hidden;
+  background: var(--cream);
+  padding: 80px 0 90px;
+}
+.app-promo-glow {
+  position: absolute; left: -140px; top: 20px;
+  width: 520px; height: 520px; border-radius: 50%; pointer-events: none;
+  background: radial-gradient(circle closest-side, rgba(255,31,31,.12) 0%, transparent 100%);
+}
+.app-promo-inner {
+  position: relative; z-index: 1;
+  max-width: 1440px; margin: 0 auto;
   padding: 0 clamp(20px,5vw,80px);
-  display: grid; gap: 26px;
+  display: grid; gap: 56px;
   grid-template-columns: 1fr;
+  align-items: center;
 }
-@media (min-width: 820px) { .places-grid { grid-template-columns: 1fr 1fr; } }
+@media (min-width: 900px) { .app-promo-inner { grid-template-columns: 1fr 0.9fr; } }
+.app-promo-text .section-lead { max-width: 440px; }
 
-.place-card {
-  background: var(--white); border-radius: var(--card-radius); overflow: hidden;
-  box-shadow: var(--card-shadow);
-  display: flex; flex-direction: column;
-  transition: transform .3s var(--card-ease), box-shadow .3s var(--card-ease);
+/* ---- Le mockup fourni : posé, léger angle, ombre douce ---- */
+.app-promo-visual img {
+  display: block; width: 100%; max-width: 460px; margin: 0 auto;
+  transform: rotate(-2deg);
+  filter: drop-shadow(0 26px 40px rgba(25,25,25,.20));
 }
-.place-card:hover { transform: translateY(-6px); box-shadow: var(--card-shadow-hover); }
 
-.place-head {
-  position: relative; padding: 26px 26px 24px;
-  min-height: 172px;
-  display: flex; flex-direction: column; justify-content: flex-end;
-  color: var(--white); overflow: hidden;
-  background-size: cover; background-position: center;
-}
-.place-head.kiosque {
-  background-image: linear-gradient(180deg, rgba(10,10,10,.30) 0%, rgba(10,10,10,.4) 45%, rgba(10,10,10,.90) 100%), url('img/kiosque.jpeg');
-}
-.place-head.camion  {
-  background-image: linear-gradient(180deg, rgba(10,10,10,.30) 0%, rgba(10,10,10,.4) 45%, rgba(10,10,10,.90) 100%), url('img/camion.jpg');
-}
-.place-kicker {
-  font-size: 11px; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
-  color: rgba(255,255,255,.75); margin-bottom: 4px;
-}
-.place-name {
-  font-family: var(--font-d); font-size: clamp(26px,3.4vw,34px);
-  text-transform: uppercase; line-height: .95;
-}
+/* ============================================================
+   CARTE ADRESSE — Kiosque & Livraison (voir .place-photo/.place-meta plus haut)
+   ============================================================ */
 .place-badge {
   display: inline-flex; align-items: center; gap: 7px;
   margin-top: 14px; padding: 6px 13px; border-radius: 999px;
@@ -1055,7 +847,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .place-badge.is-closed .dot { background: #ff6a5e; }
 @keyframes liveDot { 0% { box-shadow: 0 0 0 0 rgba(47,177,78,.55); } 100% { box-shadow: 0 0 0 9px rgba(47,177,78,0); } }
 
-.place-body { padding: 22px 26px 26px; flex: 1; display: flex; flex-direction: column; }
 .place-contact { display: flex; flex-direction: column; gap: 9px; margin-bottom: 18px; }
 .place-contact a, .place-contact span {
   display: flex; align-items: flex-start; gap: 10px;
@@ -1067,7 +858,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 
 .place-hours { border-top: 1px dashed #d8d2cc; padding-top: 14px; margin-bottom: 20px; }
 .place-hours-title {
-  font-size: 11px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
+  font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase;
   color: var(--green); margin-bottom: 10px;
 }
 .place-hours ul { display: flex; flex-direction: column; gap: 2px; }
@@ -1085,7 +876,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .place-actions { display: flex; gap: 10px; margin-top: auto; flex-wrap: wrap; }
 .place-actions a {
   flex: 1; min-width: 130px; text-align: center;
-  padding: 13px 16px; border-radius: 999px;
+  padding: 13px 16px; border: 2px solid transparent; border-radius: 999px;
   font-weight: 800; font-size: 14px; transition: background .15s, transform .12s, border-color .15s, color .15s;
 }
 .place-actions a:active { transform: scale(.97); }
@@ -1099,7 +890,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
    ============================================================ */
 .site-footer {
   background: var(--green); color: var(--white);
-  padding: 72px 0 0;
+  padding: 80px 0 0;
 }
 .footer-grid {
   max-width: 1440px; margin: 0 auto;
@@ -1139,7 +930,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 .footer-social-link svg { width: 16px; height: 16px; fill: currentColor; }
 
 .footer-col h4 {
-  font-family: var(--font-b); font-weight: 800; font-size: 13px;
+  font-family: var(--font-b); font-weight: 800; font-size: 12px;
   text-transform: uppercase; letter-spacing: 1.5px;
   color: var(--white); margin-bottom: 16px;
 }
@@ -1173,8 +964,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
    ============================================================ */
 @media (max-width: 639px) {
   .hero-content { padding-bottom: 60px; }
-  .tiktok-glow { display: none; }
-  .tiktok-glow2 { display: none; }
   .distrib-tools { flex-direction: column; }
   .distrib-geo-btn { justify-content: center; }
 }
@@ -1222,17 +1011,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 }
 .nav-pill a:hover::after { transform: scaleX(1); }
 
-/* Zoom des visuels produits au survol de la carte */
-.product-img { transition: transform .4s cubic-bezier(.22,.61,.36,1); }
-.product-card:hover .product-img { transform: scale(1.06); }
-.product-card .product-badge { transition: transform .25s ease; }
-.product-card:hover .product-badge { transform: scale(1.08) rotate(-3deg); }
-
-/* Cartes "En ce moment" — léger zoom du fond + CTA qui glisse */
-.now-card-bg { transition: transform .45s cubic-bezier(.22,.61,.36,1); }
-.now-card:hover .now-card-bg { transform: scale(1.12); }
-.now-card-cta svg, .now-card-cta::after { transition: transform .2s ease; }
-
 /* Bouton play TikTok qui pulse au survol */
 @keyframes playPulse { 0% { box-shadow: 0 0 0 0 rgba(255,255,255,.5); } 100% { box-shadow: 0 0 0 16px rgba(255,255,255,0); } }
 .tiktok-card:hover .tiktok-play-btn { animation: playPulse 1.1s ease-out infinite; }
@@ -1273,19 +1051,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 
     <!-- Centre : navigation pill -->
     <nav class="nav-pill" aria-label="Navigation principale">
-      <a href="#en-ce-moment">En ce moment</a>
-      <a href="#canaux">Comment commander</a>
-      <a href="#nos-pizzas">Nos pizzas</a>
-      <a href="#points-de-vente">Nos points de vente</a>
+      <a href="#livraison">Livraison 7 Vallées</a>
+      <a href="#kiosque">Kiosque</a>
+      <a href="#distributeur">Distributeur</a>
+      <a href="#app">Appli</a>
+      <a href="#evenementiel">Événementiel</a>
     </nav>
 
-    <!-- Droite : téléchargement app -->
-    <div class="header-right">
-      <a href="app.html" target="_blank" rel="noopener" class="header-app-btn" aria-label="Télécharger l'application Pizza Family">
-        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a1 1 0 0 1 1 1v10.59l3.3-3.3a1 1 0 1 1 1.4 1.42l-5 5a1 1 0 0 1-1.4 0l-5-5a1 1 0 1 1 1.4-1.42l3.3 3.3V3a1 1 0 0 1 1-1zM5 19a1 1 0 1 0 0 2h14a1 1 0 1 0 0-2H5z"/></svg>
-        <span>Télécharger l'appli</span>
-      </a>
-    </div>
+    <div></div>
   </div>
 </header>
 
@@ -1296,23 +1069,14 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 <div class="mobile-menu" id="mobile-menu" aria-hidden="true" role="dialog" aria-label="Menu de navigation">
   <button class="mobile-menu-close" id="mobile-menu-close" aria-label="Fermer le menu">✕</button>
   <nav>
-    <a href="#en-ce-moment">En ce moment</a>
-    <a href="#canaux">Comment commander</a>
-    <a href="#nos-pizzas">Nos pizzas</a>
-    <a href="#points-de-vente">Nos adresses</a>
+    <a href="#livraison">Livraison 7 Vallées</a>
+    <a href="#kiosque">Kiosque</a>
+    <a href="#distributeur">Distributeur</a>
+    <a href="#app">Appli</a>
+    <a href="#evenementiel">Événementiel</a>
   </nav>
-  <div class="mobile-menu-footer">
-    <a href="#points-de-vente">
-      <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
-      Mon point de vente
-    </a>
-    <a href="#">
-      <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-      Mon compte
-    </a>
-  </div>
   <div class="mobile-order-btn">
-    <a href="#nos-pizzas" class="btn-hero" style="width:100%; border-radius:12px;">Commander 🍕</a>
+    <a href="app.html" target="_blank" rel="noopener" class="btn-hero" style="width:100%;">Télécharger l'application 📲</a>
   </div>
 </div>
 
@@ -1321,22 +1085,17 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
      ════════════════════════════════════════ -->
 <section class="hero" id="hero" aria-label="Bannière principale">
 
-  <!-- Fond : photos kiosque, camion & distrib en fondu enchaîné -->
+  <!-- Fond : photos kiosque, livraison & distrib en fondu enchaîné -->
   <div class="hero-bg" aria-hidden="true">
     <div class="hero-slide s1" style="background-image:url('img/kiosque.jpeg');"></div>
-    <div class="hero-slide s2" style="background-image:url('img/camion.jpg');"></div>
-    <div class="hero-slide s3" style="background-image:url('img/distributeur.png');"></div>
+    <div class="hero-slide s2" style="background-image:url('img/distributeur.png');"></div>
   </div>
   <div class="hero-overlay" aria-hidden="true"></div>
 
   <!-- Contenu texte -->
   <div class="hero-content">
     <img class="hero-title" src="img/pizzafamily.svg" alt="Pizza Family">
-    <p class="hero-sub">Trois façons de se régaler. Faite avec amour et beaucoup de fromage.</p>
-    <div class="hero-cta-row">
-      <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander 🍕</a>
-      <a href="#nos-pizzas" class="btn-outline" style="border-color:rgba(255,255,255,.4); font-style:italic; font-weight:700;">Découvrir la carte</a>
-    </div>
+    <p class="hero-sub">Événementiel, distributeur, kiosque, livraison. Faite avec amour et beaucoup de fromage.</p>
   </div>
 
   <!-- Vague de transition vers le blanc -->
@@ -1348,782 +1107,117 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
 </section>
 
 <!-- ════════════════════════════════════════
-     EN CE MOMENT
+     LIVRAISON 7 VALLÉES
      ════════════════════════════════════════ -->
-<section class="now-section" id="en-ce-moment" aria-labelledby="now-title">
-  <div class="now-header reveal">
-    <h2 class="now-title" id="now-title">En ce<br>moment</h2>
-  </div>
-
-  <div class="now-scroll-wrap">
-    <div class="now-scroll stagger" role="list">
-
-      <!-- Card 1 — La Family (vraie pizza du menu) -->
-      <div class="now-card" role="listitem">
-        <div class="now-card-media" style="background: linear-gradient(140deg, #3a1c06, #5a2a0a);">
-          <div class="now-card-bg" aria-hidden="true">🍕</div>
-          <span class="now-card-badge">★ Notre Family</span>
+<section class="livraison-section" id="livraison" aria-labelledby="livraison-title">
+  <div class="split-layout">
+    <div class="section-header reveal">
+      <h2 class="section-title-italic" id="livraison-title">Livraison 7 Vallées</h2>
+      <p class="section-lead">
+        Le camion Pizza Family est installé à Bouin-Plumoison : viens récupérer ta pizza
+        directement sur place, ou fais-toi livrer où que tu sois dans le secteur des 7 Vallées.
+      </p>
+      <ul class="split-points">
+        <li><span class="ic">🚚</span>Retrait sur place, directement au camion</li>
+        <li><span class="ic">🏠</span>Livraison à domicile dans les 7 Vallées</li>
+      </ul>
+      <div class="place-meta">
+        <div class="place-contact">
+          <a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+247+Bis+Route+Nationale+Bouin-Plumoison" target="_blank" rel="noopener"><span class="ic">📍</span>247 Bis Route Nationale, 62140 Bouin-Plumoison</a>
+          <a href="tel:0368386262"><span class="ic">📞</span>03 68 38 62 62</a>
         </div>
-        <div class="now-card-body">
-          <h3 class="now-card-title">Pizza Family</h3>
-          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
+        <div class="place-hours">
+          <p class="place-hours-title">Horaires d’ouverture</p>
+          <ul>
+            <li data-d="1"><span class="day">Lundi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="2" class="closed"><span class="day">Mardi</span><span class="hrs">Fermé</span></li>
+            <li data-d="3" class="closed"><span class="day">Mercredi</span><span class="hrs">Fermé</span></li>
+            <li data-d="4"><span class="day">Jeudi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="5"><span class="day">Vendredi</span><span class="hrs">18:30 – 21:30</span></li>
+            <li data-d="6"><span class="day">Samedi</span><span class="hrs">18:30 – 22:00</span></li>
+            <li data-d="0"><span class="day">Dimanche</span><span class="hrs">18:30 – 21:30</span></li>
+          </ul>
         </div>
-      </div>
-
-      <!-- Card 2 — Carnivore -->
-      <div class="now-card" role="listitem">
-        <div class="now-card-media" style="background: linear-gradient(140deg, #2a0a06, #4a120a);">
-          <div class="now-card-bg" aria-hidden="true">🥩</div>
-          <span class="now-card-badge">🔥 Top vente</span>
-        </div>
-        <div class="now-card-body">
-          <h3 class="now-card-title">Carnivore</h3>
-          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
-        </div>
-      </div>
-
-      <!-- Card 3 — Tartiflette -->
-      <div class="now-card" role="listitem">
-        <div class="now-card-media" style="background: linear-gradient(140deg, #2e2208, #4a3410);">
-          <div class="now-card-bg" aria-hidden="true">🧀</div>
-          <span class="now-card-badge" style="background:#8B5E3C;">🧀 Fromagère</span>
-        </div>
-        <div class="now-card-body">
-          <h3 class="now-card-title">Tartiflette</h3>
-          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
+        <div class="place-actions">
+          <a class="place-order" href="https://app.eatself.com/4690/carte/0" target="_blank" rel="noopener">Commander 🍕</a>
+          <a class="place-route" href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+247+Bis+Route+Nationale+Bouin-Plumoison" target="_blank" rel="noopener">Itinéraire</a>
         </div>
       </div>
+    </div>
 
-      <!-- Card 4 — Texane -->
-      <div class="now-card" role="listitem">
-        <div class="now-card-media" style="background: linear-gradient(140deg, #380c06, #5e160a);">
-          <div class="now-card-bg" aria-hidden="true">🌶️</div>
-          <span class="now-card-badge">🌶️ Relevée</span>
-        </div>
-        <div class="now-card-body">
-          <h3 class="now-card-title">La Texane</h3>
-          <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="now-card-cta">Commander</a>
-        </div>
-      </div>
-
+    <div class="place-photo reveal">
+      <img src="img/voiturelivraison.jpg" alt="Camion Pizza Family, à Bouin-Plumoison — retrait sur place ou livraison dans les 7 Vallées">
+      <span class="place-badge" data-place="livraison"><span class="dot"></span>Horaires</span>
     </div>
   </div>
+
+  <div class="fb-panel reveal" aria-labelledby="fb-title-livraison">
+      <div class="tiktok-header">
+        <div class="tiktok-title-block">
+          <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
+          <div class="tiktok-handle" id="fb-title-livraison">
+            <span>Facebook</span>
+            <span class="handle">Livraison 7 Vallées</span>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-follow-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Suivre sur Facebook
+        </a>
+      </div>
+
+      <div class="tiktok-scroll stagger" role="list">
+
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Livraison Bouin-Plumoison">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1000,#3a2500);">🚚</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">👍❤️😍 94</span></div>
+          <div class="fb-card-caption">Le camion est à Bouin-Plumoison ! Pizzas faites minute, sur place ou livrées 😍</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Programme de livraison">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#0d1a0d,#1a3010);">📅</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">👍❤️ 67</span></div>
+          <div class="fb-card-caption">Programme de livraison cette semaine — suivez la page pour ne rien manquer 🚚🍕</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Marché">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1500,#3a2f00);">🧺</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">❤️👍 58</span></div>
+          <div class="fb-card-caption">Merci à tous ceux qui sont passés au marché ce matin, à très vite 🙏</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Nouvelle étape">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#0a1a17,#0d3a30);">📍</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">😍🔥 82</span></div>
+          <div class="fb-card-caption">Nouveau créneau ajouté au planning de livraison, on vient vers vous 📍</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Merci fidélité">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0a1a,#3a0d3a);">🙌</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">🙌❤️ 45</span></div>
+          <div class="fb-card-caption">Merci pour votre fidélité ! On repasse très vite près de chez vous 🚚</div>
+        </a>
+
+      </div>
+    </div>
 </section>
 
 <!-- ════════════════════════════════════════
-     NOS 3 CANAUX — 3 façons de se régaler
+     KIOSQUE
      ════════════════════════════════════════ -->
-<section class="canaux-section" id="canaux" aria-labelledby="canaux-title">
-  <div class="canaux-head reveal">
-    <h2 class="canaux-title" id="canaux-title">3 façons de<br>se régaler.</h2>
-  </div>
-
-  <div class="canaux-grid stagger">
-
-    <!-- 01 — Le Resto / Kiosque -->
-    <article class="canal-card resto" style="background-image:url('img/kiosque.jpeg');">
-      <span class="canal-num" aria-hidden="true">01</span>
-      <div class="canal-card-body">
-        <h3 class="canal-name">Le Kiosque</h3>
-        <p class="canal-desc">L’adresse historique à Hersin-Coupigny. Tu commandes, tu repars avec ta pizza cuite sur pierre. Ambiance famille garantie.</p>
-        <div class="canal-tags">
-          <span class="canal-tag">Soirs · 18h30</span>
-          <span class="canal-tag">À emporter</span>
-          <span class="canal-tag">Sur pierre</span>
-        </div>
-        <a class="canal-cta" href="#points-de-vente">Voir les horaires →</a>
-      </div>
-    </article>
-
-    <!-- 02 — Le Camion -->
-    <article class="canal-card camion" style="background-image:url('img/camion.jpg');">
-      <span class="canal-num" aria-hidden="true">02</span>
-      <div class="canal-card-body">
-        <h3 class="canal-name">Le Camion</h3>
-        <p class="canal-desc">Notre food truck sillonne les marchés et événements autour de Hesdin. Suis l’agenda sur Facebook, on vient à toi.</p>
-        <div class="canal-tags">
-          <span class="canal-tag">Selon agenda</span>
-          <span class="canal-tag">Sur Facebook</span>
-        </div>
-        <a class="canal-cta" href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener">Voir les horaires →</a>
-      </div>
-    </article>
-
-    <!-- 03 — Les Distribs -->
-    <article class="canal-card distrib" style="background-image:url('img/distributeur.png');">
-      <span class="canal-num" aria-hidden="true">03</span>
-      <div class="canal-card-body">
-        <h3 class="canal-name">Les Distribs</h3>
-        <p class="canal-desc">Distributeurs ouverts 24/7. Pizza chaude en 3 minutes chrono, CB et sans contact. Même à 3h du mat’.</p>
-        <div class="canal-tags">
-          <span class="canal-tag">24h / 7j</span>
-          <span class="canal-tag">3 min</span>
-          <span class="canal-tag">Sans contact</span>
-        </div>
-        <a class="canal-cta" href="#points-de-vente">Trouver le plus proche →</a>
-      </div>
-    </article>
-
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════
-     NOS PIZZAS
-     ════════════════════════════════════════ -->
-<section class="pizzas-section" id="nos-pizzas" aria-labelledby="pizzas-title">
-  <div class="section-header reveal">
-    <h2 class="section-title-italic" id="pizzas-title">Nos<br>pizzas</h2>
-  </div>
-
-  <!-- Tabs catégories -->
-  <div class="cat-scroll reveal" role="list" aria-label="Filtrer par catégorie">
-    <button class="cat-btn active" data-cat="classiques" role="listitem" aria-pressed="true">
-      <span class="cat-emoji">🍕</span>Classiques
-    </button>
-    <button class="cat-btn" data-cat="mer" role="listitem" aria-pressed="false">
-      <span class="cat-emoji">🦐</span>De la mer
-    </button>
-    <button class="cat-btn" data-cat="fromageres" role="listitem" aria-pressed="false">
-      <span class="cat-emoji">🧀</span>Fromagères
-    </button>
-    <button class="cat-btn" data-cat="specialites" role="listitem" aria-pressed="false">
-      <span class="cat-emoji">⭐</span>Spécialités
-    </button>
-    <button class="cat-btn" data-cat="pasta" role="listitem" aria-pressed="false">
-      <span class="cat-emoji">🍝</span>Pasta Box
-    </button>
-    <button class="cat-btn" data-cat="boissons" role="listitem" aria-pressed="false">
-      <span class="cat-emoji">🥤</span>Boissons
-    </button>
-    <button class="cat-btn" data-cat="enfant" role="listitem" aria-pressed="false">
-      <span class="cat-emoji">👶</span>Menu Enfant
-    </button>
-  </div>
-
-  <!-- Grille produits -->
-  <div id="products-panel">
-
-    <!-- ── CLASSIQUES ── -->
-    <div class="products-grid stagger" id="panel-classiques">
-
-      <div class="product-card">
-        <div class="product-img">🍕</div>
-        <div class="product-body">
-          <h3 class="product-name">Margherita</h3>
-          <p class="product-desc">Coulis de tomate, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕</div>
-        <div class="product-body">
-          <h3 class="product-name">Regina</h3>
-          <p class="product-desc">Coulis de tomate, jambon, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕
-          <span class="product-badge">🔥 Top vente</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Reine</h3>
-          <p class="product-desc">Coulis de tomate, jambon, champignons frais, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕
-          <span class="product-badge">🌶️ Relevée</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Texane</h3>
-          <p class="product-desc">Coulis de tomate, jambon, chorizo, merguez, lardons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕</div>
-        <div class="product-body">
-          <h3 class="product-name">Louisiane</h3>
-          <p class="product-desc">Coulis de tomate, émincés de poulet rôti, poivrons, tomates fraîches, champignons frais, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕</div>
-        <div class="product-body">
-          <h3 class="product-name">Bolo</h3>
-          <p class="product-desc">Coulis de tomate, bœuf haché, oignons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕</div>
-        <div class="product-body">
-          <h3 class="product-name">Chorizo</h3>
-          <p class="product-desc">Coulis de tomate, chorizo, poivrons, oignons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥚</div>
-        <div class="product-body">
-          <h3 class="product-name">Flamenkueche</h3>
-          <p class="product-desc">Crème fraîche, lardons, oignons</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥔</div>
-        <div class="product-body">
-          <h3 class="product-name">Calabrese</h3>
-          <p class="product-desc">Crème fraîche, bœuf haché, pommes de terre, lardons, oignons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥙</div>
-        <div class="product-body">
-          <h3 class="product-name">Kebab</h3>
-          <p class="product-desc">Crème fraîche, kebab, poivrons, oignons, fromage, sauce pita</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕
-          <span class="product-badge">🌶️ Relevée</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Orientale</h3>
-          <p class="product-desc">Coulis de tomate, chorizo, merguez, poivrons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍕
-          <span class="product-badge" style="background:var(--red); color:#fff;">★ Notre Family</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Family</h3>
-          <p class="product-desc">Coulis de tomate, bœuf haché, merguez, oignons, poivrons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥩
-          <span class="product-badge">🔥 Top</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Carnivore</h3>
-          <p class="product-desc">Coulis de tomate, bœuf haché, merguez, poulet, fromage, sauce burger</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍗</div>
-        <div class="product-body">
-          <h3 class="product-name">Barbecue</h3>
-          <p class="product-desc">Coulis de tomate, poulet, merguez, lard fumé, sauce barbecue, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥬
-          <span class="product-badge green">🥬 Veggie</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Végétarienne</h3>
-          <p class="product-desc">Coulis de tomate, poivrons, oignons, champignons, tomates fraîches, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-    </div><!-- /classiques -->
-
-    <!-- ── DE LA MER ── -->
-    <div class="products-grid stagger" id="panel-mer" style="display:none;">
-
-      <div class="product-card">
-        <div class="product-img">🦐</div>
-        <div class="product-body">
-          <h3 class="product-name">Fruits de mer</h3>
-          <p class="product-desc">Coulis de tomate, moules, calamars, crevettes, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🐟</div>
-        <div class="product-body">
-          <h3 class="product-name">Saumon</h3>
-          <p class="product-desc">Crème fraîche, saumon fumé, oignons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-    </div><!-- /mer -->
-
-    <!-- ── FROMAGÈRES ── -->
-    <div class="products-grid stagger" id="panel-fromageres" style="display:none;">
-
-      <div class="product-card">
-        <div class="product-img">🧀</div>
-        <div class="product-body">
-          <h3 class="product-name">Raclette</h3>
-          <p class="product-desc">Coulis de tomate, pommes de terre, lardons, raclette, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍯
-          <span class="product-badge green">🥬 Veggie</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Chèvre-Miel</h3>
-          <p class="product-desc">Crème fraîche, fromage, fromage de chèvre, miel</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🧀</div>
-        <div class="product-body">
-          <h3 class="product-name">Welsh</h3>
-          <p class="product-desc">Coulis de tomate, jambon, cheddar, œuf</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🧀
-          <span class="product-badge">⭐ Incontournable</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">4 Fromages</h3>
-          <p class="product-desc">Coulis de tomate, fromage de chèvre, reblochon, mozzarella, emmental</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🧀</div>
-        <div class="product-body">
-          <h3 class="product-name">Maroilles</h3>
-          <p class="product-desc">Crème fraîche, fromage, pommes de terre, oignons, maroilles</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥔
-          <span class="product-badge">🔥 Top</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Tartiflette</h3>
-          <p class="product-desc">Crème fraîche, pommes de terre, lardons, oignons, reblochon, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🏔️</div>
-        <div class="product-body">
-          <h3 class="product-name">Montagnarde</h3>
-          <p class="product-desc">Crème fraîche, pommes de terre, poulet, lardons, champignons, reblochon, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🐔</div>
-        <div class="product-body">
-          <h3 class="product-name">Paysanne</h3>
-          <p class="product-desc">Crème fraîche, pommes de terre, poulet, reblochon, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🧀</div>
-        <div class="product-body">
-          <h3 class="product-name">Normande</h3>
-          <p class="product-desc">Crème fraîche, jambon, lardons, oignons, camembert, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-    </div><!-- /fromageres -->
-
-    <!-- ── SPÉCIALITÉS ── -->
-    <div class="products-grid stagger" id="panel-specialites" style="display:none;">
-
-      <div class="product-card">
-        <div class="product-img">🍔</div>
-        <div class="product-body">
-          <h3 class="product-name">Burger</h3>
-          <p class="product-desc">Coulis de tomate, bœuf haché, oignons, cheddar, sauce burger</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">👨‍🍳
-          <span class="product-badge">⭐ Du chef</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Pizza du Chef</h3>
-          <p class="product-desc">Coulis de tomate, bœuf haché, chorizo, pommes de terre, lardons, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🌶️</div>
-        <div class="product-body">
-          <h3 class="product-name">Andalouse</h3>
-          <p class="product-desc">Crème fraîche, chorizo, poulet, poivrons, oignons, sauce andalouse, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍛</div>
-        <div class="product-body">
-          <h3 class="product-name">Indienne</h3>
-          <p class="product-desc">Crème fraîche, curry, jambon, pommes de terre, poulet, fromage</p>
-          <div class="product-footer"><span class="product-price">12€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-    </div><!-- /specialites -->
-
-    <!-- ── PASTA BOX ── -->
-    <div class="products-grid stagger" id="panel-pasta" style="display:none;">
-
-      <div class="product-card">
-        <div class="product-img">🍝</div>
-        <div class="product-body">
-          <h3 class="product-name">Pasta Box Romaine</h3>
-          <p class="product-desc">Penne, coulis de tomate, lardons, chorizo, fromage</p>
-          <div class="product-footer"><span class="product-price">10€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍝</div>
-        <div class="product-body">
-          <h3 class="product-name">Pasta Box Ch'ti</h3>
-          <p class="product-desc">Penne, crème fraîche, poulet, lardons, maroilles</p>
-          <div class="product-footer"><span class="product-price">10€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍝</div>
-        <div class="product-body">
-          <h3 class="product-name">Pasta Box Bolo</h3>
-          <p class="product-desc">Penne, coulis de tomate, bœuf haché, fromage</p>
-          <div class="product-footer"><span class="product-price">10€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍝</div>
-        <div class="product-body">
-          <h3 class="product-name">Pasta Box Fermière</h3>
-          <p class="product-desc">Penne, crème fraîche, poulet, lardons, raclette</p>
-          <div class="product-footer"><span class="product-price">10€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍝🐟</div>
-        <div class="product-body">
-          <h3 class="product-name">Pasta Box Saumon</h3>
-          <p class="product-desc">Penne, crème fraîche, saumon fumé, oignons, fromage</p>
-          <div class="product-footer"><span class="product-price">10€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-
-    </div><!-- /pasta -->
-
-    <!-- ── BOISSONS ── -->
-    <div class="products-grid stagger" id="panel-boissons" style="display:none;">
-
-      <div class="product-card">
-        <div class="product-img">🥤</div>
-        <div class="product-body">
-          <h3 class="product-name">Coca-Cola</h3>
-          <p class="product-desc">Original ou Zero sucres</p>
-          <div class="product-footer"><span class="product-price">1,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍹</div>
-        <div class="product-body">
-          <h3 class="product-name">Caprisun</h3>
-          <p class="product-desc">Jus de fruits pour les petits (et les grands)</p>
-          <div class="product-footer"><span class="product-price">1,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍊</div>
-        <div class="product-body">
-          <h3 class="product-name">Orangina</h3>
-          <p class="product-desc">La bulleuse préférée des pizzaïolos</p>
-          <div class="product-footer"><span class="product-price">1,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🥤</div>
-        <div class="product-body">
-          <h3 class="product-name">Schweppes Agrumes</h3>
-          <p class="product-desc">Pétillant et rafraîchissant</p>
-          <div class="product-footer"><span class="product-price">1,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🍵</div>
-        <div class="product-body">
-          <h3 class="product-name">Ice Tea</h3>
-          <p class="product-desc">Thé glacé, la boisson fraîcheur</p>
-          <div class="product-footer"><span class="product-price">1,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-      <div class="product-card">
-        <div class="product-img">🧃</div>
-        <div class="product-body">
-          <h3 class="product-name">Oasis Tropical</h3>
-          <p class="product-desc">Le goût tropical qui dépayse</p>
-          <div class="product-footer"><span class="product-price">1,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-    </div><!-- /boissons -->
-
-    <div class="products-grid stagger" id="panel-enfant" style="display:none;">
-
-      <div class="product-card">
-        <div class="product-img">👶
-          <span class="product-badge green">Menu Enfant</span>
-        </div>
-        <div class="product-body">
-          <h3 class="product-name">Menu Enfant</h3>
-          <p class="product-desc">Pizza au choix (Ø 21cm) : Régina ou Paysanne — Boisson au choix : Coca Cola, Caprisun, Orangina, Schweppes Agrumes, Ice Tea ou Oasis Tropical</p>
-          <div class="product-footer"><span class="product-price">6,50€</span>
-            <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-add">Commander</a></div>
-        </div>
-      </div>
-
-    </div><!-- /enfant -->
-
-  </div><!-- /products-panel -->
-
-  <div style="text-align:center; margin-top:48px; padding: 0 20px;" class="reveal">
-    <a href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener" class="btn-hero">Commander en ligne →</a>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════
-     FACEBOOK
-     ════════════════════════════════════════ -->
-<section class="fb-wrap" aria-labelledby="fb-wrap-title">
-  <div class="section-header reveal" style="padding:0 clamp(20px,5vw,80px); margin-bottom:40px;">
-    <h2 class="section-title-italic" id="fb-wrap-title">Nos pages<br>Facebook</h2>
-  </div>
-
-  <div class="fb-panel reveal" aria-labelledby="fb-title-kiosque">
-    <div class="tiktok-header">
-      <div class="tiktok-title-block">
-        <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
-        <div class="tiktok-handle" id="fb-title-kiosque">
-          <span>Facebook</span>
-          <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
-        </div>
-      </div>
-      <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-follow-cta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Suivre sur Facebook
-      </a>
-    </div>
-
-    <div class="tiktok-scroll stagger" role="list">
-
-      <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Tartiflette">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0800,#3a1500);">🧀</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">👍❤️🔥 148</span></div>
-        <div class="fb-card-caption">Ce soir c'est Tartiflette ! On est là jusqu'à 22h 🔥</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Pizza Family signature">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0a00,#2a1500);">🍕</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">❤️🔥👍 203</span></div>
-        <div class="fb-card-caption">La FAMILY — bœuf haché, merguez, oignons, poivrons. La signature. 12€ 👇</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Carnivore">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#200000,#400a00);">🥩</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">😍🔥❤️ 311</span></div>
-        <div class="fb-card-caption">La CARNIVORE — bœuf, merguez, poulet, sauce burger. 12€. T'es prêt ? 💪🍕</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Flamenkueche">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1206,#3a2a0d);">🥖</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">😍👍 76</span></div>
-        <div class="fb-card-caption">La Flamenkueche est de retour ! Crème fraîche, lardons, oignons 😍</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Kebab pizza">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0d06,#3a1e0d);">🌯</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">🔥❤️ 129</span></div>
-        <div class="fb-card-caption">La Kebab pizza cartonne ce mois-ci, on en refait tous les soirs 🔥</div>
-      </a>
-
-    </div>
-  </div>
-
-  <div class="fb-panel reveal" aria-labelledby="fb-title-camion">
-    <div class="tiktok-header">
-      <div class="tiktok-title-block">
-        <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
-        <div class="tiktok-handle" id="fb-title-camion">
-          <span>Facebook</span>
-          <span class="handle">Pizza Family 62 Camion</span>
-        </div>
-      </div>
-      <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-follow-cta">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-        Suivre sur Facebook
-      </a>
-    </div>
-
-    <div class="tiktok-scroll stagger" role="list">
-
-      <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Camion Hesdin">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1000,#3a2500);">🚚</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">👍❤️😍 94</span></div>
-        <div class="fb-card-caption">Le camion est à Hesdin ! Pizzas faites minute, ouvert jusqu'à 14h 😍</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Programme camion">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#0d1a0d,#1a3010);">📅</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">👍❤️ 67</span></div>
-        <div class="fb-card-caption">Programme du camion cette semaine — suivez la page pour aucune sortie manquée 🚚🍕</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Marché">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1500,#3a2f00);">🧺</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">❤️👍 58</span></div>
-        <div class="fb-card-caption">Merci à tous ceux qui sont passés au marché ce matin, à très vite 🙏</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Nouvelle étape">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#0a1a17,#0d3a30);">📍</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">😍🔥 82</span></div>
-        <div class="fb-card-caption">Nouvelle étape ajoutée à l'agenda du camion, on vient vers vous 📍</div>
-      </a>
-
-      <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Merci fidélité">
-        <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0a1a,#3a0d3a);">🙌</div>
-        <div class="fb-card-overlay"></div>
-        <div class="fb-card-top"><span class="fb-card-reactions">🙌❤️ 45</span></div>
-        <div class="fb-card-caption">Merci pour votre fidélité ! Le camion revient très vite près de chez vous 🚚</div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ════════════════════════════════════════
-     ADRESSES & HORAIRES
-     ════════════════════════════════════════ -->
-<section class="places-section" id="points-de-vente" aria-labelledby="places-title">
-  <div class="section-header reveal">
-    <h2 class="section-title-italic" id="places-title">Nos points<br>de vente</h2>
-  </div>
-
-  <div class="places-grid stagger">
-
-    <!-- ── LE KIOSQUE ── -->
-    <article class="place-card">
-      <div class="place-head kiosque">
-        <p class="place-kicker">Le Kiosque</p>
-        <h3 class="place-name">Hersin-<br>Coupigny</h3>
-        <span class="place-badge" data-place="kiosque"><span class="dot"></span>Horaires</span>
-      </div>
-      <div class="place-body">
+<section class="kiosque-section" id="kiosque" aria-labelledby="kiosque-title">
+  <div class="split-layout">
+    <div class="section-header reveal">
+      <h2 class="section-title-italic" id="kiosque-title">Kiosque</h2>
+      <p class="section-lead">
+        L'adresse historique à Hersin-Coupigny. Tu commandes, tu repars avec ta pizza cuite sur pierre.
+      </p>
+      <div class="place-meta">
         <div class="place-contact">
           <a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Rue+Victor+Hugo+Hersin-Coupigny" target="_blank" rel="noopener"><span class="ic">📍</span>Rue Victor Hugo, 62530 Hersin-Coupigny</a>
           <a href="tel:0368386262"><span class="ic">📞</span>03 68 38 62 62</a>
@@ -2145,88 +1239,273 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
           <a class="place-route" href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Rue+Victor+Hugo+Hersin-Coupigny" target="_blank" rel="noopener">Itinéraire</a>
         </div>
       </div>
-    </article>
+    </div>
 
-    <!-- ── LE CAMION ── -->
-    <article class="place-card">
-      <div class="place-head camion">
-        <p class="place-kicker">Le Camion</p>
-        <h3 class="place-name">Hesdin</h3>
-        <span class="place-badge" data-place="camion"><span class="dot"></span>Horaires</span>
+    <div class="place-photo reveal">
+      <img src="img/kiosque.jpeg" alt="Le kiosque Pizza Family à Hersin-Coupigny">
+      <span class="place-badge" data-place="kiosque"><span class="dot"></span>Horaires</span>
+    </div>
+  </div>
+
+  <div class="fb-panel reveal" aria-labelledby="fb-title-kiosque">
+      <div class="tiktok-header">
+        <div class="tiktok-title-block">
+          <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
+          <div class="tiktok-handle" id="fb-title-kiosque">
+            <span>Facebook</span>
+            <span class="handle">Pizza family 62 kiosque Hersin-Coupigny</span>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-follow-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Suivre sur Facebook
+        </a>
       </div>
-      <div class="place-body">
-        <div class="place-contact">
-          <a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Avenue+des+Tilleuls+Hesdin" target="_blank" rel="noopener"><span class="ic">📍</span>Avenue des Tilleuls, 62140 Hesdin</a>
-          <a href="tel:0368386262"><span class="ic">📞</span>03 68 38 62 62</a>
-        </div>
-        <div class="place-hours">
-          <p class="place-hours-title">Horaires d’ouverture</p>
-          <ul>
-            <li data-d="1"><span class="day">Lundi</span><span class="hrs">18:30 – 21:30</span></li>
-            <li data-d="2" class="closed"><span class="day">Mardi</span><span class="hrs">Fermé</span></li>
-            <li data-d="3" class="closed"><span class="day">Mercredi</span><span class="hrs">Fermé</span></li>
-            <li data-d="4"><span class="day">Jeudi</span><span class="hrs">18:30 – 21:30</span></li>
-            <li data-d="5"><span class="day">Vendredi</span><span class="hrs">18:30 – 21:30</span></li>
-            <li data-d="6"><span class="day">Samedi</span><span class="hrs">18:30 – 22:00</span></li>
-            <li data-d="0"><span class="day">Dimanche</span><span class="hrs">18:30 – 21:30</span></li>
-          </ul>
-        </div>
-        <div class="place-actions">
-          <a class="place-order" href="https://pizza-family-hersin-coupigny.order.dish.co" target="_blank" rel="noopener">Commander 🍕</a>
-          <a class="place-route" href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Avenue+des+Tilleuls+Hesdin" target="_blank" rel="noopener">Itinéraire</a>
+
+      <div class="tiktok-scroll stagger" role="list">
+
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Tartiflette">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0800,#3a1500);">🧀</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">👍❤️🔥 148</span></div>
+          <div class="fb-card-caption">Ce soir c'est Tartiflette ! On est là jusqu'à 22h 🔥</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Pizza Family signature">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0a00,#2a1500);">🍕</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">❤️🔥👍 203</span></div>
+          <div class="fb-card-caption">La FAMILY — bœuf haché, merguez, oignons, poivrons. La signature. 12€ 👇</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Carnivore">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#200000,#400a00);">🥩</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">😍🔥❤️ 311</span></div>
+          <div class="fb-card-caption">La CARNIVORE — bœuf, merguez, poulet, sauce burger. 12€. T'es prêt ? 💪🍕</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Flamenkueche">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1206,#3a2a0d);">🥖</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">😍👍 76</span></div>
+          <div class="fb-card-caption">La Flamenkueche est de retour ! Crème fraîche, lardons, oignons 😍</div>
+        </a>
+
+        <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Kebab pizza">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0d06,#3a1e0d);">🌯</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">🔥❤️ 129</span></div>
+          <div class="fb-card-caption">La Kebab pizza cartonne ce mois-ci, on en refait tous les soirs 🔥</div>
+        </a>
+
+      </div>
+    </div>
+
+  
+</section>
+
+<!-- ════════════════════════════════════════
+     DISTRIBUTEUR
+     ════════════════════════════════════════ -->
+<section class="distrib-section" id="distributeur" aria-labelledby="distrib-title">
+
+  <div class="distrib-finder">
+    <!-- Fond carte stylisé + pins pizza -->
+    <div class="map-bg" aria-hidden="true"></div>
+    <div class="map-pins" aria-hidden="true">
+      <div class="map-pin" style="top:14%;left:72%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+      <div class="map-pin" style="top:34%;left:88%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+      <div class="map-pin-cluster" style="top:10%;left:62%;">3</div>
+      <div class="map-pin" style="top:72%;left:4%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+      <div class="map-pin" style="top:80%;left:74%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+      <div class="map-pin-cluster" style="top:62%;left:95%;">5</div>
+      <div class="map-pin" style="top:95%;left:36%;"><div class="map-pin-icon"><span>🍕</span></div></div>
+    </div>
+    <div class="distrib-scrim" aria-hidden="true"></div>
+
+    <div class="distrib-inner">
+
+      <div class="distrib-head reveal">
+        <h2 class="section-title-italic" id="distrib-title">Trouve le distributeur<br>le plus proche</h2>
+        <p class="distrib-lead">
+          Nos distributeurs de pizzas fraîches sont ouverts jour et nuit.
+          Localise-toi ou tape ta ville pour voir les plus proches de chez toi.
+        </p>
+      </div>
+
+      <div class="distrib-tools reveal">
+        <button type="button" class="distrib-geo-btn" id="distribGeo">
+          <span aria-hidden="true">📍</span> Autour de moi
+        </button>
+        <div class="distrib-search">
+          <input type="search" id="distribSearch" class="distrib-input"
+                 placeholder="Ville ou code postal (ex. 62530)"
+                 aria-label="Rechercher un distributeur par ville ou code postal">
         </div>
       </div>
-    </article>
+
+      <p class="distrib-status" id="distribStatus" role="status" aria-live="polite"></p>
+
+      <div class="distrib-grid" id="distribList"></div>
+      <div class="distrib-more" id="distribMore"></div>
+
+    </div>
+  </div>
+
+  <div class="fb-panel reveal" aria-labelledby="fb-title-distrib">
+      <div class="tiktok-header">
+        <div class="tiktok-title-block">
+          <img src="img/logofacebook.png" class="fb-brand-logo" alt="" aria-hidden="true">
+          <div class="tiktok-handle" id="fb-title-distrib">
+            <span>Facebook</span>
+            <span class="handle">Distributeurs Pizza Family</span>
+          </div>
+        </div>
+        <a href="https://www.facebook.com/share/1UU9JMCPfv/?mibextid=wwXIfr&utm_source=chatgpt.com" target="_blank" rel="noopener" class="fb-follow-cta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Suivre sur Facebook
+        </a>
+      </div>
+
+      <div class="tiktok-scroll stagger" role="list">
+
+        <a href="https://www.facebook.com/share/1UU9JMCPfv/?mibextid=wwXIfr&utm_source=chatgpt.com" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Nouveau distributeur">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0800,#3a1500);">🍕</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">👍❤️🔥 121</span></div>
+          <div class="fb-card-caption">Un nouveau distributeur vient d'ouvrir dans le secteur ! Ouvert 24h/24, 7j/7 🍕</div>
+        </a>
+
+        <a href="https://www.facebook.com/share/1UU9JMCPfv/?mibextid=wwXIfr&utm_source=chatgpt.com" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Pizza chaude en 3 minutes">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a0a00,#2a1500);">🔥</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">❤️🔥👍 176</span></div>
+          <div class="fb-card-caption">Pâte fraîche, cuisson sur pierre, prête en 3 minutes chrono. Direct au distributeur 👇</div>
+        </a>
+
+        <a href="https://www.facebook.com/share/1UU9JMCPfv/?mibextid=wwXIfr&utm_source=chatgpt.com" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Disponible la nuit">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#0a0a1a,#0d1030);">🌙</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">😍👍 89</span></div>
+          <div class="fb-card-caption">Une petite faim à minuit ? Nos distributeurs ne ferment jamais 🌙🍕</div>
+        </a>
+
+        <a href="https://www.facebook.com/share/1UU9JMCPfv/?mibextid=wwXIfr&utm_source=chatgpt.com" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Paiement sans contact">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#0d1a10,#14301c);">💳</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">👍❤️ 64</span></div>
+          <div class="fb-card-caption">CB, sans contact, ça marche partout et tout le temps. Simple et rapide 💳</div>
+        </a>
+
+        <a href="https://www.facebook.com/share/1UU9JMCPfv/?mibextid=wwXIfr&utm_source=chatgpt.com" target="_blank" rel="noopener" class="fb-post-card" role="listitem" aria-label="Post — Carte des distributeurs">
+          <div class="fb-card-bg" style="background:linear-gradient(140deg,#1a1500,#3a2f00);">📍</div>
+          <div class="fb-card-overlay"></div>
+          <div class="fb-card-top"><span class="fb-card-reactions">🔥❤️ 103</span></div>
+          <div class="fb-card-caption">Retrouve tous nos distributeurs sur la carte du site, du plus proche au plus loin 📍</div>
+        </a>
+
+      </div>
+    </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     APPLI
+     ════════════════════════════════════════ -->
+<section class="app-promo-section" id="app" aria-labelledby="app-title">
+  <div class="app-promo-glow" aria-hidden="true"></div>
+  <div class="app-promo-inner">
+
+    <div class="app-promo-text reveal">
+      <h2 class="section-title-italic" id="app-title">Réserve avec<br>l'appli</h2>
+      <p class="section-lead">
+        Choisis ta pizza et réserve-la en quelques secondes depuis l'appli.
+        Elle t'attend, chaude, directement au distributeur le plus proche.
+      </p>
+      <ul class="split-points">
+        <li><span class="ic">📍</span>Trouve le distributeur le plus proche</li>
+        <li><span class="ic">⚡</span>Réservation en 30 secondes</li>
+        <li><span class="ic">🔑</span>Un code à l'arrivée, ta pizza t'attend</li>
+      </ul>
+      <a href="app.html" target="_blank" rel="noopener" class="btn-hero">Télécharger l'appli 📲</a>
+    </div>
+
+    <div class="app-promo-visual reveal">
+      <img src="img/mockuptel-crop.jpg" alt="Aperçu de l'appli Pizza Family : recherche du distributeur le plus proche et réservation d'une pizza">
+    </div>
 
   </div>
 </section>
 
 <!-- ════════════════════════════════════════
-     CARTE (visuel)
+     ÉVÉNEMENTIEL
      ════════════════════════════════════════ -->
-<section class="distrib-section" id="carte" aria-labelledby="distrib-title">
-
-  <!-- Fond carte stylisé + pins pizza -->
-  <div class="map-bg" aria-hidden="true"></div>
-  <div class="map-pins" aria-hidden="true">
-    <div class="map-pin" style="top:14%;left:72%;"><div class="map-pin-icon"><span>🍕</span></div></div>
-    <div class="map-pin" style="top:34%;left:88%;"><div class="map-pin-icon"><span>🍕</span></div></div>
-    <div class="map-pin-cluster" style="top:10%;left:62%;">3</div>
-    <div class="map-pin" style="top:72%;left:4%;"><div class="map-pin-icon"><span>🍕</span></div></div>
-    <div class="map-pin" style="top:80%;left:74%;"><div class="map-pin-icon"><span>🍕</span></div></div>
-    <div class="map-pin-cluster" style="top:62%;left:95%;">5</div>
-    <div class="map-pin" style="top:95%;left:36%;"><div class="map-pin-icon"><span>🍕</span></div></div>
-  </div>
-  <div class="distrib-scrim" aria-hidden="true"></div>
-
-  <div class="distrib-inner">
-
-    <div class="distrib-head reveal">
-      <h2 class="section-title-italic" id="distrib-title">Trouve le distributeur<br>le plus proche</h2>
-      <p class="distrib-lead">
-        Nos distributeurs de pizzas fraîches sont ouverts jour et nuit.
-        Localise-toi ou tape ta ville pour voir les plus proches de chez toi.
+<section class="evt-section" id="evenementiel" aria-labelledby="evt-title">
+  <div class="evt-glow" aria-hidden="true"></div>
+  <div class="split-layout">
+    <div class="section-header reveal">
+      <h2 class="section-title-italic" id="evt-title">Événementiel</h2>
+      <p class="section-lead">
+        Anniversaire, mariage, fête d'entreprise, kermesse ou événement associatif :
+        Pizza Family se déplace pour cuire des pizzas fraîches directement sur votre événement.
       </p>
+      <ul class="split-points">
+        <li><span class="ic">🔥</span>Cuisson sur place, four à pizza mobile</li>
+        <li><span class="ic">🧑‍🍳</span>Menus personnalisables selon le nombre d'invités</li>
+        <li><span class="ic">⏱️</span>On revient vers toi sous 24h</li>
+      </ul>
     </div>
 
-    <div class="distrib-tools reveal">
-      <button type="button" class="distrib-geo-btn" id="distribGeo">
-        <span aria-hidden="true">📍</span> Autour de moi
-      </button>
-      <div class="distrib-search">
-        <input type="search" id="distribSearch" class="distrib-input"
-               placeholder="Ville ou code postal (ex. 62530)"
-               aria-label="Rechercher un distributeur par ville ou code postal">
+    <form class="evt-form reveal" id="evtForm">
+      <div class="evt-row">
+        <div class="evt-field">
+          <label for="evtName">Nom complet</label>
+          <input type="text" id="evtName" name="nom" required autocomplete="name">
+        </div>
+        <div class="evt-field">
+          <label for="evtEmail">Email</label>
+          <input type="email" id="evtEmail" name="email" required autocomplete="email">
+        </div>
       </div>
-    </div>
-
-    <p class="distrib-status" id="distribStatus" role="status" aria-live="polite"></p>
-
-    <div class="distrib-grid" id="distribList"></div>
-    <div class="distrib-more" id="distribMore"></div>
-
+      <div class="evt-row">
+        <div class="evt-field">
+          <label for="evtPhone">Téléphone</label>
+          <input type="tel" id="evtPhone" name="telephone" autocomplete="tel">
+        </div>
+        <div class="evt-field" id="evtDateSingleField">
+          <label for="evtDate">Date de l'événement</label>
+          <input type="date" id="evtDate" name="date">
+        </div>
+      </div>
+      <label class="evt-checkbox">
+        <input type="checkbox" id="evtMultiDay" name="plusieursJours">
+        Événement sur plusieurs jours
+      </label>
+      <div class="evt-row" id="evtDateRangeRow" hidden>
+        <div class="evt-field">
+          <label for="evtDateStart">Date de début</label>
+          <input type="date" id="evtDateStart" name="dateDebut">
+        </div>
+        <div class="evt-field">
+          <label for="evtDateEnd">Date de fin</label>
+          <input type="date" id="evtDateEnd" name="dateFin">
+        </div>
+      </div>
+      <div class="evt-field">
+        <label for="evtGuests">Nombre de personnes (environ)</label>
+        <input type="number" id="evtGuests" name="personnes" min="1" placeholder="Ex. 50">
+      </div>
+      <div class="evt-field">
+        <label for="evtMessage">Votre message</label>
+        <textarea id="evtMessage" name="message" placeholder="Décrivez votre événement : lieu, type, horaires souhaités…" required></textarea>
+      </div>
+      <button type="submit" class="evt-submit">Envoyer la demande →</button>
+      <p class="evt-note">Ta messagerie s'ouvre avec les informations pré-remplies, prêtes à nous être envoyées.</p>
+    </form>
   </div>
 </section>
+
+
 
 <!-- ════════════════════════════════════════
      FOOTER
@@ -2241,29 +1520,29 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
       <div class="footer-logo">
         <img src="img/logo.png" alt="Pizza Family Hersin" width="166" height="72">
       </div>
-      <p class="footer-tagline">Trois façons de se régaler. Pâte fraîche chaque matin, ingrédients qu'on choisit nous-mêmes, un four bien chaud.</p>
+      <p class="footer-tagline">Événementiel, distributeur, kiosque et livraison. Pâte fraîche chaque matin, ingrédients qu'on choisit nous-mêmes, un four bien chaud.</p>
       <div class="footer-social-row" aria-label="Réseaux sociaux">
         <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook — Le Kiosque" title="Facebook Le Kiosque">
           <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
-        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook — Le Camion" title="Facebook Le Camion">
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" class="footer-social-link" aria-label="Facebook — Livraison 7 Vallées" title="Facebook Livraison 7 Vallées">
           <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
         </a>
       </div>
       <div style="margin-top:10px; font-size:11px; color:rgba(255,255,255,.6); line-height:1.6;">
         <a href="https://www.facebook.com/p/Pizza-family-62-kiosque-Hersin-Coupigny-100049129222929/" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75);">🏪 Kiosque</a> &nbsp;·&nbsp;
-        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75);">🚚 Camion</a>
+        <a href="https://www.facebook.com/p/Pizza-Family-62-Camion--100063723422936/?locale=fr_FR" target="_blank" rel="noopener" style="color:rgba(255,255,255,.75);">🚚 Livraison</a>
       </div>
     </div>
 
     <div class="footer-col">
-      <h4>Nos pizzas</h4>
+      <h4>Découvrir</h4>
       <ul>
-        <li><a href="#nos-pizzas">Classiques</a></li>
-        <li><a href="#nos-pizzas">Signature</a></li>
-        <li><a href="#nos-pizzas">Épicées</a></li>
-        <li><a href="#nos-pizzas">Veggie</a></li>
-        <li><a href="#nos-pizzas">Desserts & Boissons</a></li>
+        <li><a href="#livraison">Livraison 7 Vallées</a></li>
+        <li><a href="#kiosque">Kiosque</a></li>
+        <li><a href="#distributeur">Distributeur</a></li>
+        <li><a href="#app">Appli</a></li>
+        <li><a href="#evenementiel">Événementiel</a></li>
       </ul>
     </div>
 
@@ -2271,7 +1550,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
       <h4>Nous trouver</h4>
       <ul>
         <li><a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Rue+Victor+Hugo+Hersin-Coupigny" target="_blank" rel="noopener">🏪 Kiosque — Rue Victor Hugo, Hersin-Coupigny</a></li>
-        <li><a href="https://www.google.com/maps/search/?api=1&query=Pizza+Family+Avenue+des+Tilleuls+Hesdin" target="_blank" rel="noopener">🚚 Camion — Avenue des Tilleuls, Hesdin</a></li>
+        <li><a href="#livraison">🚚 Livraison — secteur des 7 Vallées</a></li>
         <li><a href="tel:0368386262">📞 03 68 38 62 62</a></li>
         <li><a href="mailto:pizzafamily62@gmail.com">✉️ pizzafamily62@gmail.com</a></li>
       </ul>
@@ -2284,7 +1563,7 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
         <li><a href="#">Fidélité</a></li>
         <li><a href="#">Nos engagements</a></li>
         <li><a href="#">Carrière</a></li>
-        <li><a href="#">Nous contacter</a></li>
+        <li><a href="#evenementiel">Nous contacter</a></li>
       </ul>
     </div>
 
@@ -2354,37 +1633,6 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
     a.addEventListener('click', closeMenu);
   });
 
-  /* ── Catégorie tabs pizzas ── */
-  var catBtns = document.querySelectorAll('.cat-btn');
-  var panels  = {
-    classiques:  document.getElementById('panel-classiques'),
-    mer:         document.getElementById('panel-mer'),
-    fromageres:  document.getElementById('panel-fromageres'),
-    specialites: document.getElementById('panel-specialites'),
-    pasta:       document.getElementById('panel-pasta'),
-    boissons:    document.getElementById('panel-boissons'),
-    enfant:      document.getElementById('panel-enfant'),
-  };
-
-  catBtns.forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      catBtns.forEach(function (b) { b.classList.remove('active'); b.setAttribute('aria-pressed','false'); });
-      this.classList.add('active');
-      this.setAttribute('aria-pressed', 'true');
-      var cat = this.dataset.cat;
-      Object.values(panels).forEach(function (p) { if (p) p.style.display = 'none'; });
-      var panel = panels[cat];
-      if (panel) {
-        panel.style.display = 'grid';
-        /* rejoue la cascade à chaque changement d'onglet */
-        panel.classList.remove('visible');
-        void panel.offsetWidth;            /* force le reflow */
-        applyStaggerDelays(panel);
-        requestAnimationFrame(function () { panel.classList.add('visible'); });
-      }
-    });
-  });
-
   /* ── Scroll reveal + cascade (stagger) ── */
   function applyStaggerDelays(el) {
     var kids = el.children, step = 70, d = 0;
@@ -2423,8 +1671,8 @@ a:focus-visible, button:focus-visible, input:focus-visible, .cat-btn:focus-visib
   /* ── Horaires : statut ouvert/fermé en direct + jour surligné ── */
   var schedules = {
     /* clés = jour JS (0 = dimanche … 6 = samedi), minutes depuis minuit */
-    kiosque: { 0:[1110,1290], 1:null,        2:[1110,1290], 3:[1110,1290], 4:[1110,1290], 5:[1110,1320], 6:[1110,1320] },
-    camion:  { 0:[1110,1290], 1:[1110,1290], 2:null,        3:null,        4:[1110,1290], 5:[1110,1290], 6:[1110,1320] }
+    kiosque:   { 0:[1110,1290], 1:null,        2:[1110,1290], 3:[1110,1290], 4:[1110,1290], 5:[1110,1320], 6:[1110,1320] },
+    livraison: { 0:[1110,1290], 1:[1110,1290], 2:null,        3:null,        4:[1110,1290], 5:[1110,1290], 6:[1110,1320] }
   };
   var dayNames = ['dim.', 'lun.', 'mar.', 'mer.', 'jeu.', 'ven.', 'sam.'];
   function fmtMin(m) { var h = Math.floor(m / 60), mm = m % 60; return h + 'h' + (mm < 10 ? '0' + mm : mm); }
@@ -2660,7 +1908,7 @@ var DISTRIBUTEURS = [
     animateToggle = true;
     render();
     if (collapsing) {
-      document.getElementById('carte').scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('distributeur').scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   });
 
@@ -2672,6 +1920,66 @@ var DISTRIBUTEURS = [
   });
 
   render();
+})();
+</script>
+
+<script>
+/* ── Formulaire Événementiel : bascule date unique / plusieurs jours ── */
+(function () {
+  var multiDay      = document.getElementById('evtMultiDay');
+  var singleField    = document.getElementById('evtDateSingleField');
+  var rangeRow        = document.getElementById('evtDateRangeRow');
+  if (!multiDay) return;
+
+  function sync() {
+    var isMulti = multiDay.checked;
+    singleField.hidden = isMulti;
+    rangeRow.hidden = !isMulti;
+  }
+  multiDay.addEventListener('change', sync);
+  sync();
+})();
+
+/* ── Formulaire Événementiel : ouvre la messagerie avec le message pré-rempli ── */
+(function () {
+  var form = document.getElementById('evtForm');
+  if (!form) return;
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var nom = form.nom.value.trim();
+    var email = form.email.value.trim();
+    var tel = form.telephone.value.trim();
+    var personnes = form.personnes.value.trim();
+    var message = form.message.value.trim();
+
+    var dateLine;
+    if (form.plusieursJours.checked) {
+      var debut = form.dateDebut.value;
+      var fin = form.dateFin.value;
+      dateLine = (debut || fin)
+        ? 'Dates de l\'événement : du ' + (debut || '?') + ' au ' + (fin || '?')
+        : null;
+    } else {
+      var date = form.date.value;
+      dateLine = date ? 'Date de l\'événement : ' + date : null;
+    }
+
+    var lines = [
+      'Nom : ' + nom,
+      'Email : ' + email,
+      tel ? 'Téléphone : ' + tel : null,
+      dateLine,
+      personnes ? 'Nombre de personnes : ' + personnes : null,
+      '',
+      message
+    ].filter(function (l) { return l !== null; }).join('\n');
+
+    var subject = 'Demande événementiel — ' + nom;
+    var mailto = 'mailto:contact@pizzafamily.fr'
+      + '?subject=' + encodeURIComponent(subject)
+      + '&body=' + encodeURIComponent(lines);
+    window.location.href = mailto;
+  });
 })();
 </script>
 
